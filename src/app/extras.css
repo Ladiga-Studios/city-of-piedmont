@@ -1,0 +1,112 @@
+/* ============================================================
+   SITE EXTRAS — utility top bar, "Today in Piedmont" panel,
+   back-to-top. Imported once in layout.js.
+   ============================================================ */
+
+/* ---------------- UTILITY TOP BAR ---------------- */
+.topbar{background:var(--umber-900);color:rgba(247,243,236,.85);font-size:.82rem;position:relative;z-index:101}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:38px;padding-block:.3rem}
+.topbar-live{display:flex;align-items:center;gap:1.1rem;min-width:0}
+
+.tb-status{display:inline-flex;align-items:center;gap:.45rem;font-weight:600;white-space:nowrap}
+.tb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tb-status.is-open .tb-dot,.tb-dot.dot-open{background:#6fbf7e;box-shadow:0 0 0 3px rgba(111,191,126,.22)}
+.tb-status.is-closed .tb-dot,.tb-dot.dot-closed{background:var(--stone-300)}
+.tb-status-detail{font-weight:400;color:rgba(247,243,236,.6)}
+
+.tb-weather{display:inline-flex;align-items:center;gap:.45rem;color:rgba(247,243,236,.85);white-space:nowrap}
+.tb-weather svg{color:var(--amber)}
+
+.topbar-links{display:flex;align-items:center;gap:.2rem;flex-shrink:0}
+.topbar-links > a{padding:.35rem .6rem;border-radius:6px;font-weight:600;color:rgba(247,243,236,.85);transition:background .15s,color .15s}
+.topbar-links > a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.tb-lang{position:relative;margin-left:.2rem}
+.tb-lang-btn{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);border-radius:7px;padding:.3rem .65rem;cursor:pointer;
+  color:rgba(247,243,236,.9);font-family:inherit;font-size:.8rem;font-weight:600;transition:background .15s}
+.tb-lang-btn:hover{background:rgba(255,255,255,.16)}
+.tb-lang-menu{position:absolute;top:calc(100% + .45rem);right:0;min-width:170px;list-style:none;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-md);
+  padding:.4rem;z-index:120;animation:tbLangIn .18s var(--ease)}
+@keyframes tbLangIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.tb-lang-menu a{display:block;padding:.5rem .7rem;border-radius:8px;color:var(--ink-2);font-size:.9rem;font-weight:500}
+.tb-lang-menu a:hover{background:var(--paper-2);color:var(--sunset)}
+.tb-lang-note{padding:.4rem .7rem .2rem;font-size:.7rem;color:var(--muted);border-top:1px solid var(--line);margin-top:.25rem}
+
+@media(max-width:860px){
+  .topbar-links > a{display:none}          /* keep status + weather + translate */
+  .tb-status-detail{display:none}
+}
+@media(max-width:480px){
+  .topbar{font-size:.78rem}
+  .tb-weather{gap:.35rem}
+}
+
+/* ---------------- "TODAY IN PIEDMONT" PANEL ---------------- */
+.today{background:var(--hx-cream,#f7f3ed);padding-bottom:clamp(1.5rem,3vw,2.2rem)}
+.today-panel{display:flex;align-items:center;gap:clamp(1rem,2.5vw,2rem);flex-wrap:wrap;
+  background:var(--umber-900);color:var(--paper);border-radius:16px;
+  padding:1.1rem clamp(1.1rem,3vw,1.8rem);box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.today-title{flex:0 0 auto}
+.today-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  writing-mode:vertical-rl;transform:rotate(180deg);border-left:2px solid rgba(202,162,74,.4);padding-left:.55rem;display:block}
+
+.today-now{display:flex;align-items:center;gap:.8rem;min-width:200px}
+.today-ico{color:var(--amber);display:flex}
+.today-temp{font-family:var(--display);font-size:2.4rem;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.today-cond{display:flex;flex-direction:column;line-height:1.25;font-weight:600;color:#fff}
+.today-cond small{font-weight:400;font-size:.78rem;color:rgba(247,243,236,.65)}
+
+.today-days{display:flex;gap:clamp(.6rem,1.5vw,1.1rem)}
+.today-day{display:flex;flex-direction:column;align-items:center;gap:.25rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  padding:.5rem .7rem;min-width:64px}
+.today-day svg{color:rgba(247,243,236,.85)}
+.td-name{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,243,236,.6)}
+.td-temps{font-size:.82rem;font-weight:700;color:#fff}
+.td-temps em{font-style:normal;font-weight:400;color:rgba(247,243,236,.55)}
+
+.today-divider{width:1px;align-self:stretch;background:rgba(255,255,255,.14);min-height:44px}
+
+.today-hall{display:flex;align-items:center;gap:.6rem}
+.today-hall strong{display:block;font-size:.92rem;color:#fff;line-height:1.25}
+.today-hall small{font-size:.78rem;color:rgba(247,243,236,.65)}
+
+.today-next{margin-left:auto}
+.today-next-link{display:flex;flex-direction:column;line-height:1.3;padding:.55rem .9rem;border-radius:10px;
+  background:rgba(202,162,74,.12);border:1px solid rgba(202,162,74,.35);transition:background .18s,border-color .18s}
+.today-next-link:hover{background:rgba(202,162,74,.22);border-color:var(--amber)}
+.tn-label{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.today-next-link strong{color:#fff;font-size:.95rem}
+.today-next-link small{font-size:.78rem;color:rgba(247,243,236,.65)}
+
+@media(max-width:900px){
+  .today-panel{gap:1rem}
+  .today-divider{display:none}
+  .today-next{margin-left:0;width:100%}
+  .today-next-link{flex-direction:row;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+}
+@media(max-width:560px){
+  .today-eyebrow{writing-mode:horizontal-tb;transform:none;border-left:0;padding-left:0;
+    border-bottom:2px solid rgba(202,162,74,.4);padding-bottom:.3rem}
+  .today-title{width:100%}
+  .today-days{width:100%;justify-content:space-between}
+  .today-day{flex:1}
+}
+
+/* ---------------- BACK TO TOP ---------------- */
+.to-top{position:fixed;right:clamp(1rem,3vw,1.8rem);bottom:clamp(1rem,3vw,1.8rem);z-index:95;
+  width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--umber-900);color:var(--paper);display:grid;place-items:center;
+  box-shadow:var(--shadow-md);opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,background .2s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:var(--umber-700)}
+.to-top:focus-visible{outline:3px solid var(--sunset);outline-offset:3px}
+.to-top-ring{position:absolute;inset:0}
+.to-top-arrow{position:relative}
+@media(prefers-reduced-motion:reduce){
+  .to-top{transition:opacity .2s,visibility .2s;transform:none}
+}
+@media print{.to-top,.topbar{display:none}}

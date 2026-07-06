@@ -1,0 +1,35 @@
+/* ============================================================
+   PARK DETAIL pages (Chief Ladiga Trail, Terrapin Creek)
+   Info card + map + content layout
+   ============================================================ */
+
+/* two-column: prose/content on the left, sticky info+map card on the right */
+.pd-layout{display:grid;grid-template-columns:1fr 340px;gap:var(--s5);align-items:start;margin-bottom:var(--s5)}
+.pd-main .prose{max-width:none}
+
+/* info / map card */
+.pd-info{position:sticky;top:var(--s4)}
+.pd-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:var(--s4);box-shadow:var(--shadow-sm)}
+.pd-card h2{font-size:1.3rem;margin-bottom:1rem}
+.pd-row{display:flex;flex-direction:column;gap:.15rem;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.pd-row:last-of-type{border-bottom:none}
+.pd-label{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.pd-row span:last-child,.pd-row a{color:var(--ink-2)}
+.pd-row a{color:var(--sunset);font-weight:500}
+.pd-row a:hover{text-decoration:underline}
+
+/* map embed (Leaflet / OSM) */
+.pd-map{margin-top:var(--s3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.pd-map .leaflet-container{width:100%;height:220px;display:block;font:inherit}
+.pd-directions{display:block;padding:.8rem 1rem;font-weight:600;color:var(--sunset);text-align:center}
+.pd-directions:hover{background:var(--paper-2)}
+
+/* base back-link (the .link class is otherwise only styled inside .section-head) */
+.prose + .pd-back,.pd-back{display:inline-flex;gap:.4rem;align-items:center;color:var(--sunset);font-weight:600;margin-top:var(--s4)}
+.pd-back:hover{text-decoration:underline}
+
+@media(max-width:900px){
+  .pd-layout{grid-template-columns:1fr;gap:var(--s4)}
+  .pd-info{position:static}
+}

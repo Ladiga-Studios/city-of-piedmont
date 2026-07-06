@@ -1,0 +1,82 @@
+/* ============================================================
+   RESIDENTS hub — quick actions, service sections, contact cards
+   ============================================================ */
+
+/* intro lead */
+.rp-lead{max-width:760px;margin-bottom:var(--s5)}
+.rp-lead p{font-size:clamp(1.1rem,2vw,1.3rem);line-height:1.6;color:var(--ink-2);
+  font-family:var(--display);font-weight:400}
+
+/* quick-action bar */
+.rp-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:var(--s3);margin-bottom:var(--s6)}
+.rp-action{display:flex;align-items:flex-start;gap:.9rem;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--s3);
+  box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+.rp-action:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--sunset)}
+.rp-action-icon{width:44px;height:44px;border-radius:12px;background:var(--paper-2);
+  display:grid;place-items:center;color:var(--sunset);flex:none}
+.rp-action-icon svg{width:22px;height:22px}
+.rp-action h3{font-size:1.1rem;margin-bottom:.15rem}
+.rp-action p{font-size:.85rem;color:var(--muted);line-height:1.4}
+.rp-action .rp-action-cta{display:inline-block;margin-top:.4rem;font-size:.82rem;
+  font-weight:600;color:var(--sunset)}
+.rp-action:hover .rp-action-cta{text-decoration:underline}
+
+/* service section */
+/* Anchor targets must clear the sticky header when jumped to (e.g. /residents#permits).
+   The header is tallest (~130px) when the page first loads unscrolled, so we offset
+   by a bit more so the section title isn't hidden underneath it. */
+.rp-section{margin-bottom:var(--s6);scroll-margin-top:90px}
+.rp-card[id]{scroll-margin-top:90px}
+.rp-section-head{margin-bottom:var(--s4);max-width:680px}
+.rp-section-head .eyebrow{margin-bottom:.3rem}
+.rp-section-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+.rp-section-head p{color:var(--ink-2);margin-top:.5rem;line-height:1.6}
+
+/* generic info/service card grid */
+.rp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:var(--s3)}
+.rp-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:var(--s3);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.rp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.rp-card h3{font-size:1.2rem;margin-bottom:.3rem}
+.rp-card > p{font-size:.93rem;color:var(--ink-2);line-height:1.55;margin-bottom:.8rem}
+.rp-card ul{list-style:none;margin:0 0 .8rem;padding:0}
+.rp-card li{font-size:.9rem;color:var(--ink-2);padding:.35rem 0;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.rp-card li:last-child{border-bottom:none}
+.rp-card li .rp-k{color:var(--muted);font-weight:600;font-size:.78rem;letter-spacing:.04em;
+  text-transform:uppercase}
+.rp-card li .rp-v{color:var(--ink-2);text-align:right}
+.rp-card a{color:var(--sunset);font-weight:500;text-decoration:none}
+.rp-card a:hover{text-decoration:underline}
+.rp-card-links{margin-top:auto;display:flex;flex-direction:column;gap:.45rem;
+  padding-top:.5rem}
+.rp-card-links a{font-size:.9rem;font-weight:600;display:inline-flex;align-items:center;gap:.3rem}
+
+/* emphasis card (severe weather / emergency) */
+.rp-card.rp-alert{background:var(--umber-800);border-color:var(--umber-700);color:var(--paper)}
+.rp-card.rp-alert h3{color:var(--paper)}
+.rp-card.rp-alert > p{color:rgba(247,243,236,.85)}
+.rp-card.rp-alert li{color:rgba(247,243,236,.9);border-color:rgba(247,243,236,.14)}
+.rp-card.rp-alert li .rp-k{color:var(--amber)}
+.rp-card.rp-alert li .rp-v{color:rgba(247,243,236,.9)}
+.rp-card.rp-alert a{color:var(--amber)}
+
+/* 911 callout strip */
+.rp-911{display:flex;align-items:center;gap:1rem;background:var(--sunset);color:#fff;
+  border-radius:var(--radius);padding:1rem 1.3rem;margin-bottom:var(--s4);font-weight:600}
+.rp-911 svg{width:26px;height:26px;flex:none}
+.rp-911 strong{font-size:1.15rem}
+
+/* placeholder flag */
+.rp-placeholder{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--sunset-dark);background:rgba(157,37,64,.1);
+  padding:.15rem .5rem;border-radius:6px;margin-left:.4rem;vertical-align:middle}
+
+@media(max-width:600px){
+  .rp-card li{flex-direction:column;gap:.1rem}
+  .rp-card li .rp-v{text-align:left}
+}

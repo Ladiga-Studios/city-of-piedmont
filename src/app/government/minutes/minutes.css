@@ -1,0 +1,114 @@
+/* ============================================================
+   COUNCIL MINUTES — explorer (split list + AI summary)
+   Uses the Warm Stone & Sunset tokens from globals.css.
+   ============================================================ */
+
+.minutes-explorer{
+  display:grid;
+  grid-template-columns:minmax(0,360px) minmax(0,1fr);
+  gap:var(--s4);
+  align-items:start;
+}
+
+/* ---------- left: meeting list ---------- */
+.mx-list{
+  display:flex;flex-direction:column;gap:var(--s3);
+  max-height:78vh;overflow-y:auto;padding-right:.4rem;
+  position:sticky;top:calc(var(--s4));
+}
+.mx-list::-webkit-scrollbar{width:8px}
+.mx-list::-webkit-scrollbar-thumb{background:var(--stone-200);border-radius:8px}
+
+.mx-year-label{
+  font-size:.82rem;font-family:var(--body);font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sunset);
+  padding:.2rem 0 .6rem;margin-bottom:.2rem;border-bottom:1px solid var(--line);
+}
+.mx-year{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.4rem}
+
+.mx-item{
+  display:flex;flex-direction:column;gap:.15rem;text-align:left;
+  background:var(--card);border:1px solid var(--line);border-left:3px solid transparent;
+  border-radius:10px;padding:.7rem .9rem;cursor:pointer;
+  transition:border-color .18s var(--ease),background .18s var(--ease),transform .18s var(--ease);
+}
+.mx-item:hover{border-color:var(--line-strong);transform:translateX(2px)}
+.mx-item.active{
+  border-color:var(--sunset);border-left-color:var(--sunset);
+  background:linear-gradient(90deg,rgba(157,37,64,.06),var(--card) 60%);
+}
+.mx-item-title{font-weight:600;font-size:.96rem;color:var(--ink);line-height:1.25}
+.mx-item-date{font-size:.8rem;color:var(--muted)}
+
+/* ---------- right: detail / summary ---------- */
+.mx-detail{position:relative;min-height:300px}
+
+.mx-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:clamp(1.4rem,3vw,2.4rem);box-shadow:var(--shadow-md);
+  position:relative;overflow:hidden;
+  animation:mxIn .4s var(--ease);
+}
+/* subtle top accent bar */
+.mx-card::before{
+  content:'';position:absolute;inset:0 0 auto 0;height:4px;
+  background:linear-gradient(90deg,var(--sunset),var(--amber));
+}
+@keyframes mxIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+  .mx-card{animation:none}
+  .mx-item{transition:none}
+}
+
+.mx-card-head{margin-bottom:1.2rem}
+.mx-card-head h3{font-size:clamp(1.5rem,3vw,2.1rem);margin-top:.3rem;line-height:1.1}
+.mx-card-desc{font-size:1rem;color:var(--muted);margin-top:.35rem;font-weight:500}
+
+.ai-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sunset);background:rgba(157,37,64,.08);
+  border:1px solid rgba(157,37,64,.2);border-radius:999px;
+  padding:.3rem .7rem;margin-bottom:.9rem;
+}
+.ai-tag svg{color:var(--amber)}
+
+.mx-summary{font-size:1.08rem;line-height:1.65;color:var(--ink-2);margin-bottom:1.4rem}
+.mx-no-summary{color:var(--muted);font-style:italic}
+
+.mx-block{margin-bottom:1.4rem}
+.mx-block h4{
+  font-family:var(--body);font-weight:700;font-size:.8rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;
+}
+.mx-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.mx-bullets li{
+  position:relative;padding-left:1.5rem;line-height:1.5;color:var(--ink);
+}
+.mx-bullets li::before{
+  content:'';position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:2px;
+  background:var(--sunset);transform:rotate(45deg);
+}
+.mx-bullets-action li::before{background:var(--seal-blue)}
+
+.mx-disclaimer{
+  font-size:.82rem;color:var(--muted);font-style:italic;
+  border-top:1px solid var(--line);padding-top:1rem;margin-bottom:1.4rem;
+}
+
+.mx-download{margin-top:.4rem}
+
+/* ---------- responsive ---------- */
+@media(max-width:880px){
+  .minutes-explorer{grid-template-columns:1fr;gap:var(--s3)}
+  .mx-list{
+    position:static;max-height:none;flex-direction:column;
+    padding-right:0;
+  }
+  /* On mobile, cap the list height so the detail is reachable without endless scroll */
+  .mx-list{max-height:46vh;overflow-y:auto;border:1px solid var(--line);
+    border-radius:var(--radius);padding:.8rem}
+}

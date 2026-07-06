@@ -1,0 +1,351 @@
+/* ============================================================
+   PIEDMONT HOMEPAGE — mockup 2 (trail-arch style)
+   Full-bleed video hero w/ light-moderate dark scrim, white text.
+   Namespaced hx2-.
+   ============================================================ */
+:root{
+  --hx-cream:#f7f3ed;
+  --hx-cream-2:#faf8f2;
+  --hx-card:#fffdf9;
+  --hx-green:#1e3c24;        /* stats band + footer green */
+  --hx-green-card:#1f3a26;   /* explore overlay */
+}
+
+/* ============ HERO ============ */
+.hx2-hero{position:relative;min-height:clamp(560px,80vh,760px);display:flex;flex-direction:column;
+  justify-content:center;overflow:visible;background:var(--umber-900);isolation:isolate;
+  padding-bottom:clamp(3rem,7vw,5rem)}
+.hx2-hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--umber-900)}
+.hx2-hero-media .hero-poster,
+.hx2-hero-media .hero-video{position:absolute;inset:0;width:100%;height:100%}
+.hx2-hero-media .hero-poster{z-index:1}
+.hx2-hero-media .hero-video{z-index:2}
+.hx2-hero-media .hero-poster img{width:100%;height:100%;object-fit:cover}
+.hx2-hero-media .hero-video{object-fit:cover;opacity:0;visibility:hidden;transition:opacity .8s var(--ease)}
+.hx2-hero-media .hero-video.ready{opacity:1;visibility:visible}
+@media(prefers-reduced-motion:reduce){.hx2-hero-media .hero-video{display:none}}
+
+/* Ken Burns: a very slow, continuous zoom on the hero footage (and on the
+   poster while the video buffers) so even a still frame feels alive. ~24s,
+   alternating in/out so it never snaps back. Disabled for reduced-motion. */
+@media(prefers-reduced-motion:no-preference){
+  .hx2-hero-media .hero-poster img,
+  .hx2-hero-media .hero-video{
+    animation:hx2-kenburns 28s ease-in-out infinite alternate;
+    will-change:transform;transform-origin:50% 42%}
+}
+@keyframes hx2-kenburns{
+  from{transform:scale(1.02)}
+  to{transform:scale(1.12)}
+}
+
+/* Scrim weighted toward the lower-left where the headline, tagline and search
+   dock live, fading out toward the upper-right so more footage reads through. */
+.hx2-hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 18% 78%, rgba(15,24,16,.58) 0%, rgba(15,24,16,.30) 45%, rgba(15,24,16,.06) 75%, rgba(15,24,16,0) 100%),
+    linear-gradient(90deg, rgba(15,24,16,.52) 0%, rgba(15,24,16,.30) 45%, rgba(15,24,16,.08) 78%, rgba(15,24,16,0) 100%),
+    linear-gradient(0deg, rgba(15,24,16,.50) 0%, rgba(15,24,16,0) 42%)}
+
+.hx2-hero-inner{position:relative;width:100%}
+.hx2-hero-inner h1{font-family:var(--display);font-weight:500;color:#fff;line-height:1;
+  font-size:clamp(2.6rem,6.5vw,5rem);letter-spacing:-.01em;
+  text-shadow:0 2px 24px rgba(0,0,0,.4)}
+.hx2-tagline{font-family:var(--display);font-weight:400;color:rgba(255,255,255,.95);
+  font-size:clamp(1.3rem,2.6vw,2rem);line-height:1.2;margin:.7rem 0 1.6rem;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hx2-hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+
+/* Staggered entrance: each hero line rises and fades in on load. The .js gate
+   means content is fully visible if JS never runs; reduced-motion users skip it.
+   The headline animates its two lines separately via the .hx2-line spans. */
+@media(prefers-reduced-motion:no-preference){
+  .js .hx2-hero-inner .hx2-line{display:block;opacity:0;transform:translateY(26px);
+    animation:hx2-rise .9s var(--ease) forwards}
+  .js .hx2-hero-inner .hx2-line:nth-child(1){animation-delay:.15s}
+  .js .hx2-hero-inner .hx2-line:nth-child(2){animation-delay:.3s}
+  .js .hx2-tagline{opacity:0;transform:translateY(20px);animation:hx2-rise .9s var(--ease) .5s forwards}
+  .js .hx2-hero-actions{opacity:0;transform:translateY(18px);animation:hx2-rise .9s var(--ease) .68s forwards}
+  .js .hx2-search-dock{opacity:0;transform:translateY(50%) translateY(18px);
+    animation:hx2-dock-in 1s var(--ease) .86s forwards}
+}
+@keyframes hx2-rise{to{opacity:1;transform:none}}
+/* The dock is already translateY(50%) for its overlap; animate from a bit lower. */
+@keyframes hx2-dock-in{to{opacity:1;transform:translateY(50%)}}
+@media(max-width:680px){
+  .js .hx2-search-dock{transform:translateY(18px);animation-name:hx2-rise}
+}
+
+/* outline-light button for the dark hero */
+.btn-outline-light{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.7);color:#fff;
+  padding:.7rem 1.4rem;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:.4rem;
+  transition:background .18s,border-color .18s}
+.btn-outline-light:hover{background:rgba(255,255,255,.18);border-color:#fff}
+
+/* solid gold button — primary hero CTA in the mockup */
+.btn-gold{background:var(--gold);color:#fff;padding:.7rem 1.5rem;border-radius:10px;font-weight:700;
+  display:inline-flex;align-items:center;gap:.45rem;border:1.5px solid transparent;
+  transition:background .18s,transform .18s,box-shadow .18s}
+.btn-gold:hover{background:var(--amber);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.btn-gold svg{transition:transform .25s var(--ease)}
+.btn-gold:hover svg{transform:translateX(3px)}
+
+/* centered search dock overlapping hero bottom */
+.hx2-search-dock{position:absolute;left:0;right:0;bottom:0;transform:translateY(50%);z-index:3}
+.hx2-search-dock .hx-search-wrap{max-width:760px;margin:0 auto}
+.hx2-search-dock .hx-search{box-shadow:var(--shadow-md);padding:.55rem .55rem .55rem 1rem;border-radius:14px}
+
+@media(max-width:680px){
+  .hx2-hero{min-height:clamp(480px,70vh,620px)}
+  .hx2-search-dock{position:static;transform:none;margin-top:1.8rem}
+}
+
+/* ============ SEARCH (shared, restyled for dock) ============ */
+.hx-search-wrap{position:relative}
+.hx-search{display:flex;align-items:center;gap:.6rem;background:var(--hx-card);
+  border:1px solid var(--line-strong);border-radius:14px;padding:.5rem .5rem .5rem .9rem}
+.hx-search-ico{color:var(--muted);display:flex;flex-shrink:0}
+.hx-search input{flex:1;border:none;background:none;font-family:inherit;font-size:1rem;color:var(--ink);outline:none;min-width:0}
+.hx-search input::placeholder{color:var(--muted)}
+.hx-popular-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;background:var(--umber-700);
+  border:none;border-radius:9px;padding:.6rem 1.1rem;font-family:inherit;font-size:.9rem;font-weight:700;
+  color:#fff;cursor:pointer;white-space:nowrap}
+.hx-popular-btn:hover{background:var(--umber-800)}
+.hx-popular-menu{position:absolute;top:calc(100% + .5rem);left:0;right:0;background:var(--hx-card);
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-md);padding:.4rem;z-index:5}
+.hx-popular-item{display:block;padding:.6rem .8rem;border-radius:8px;color:var(--ink-2);font-size:.92rem}
+.hx-popular-item:hover{background:var(--paper-2);color:var(--sunset)}
+
+/* ============ TASK STRIP (single panel, dividers) ============ */
+.hx2-tasks-sec{background:var(--hx-cream);padding-top:clamp(3.5rem,6vw,5rem);padding-bottom:clamp(2rem,4vw,3rem)}
+.hx2-tasks{display:grid;grid-template-columns:repeat(7,1fr);background:var(--hx-card);
+  border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-md);overflow:hidden}
+.hx2-tasks-6{grid-template-columns:repeat(6,1fr)}
+.hx2-task{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;
+  padding:1.4rem .8rem;border-right:1px solid var(--line);transition:background .15s}
+.hx2-task:last-child{border-right:none}
+.hx2-task:hover{background:var(--hx-cream)}
+.hx2-task-ico{color:var(--umber-700);margin-bottom:.2rem}
+.hx2-task strong{font-size:.82rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink)}
+.hx2-task small{font-size:.74rem;color:var(--muted);line-height:1.3}
+
+@media(max-width:900px){.hx2-tasks{grid-template-columns:repeat(3,1fr)}
+  .hx2-tasks-6{grid-template-columns:repeat(3,1fr)}
+  .hx2-task{border-bottom:1px solid var(--line)}
+  .hx2-task:nth-child(3n){border-right:none}}
+@media(max-width:520px){.hx2-tasks{grid-template-columns:repeat(2,1fr)}
+  .hx2-tasks-6{grid-template-columns:repeat(2,1fr)}
+  .hx2-task:nth-child(3n){border-right:1px solid var(--line)}
+  .hx2-task:nth-child(2n){border-right:none}}
+
+/* ============ shared section bits ============ */
+.section{padding-block:clamp(3.5rem,7vw,6rem)}
+.hx2-section-eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:var(--s4)}
+
+/* centered title flanked by gold rules — "Discover Piedmont" */
+.hx2-rule-center{display:flex;align-items:center;justify-content:center;gap:1rem;text-align:center;
+  font-family:var(--display);font-weight:500;text-transform:none;letter-spacing:.01em;
+  font-size:clamp(1.5rem,3vw,2rem);color:var(--ink);margin-bottom:var(--s5)}
+.hx2-rule-center::before,.hx2-rule-center::after{content:"";height:2px;width:clamp(40px,8vw,90px);
+  background:var(--gold);flex-shrink:0}
+
+/* small crimson eyebrow above a section/panel title */
+.hx2-eyebrow-sm{font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--sunset);margin-bottom:.25rem;flex-basis:100%}
+
+.hx2-panel-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem 1rem;margin-bottom:var(--s3);flex-wrap:wrap}
+.hx2-panel-head h2{font-size:1.5rem;color:var(--ink)}
+.hx2-viewall{font-size:.84rem;font-weight:700;color:var(--sunset);white-space:nowrap;letter-spacing:.02em}
+.hx2-viewall:hover{text-decoration:underline}
+
+/* ============ NEWS + EVENTS ============ */
+.hx2-ne{background:var(--hx-cream)}
+.hx2-ne-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:var(--s4);align-items:stretch}
+.hx2-news-panel,.hx2-events-panel{background:var(--hx-card);border:1px solid var(--line);
+  border-radius:16px;padding:var(--s4);box-shadow:var(--shadow-sm)}
+.hx2-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2)}
+.hx2-news-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--hx-cream-2);transition:transform .18s var(--ease),box-shadow .18s}
+.hx2-news-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.hx2-news-img{aspect-ratio:16/10;background:linear-gradient(135deg,var(--paper-2),var(--line));overflow:hidden}
+.hx2-news-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s var(--ease)}
+.hx2-news-card:hover .hx2-news-img img{transform:scale(1.05)}
+.hx2-news-body{padding:.85rem .9rem 1rem}
+.hx2-news-date{display:block;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--sunset);margin-bottom:.4rem}
+.hx2-news-body h3{font-size:.98rem;line-height:1.25;color:var(--ink);margin-bottom:.35rem;overflow-wrap:anywhere}
+.hx2-news-body p{font-size:.84rem;color:var(--ink-2);line-height:1.45;overflow-wrap:anywhere}
+
+.hx2-events-list{display:flex;flex-direction:column}
+.hx2-event{display:flex;gap:.9rem;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.hx2-event:first-child{padding-top:0}
+.hx2-event-date{flex-shrink:0;width:52px;text-align:center;background:var(--sunset);border-radius:9px;
+  padding:.4rem 0;height:fit-content;overflow:hidden;color:#fff}
+.hx2-event-date .m{display:block;font-size:.64rem;font-weight:800;text-transform:uppercase;color:rgba(255,255,255,.9);letter-spacing:.04em}
+.hx2-event-date .d{display:block;font-family:var(--display);font-size:1.4rem;line-height:1.05;color:#fff}
+.hx2-event h3{font-size:.98rem;color:var(--ink);margin-bottom:.15rem}
+.hx2-event-when{font-size:.8rem;color:var(--ink-2)}
+.hx2-event-where{font-size:.78rem;color:var(--muted)}
+.hx2-events-foot{display:inline-block;margin-top:var(--s3)}
+.hx2-news-foot{display:inline-block;margin-top:var(--s3)}
+
+@media(max-width:900px){.hx2-ne-grid{grid-template-columns:1fr}.hx2-news-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.hx2-news-grid{grid-template-columns:1fr}}
+
+/* ============ EXPLORE ============ */
+.hx2-explore-sec{background:var(--hx-cream-2);padding-bottom:clamp(3rem,5vw,4.5rem)}
+.hx2-explore-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2)}
+.hx2-explore-card{position:relative;border-radius:14px;overflow:hidden;min-height:230px;
+  display:flex;align-items:flex-end;box-shadow:var(--shadow-sm);isolation:isolate}
+.hx2-explore-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  background:var(--paper-2);transition:transform .5s var(--ease)}
+.hx2-explore-card::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top,rgba(20,28,18,.92) 15%,rgba(20,28,18,.45) 55%,rgba(20,28,18,.1) 100%)}
+.hx2-explore-card:hover img{transform:scale(1.06)}
+.hx2-explore-overlay{padding:1.1rem;color:#fff}
+.hx2-explore-ico{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--amber);color:var(--amber);margin-bottom:.6rem}
+.hx2-explore-overlay h3{font-size:1.05rem;color:#fff;margin-bottom:.25rem;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.hx2-explore-overlay p{font-size:.8rem;color:rgba(255,255,255,.88);line-height:1.4;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+
+@media(max-width:1000px){.hx2-explore-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.hx2-explore-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.hx2-explore-grid{grid-template-columns:1fr}}
+
+/* ============ SERVICES ============ */
+.hx2-services-sec{background:var(--hx-cream)}
+.hx2-services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2)}
+.hx2-service-card{display:flex;flex-direction:column;gap:.6rem;background:var(--hx-card);border:1px solid var(--line);
+  border-radius:12px;padding:1.1rem;position:relative;transition:transform .18s var(--ease),box-shadow .18s}
+.hx2-service-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.hx2-service-ico{color:var(--umber-700)}
+.hx2-service-body strong{display:block;font-size:.95rem;color:var(--ink);margin-bottom:.2rem}
+.hx2-service-body small{font-size:.82rem;color:var(--muted);line-height:1.4}
+.hx2-service-arrow{position:absolute;top:1.1rem;right:1rem;color:var(--muted)}
+
+@media(max-width:1000px){.hx2-services-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.hx2-services-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.hx2-services-grid{grid-template-columns:1fr}}
+
+/* ============ BY THE NUMBERS (green band) ============ */
+.hx2-stats-band{background:var(--hx-green);padding-block:clamp(2.6rem,5vw,3.6rem);
+  border-top:3px solid var(--gold);position:relative}
+.hx2-stats-eyebrow{text-align:center;font-family:var(--display);font-weight:500;
+  font-size:clamp(1.3rem,2.4vw,1.7rem);color:#fff;margin-bottom:clamp(1.6rem,3vw,2.2rem)}
+.hx2-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2)}
+.hx2-stat{display:flex;align-items:center;justify-content:center;gap:.8rem}
+.hx2-stat-ico{color:var(--amber);flex-shrink:0}
+.hx2-stat-body{display:flex;flex-direction:column;line-height:1.1}
+.hx2-stat-val{font-family:var(--display);font-size:clamp(1.9rem,2.6vw,2.3rem);color:#fff;line-height:1;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.hx2-stat-label{font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+.hx2-stat-sub{display:block;font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.35}
+
+@media(max-width:880px){.hx2-stats{grid-template-columns:repeat(2,1fr);gap:var(--s3);row-gap:var(--s4)}}
+@media(max-width:480px){.hx2-stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ CLOSING CTA ============ */
+.hx2-cta{background:var(--hx-cream);padding-block:clamp(3rem,6vw,4.5rem)}
+.hx2-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+  flex-wrap:wrap;background:var(--hx-card);border:1px solid var(--line);border-radius:18px;
+  padding:clamp(1.8rem,4vw,2.8rem) clamp(1.6rem,4vw,3rem);box-shadow:var(--shadow-sm);
+  border-left:5px solid var(--gold)}
+.hx2-cta-text{flex:1;min-width:min(100%,320px)}
+.hx2-cta-text h2{font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--ink);margin-bottom:.4rem}
+.hx2-cta-text p{font-size:.95rem;color:var(--ink-2);line-height:1.6;max-width:52ch}
+.hx2-cta-actions{display:flex;gap:.7rem;flex-wrap:wrap;flex-shrink:0}
+
+@media(max-width:600px){
+  .hx2-cta-inner{flex-direction:column;align-items:flex-start}
+  .hx2-cta-actions{width:100%}
+  .hx2-cta-actions .btn{flex:1;justify-content:center}
+}
+
+/* ============ NEWS / EVENTS EMPTY STATE ============ */
+.hx2-ne-empty{display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:clamp(2rem,5vw,3.2rem) 1.2rem;gap:.5rem}
+.hx2-ne-empty svg{color:var(--stone-300);margin-bottom:.3rem}
+.hx2-ne-empty-title{font-family:var(--display);font-size:1.15rem;color:var(--ink);margin:0}
+.hx2-ne-empty-sub{font-size:.9rem;color:var(--muted);line-height:1.5;max-width:34ch;margin:0}
+
+/* ============ HERO SEARCH SUGGESTIONS ============ */
+.hx-suggest{position:absolute;top:calc(100% + .5rem);left:0;right:0;background:var(--hx-card);
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-md);padding:.4rem;z-index:6;overflow:hidden}
+.hx-suggest-item{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;
+  padding:.65rem .8rem;border:none;background:none;border-radius:8px;cursor:pointer;text-align:left;font-family:inherit}
+.hx-suggest-item:hover{background:var(--paper-2)}
+.hx-suggest-title{font-size:.95rem;color:var(--ink);font-weight:500}
+.hx-suggest-item:hover .hx-suggest-title{color:var(--sunset)}
+.hx-suggest-type{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.hx-suggest-all{display:block;width:100%;text-align:left;padding:.65rem .8rem;margin-top:.2rem;
+  border:none;border-top:1px solid var(--line);background:none;cursor:pointer;font-family:inherit;
+  font-size:.85rem;font-weight:700;color:var(--sunset);border-radius:0 0 8px 8px}
+.hx-suggest-all:hover{background:var(--paper-2)}
+
+/* ============ WHY PIEDMONT — VIDEOS ============ */
+.hx2-why-lead{max-width:64ch;margin:0 auto var(--s5);text-align:center;color:var(--muted);
+  font-size:1.08rem;line-height:1.7}
+.hx2-why-videos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.5vw,1.8rem);max-width:980px;margin:0 auto}
+.hx2-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  background:#0e1f14;box-shadow:var(--shadow-md);border:1px solid var(--line)}
+.hx2-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+@media(max-width:760px){
+  .hx2-why-videos{grid-template-columns:1fr;max-width:560px}
+}
+
+/* ============================================================
+   NEWSLETTER SIGNUP (homepage news area + /news page)
+   ============================================================ */
+.nl{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--card);
+  padding:clamp(1.4rem,3vw,2rem);overflow:hidden}
+/* Forest accent bar down the left edge */
+.nl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--umber-800)}
+.nl-panel{max-width:640px}
+/* Homepage variant: warm cream with the same accent, not a flat beige box */
+.nl-inline{background:var(--paper-2)}
+
+.nl-head{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.1rem}
+.nl-icon{flex:0 0 auto;width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--umber-800);color:var(--amber,#e0a23c);
+  box-shadow:0 4px 12px rgba(30,60,36,.22)}
+.nl-text{min-width:0}
+.nl-heading{font-family:var(--display);font-size:1.32rem;line-height:1.2;color:var(--ink);margin:0 0 .25rem}
+.nl-blurb{color:var(--muted);font-size:.94rem;line-height:1.55;margin:0;max-width:52ch}
+
+.nl-field{display:flex;gap:.6rem;flex-wrap:wrap}
+.nl-field input{flex:1;min-width:210px;border:1.5px solid var(--line-strong);border-radius:10px;
+  padding:.75rem .95rem;font-family:var(--body);font-size:1rem;color:var(--ink);background:var(--paper);outline:none;
+  transition:border-color .15s,box-shadow .15s}
+.nl-field input:focus{border-color:var(--sunset);box-shadow:0 0 0 3px rgba(157,37,64,.12)}
+.nl-field input:disabled{opacity:.6}
+.nl-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--sunset);color:#fff;border:none;border-radius:10px;
+  padding:.75rem 1.6rem;font-weight:600;font-family:var(--body);font-size:1rem;cursor:pointer;transition:background .15s,transform .1s}
+.nl-btn:hover{background:var(--sunset-dark)}
+.nl-btn:active{transform:translateY(1px)}
+.nl-btn:disabled{opacity:.7;cursor:default}
+.nl-error{color:var(--crimson,#9d2540);font-size:.85rem;margin:.55rem 0 0}
+.nl-fine{color:var(--muted);font-size:.78rem;margin:.7rem 0 0}
+.nl-success{display:flex;align-items:center;gap:.6rem;color:var(--umber-800);font-weight:600;
+  font-size:1.02rem;margin:0;padding:.4rem 0}
+.nl-success svg{flex-shrink:0;background:var(--umber-800);color:#fff;border-radius:50%;padding:5px;width:28px;height:28px}
+@media(max-width:520px){
+  .nl-head{gap:.7rem}
+  .nl-icon{width:40px;height:40px}
+}
+
+.hx2-news-signup{margin-top:var(--s4)}
+
+/* ============ "CITY BULLETIN" CARD (news with no photo) ============
+   Instead of a placeholder icon, photo-less articles get a deliberate
+   editorial treatment: deep forest green, gold date, and headline in cream. */
+.hx2-bulletin{position:relative;background:var(--umber-900);border-color:var(--umber-900);
+  display:flex;flex-direction:column;justify-content:flex-start;isolation:isolate}
+.hx2-bulletin-tag{display:inline-flex;align-items:center;gap:.4rem;margin:.85rem .9rem 0;align-self:flex-start;
+  font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);
+  border:1px solid rgba(202,162,74,.4);border-radius:999px;padding:.28rem .6rem}
+.hx2-bulletin .hx2-news-body{display:flex;flex-direction:column;flex:1;padding-top:.7rem}
+.hx2-bulletin .hx2-news-date{color:var(--amber)}
+.hx2-bulletin h3{color:#fff;font-family:var(--display);font-weight:500;font-size:1.18rem;line-height:1.25}
+.hx2-bulletin p{color:rgba(247,243,236,.72)}
+.hx2-bulletin:hover{box-shadow:var(--shadow-md)}

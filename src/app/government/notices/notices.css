@@ -1,0 +1,67 @@
+/* ============================================================
+   PUBLIC NOTICES & BID REQUESTS
+   Uses the Warm Stone & Sunset tokens from globals.css.
+   ============================================================ */
+
+.notices-wrap{
+  display:flex;flex-direction:column;gap:var(--s5);
+  max-width:880px;
+}
+
+.notice-block-head{
+  display:flex;align-items:baseline;gap:.8rem;
+  margin-bottom:var(--s3);padding-bottom:.7rem;
+  border-bottom:2px solid var(--line);
+}
+.notice-block-head h2{font-size:clamp(1.5rem,3vw,2rem)}
+.notice-block-head .count-pill{
+  font-size:.78rem;color:var(--muted);background:var(--paper-2);
+  border:1px solid var(--line);border-radius:999px;padding:.15rem .7rem;
+}
+
+.notice-list{list-style:none;display:flex;flex-direction:column;gap:var(--s2)}
+
+.notice-row{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+  background:var(--card);border:1px solid var(--line);border-left:3px solid var(--sunset);
+  border-radius:12px;padding:1rem 1.2rem;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease);
+}
+.notice-row:hover{
+  border-color:var(--line-strong);border-left-color:var(--sunset);
+  box-shadow:var(--shadow-md);transform:translateX(2px);
+}
+
+.notice-main{display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.notice-date{
+  font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);
+}
+.notice-title{
+  font-family:var(--display);font-size:1.1rem;line-height:1.25;color:var(--ink);
+  font-weight:600;
+}
+
+.notice-tag{
+  align-self:flex-start;margin-top:.2rem;
+  font-size:.74rem;font-weight:700;letter-spacing:.04em;
+  border-radius:999px;padding:.18rem .6rem;
+}
+.notice-tag.open{color:var(--sunset);background:rgba(157,37,64,.08);border:1px solid rgba(157,37,64,.2)}
+.notice-tag.closed{color:var(--muted);background:var(--paper-2);border:1px solid var(--line)}
+
+.notice-dl{flex:0 0 auto;padding:.6rem 1rem;font-size:.92rem}
+
+/* ---------- scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .notice-row{transition:none}
+}
+
+/* ---------- responsive ---------- */
+@media(max-width:560px){
+  .notice-row{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .notice-dl{align-self:stretch;justify-content:center}
+}

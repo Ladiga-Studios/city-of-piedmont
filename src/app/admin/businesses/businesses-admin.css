@@ -1,0 +1,61 @@
+/* ============================================================ ADMIN — businesses */
+.biz-admin-list{display:flex;flex-direction:column;gap:.6rem}
+.ba-item{display:flex;align-items:center;gap:1rem;padding:.7rem .85rem;border:1px solid var(--line);
+  border-radius:10px;background:var(--paper)}
+.ba-thumb{flex:0 0 auto;width:52px;height:52px;border-radius:8px;overflow:hidden;background:var(--umber-700);
+  display:grid;place-items:center;color:var(--amber);font-family:var(--display);font-size:1.4rem}
+.ba-thumb img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.ba-main{flex:1;min-width:0}
+.ba-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.ba-badge{font-size:.7rem;font-weight:700;border-radius:999px;padding:.1rem .5rem;text-transform:uppercase;letter-spacing:.04em}
+.ba-badge.on{color:var(--success);background:rgba(63,107,70,.12)}
+.ba-badge.off{color:var(--muted);background:var(--paper-2);border:1px solid var(--line)}
+.ba-badge.feat{color:var(--gold);background:rgba(190,154,70,.14)}
+.ba-actions{display:flex;gap:.4rem;flex-shrink:0}
+
+/* form */
+.biz-form{display:flex;flex-direction:column;gap:var(--s2)}
+.bf-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2)}
+.bf-hint{font-weight:400;font-size:.78rem;color:var(--muted);text-transform:none;letter-spacing:0}
+.field textarea{width:100%;padding:.75rem .9rem;border:1.5px solid var(--line-strong);border-radius:10px;
+  background:var(--card);color:var(--ink);font-family:inherit;font-size:1rem;line-height:1.5;resize:vertical}
+.field textarea:focus{border-color:var(--sunset);outline:none}
+.bf-photo{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.bf-preview{width:120px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+
+.bf-hours{display:flex;flex-direction:column;gap:.4rem}
+.bf-hour-row{display:flex;align-items:center;gap:.5rem}
+.bf-day{flex:0 0 90px;font-size:.85rem;font-weight:600;color:var(--ink-2)}
+.bf-hour-row input{flex:1;min-width:0;padding:.45rem .6rem;border:1px solid var(--line);border-radius:7px;
+  background:var(--card);color:var(--ink);font-size:.85rem}
+.bf-hour-row .bf-note{flex:1.4}
+
+.bf-gallery{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.7rem}
+.bf-gphoto{position:relative;width:90px;height:68px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.bf-gphoto img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.bf-gphoto button{position:absolute;top:2px;right:2px;width:20px;height:20px;border:none;border-radius:50%;
+  background:rgba(0,0,0,.65);color:#fff;font-size:.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+
+.bf-toggles{display:flex;flex-direction:column;gap:.7rem;padding:var(--s2);background:var(--paper-2);
+  border-radius:10px;border:1px solid var(--line)}
+
+@media(max-width:600px){.bf-grid{grid-template-columns:1fr}.bf-hour-row{flex-wrap:wrap}.bf-day{flex-basis:100%}}
+
+/* ============================================================
+   MAIN-PHOTO CROPPER (directory card crop)
+   ============================================================ */
+.bf-crop{margin-top:1rem}
+.bf-crop-label{display:block;font-weight:600;font-size:.85rem;color:var(--ink-2);margin-bottom:.5rem}
+.cropper{display:flex;flex-direction:column;gap:.6rem;max-width:440px}
+.cropper-frame{position:relative;aspect-ratio:3/2;width:100%;border-radius:10px;overflow:hidden;
+  background:#0e1f14;border:1px solid var(--line);cursor:grab;touch-action:none;user-select:none}
+.cropper-frame:active{cursor:grabbing}
+.cropper-frame img{pointer-events:none}
+.cropper-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px);
+  background-size:33.33% 33.33%;opacity:.5}
+.cropper-controls{display:flex;align-items:center;gap:.8rem}
+.cropper-zoom{display:flex;align-items:center;gap:.6rem;flex:1;font-size:.84rem;color:var(--ink-2);font-weight:600}
+.cropper-zoom input[type=range]{flex:1;accent-color:var(--sunset)}
+.cropper-hint{font-size:.78rem;color:var(--muted);line-height:1.4}

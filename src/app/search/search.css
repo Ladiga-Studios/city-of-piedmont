@@ -1,0 +1,32 @@
+/* ============================================================
+   SEARCH RESULTS PAGE
+   ============================================================ */
+.sr-form{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1.5px solid var(--line-strong);
+  border-radius:14px;padding:.5rem .5rem .5rem 1rem;max-width:760px;margin-bottom:var(--s5)}
+.sr-form:focus-within{border-color:var(--sunset)}
+.sr-form-ico{color:var(--muted);display:flex;flex-shrink:0}
+.sr-form input{flex:1;border:none;background:none;font-family:inherit;font-size:1rem;color:var(--ink);outline:none;min-width:0}
+.sr-form input::placeholder{color:var(--muted)}
+.sr-form .btn{flex-shrink:0;padding:.6rem 1.2rem}
+
+.sr-empty{color:var(--muted);font-size:1rem}
+
+.sr-noresults{padding:var(--s4) 0}
+.sr-noresults-title{font-family:var(--display);font-size:1.4rem;color:var(--ink);margin-bottom:.4rem}
+.sr-noresults-sub{color:var(--ink-2);line-height:1.6}
+.sr-noresults-sub a{color:var(--sunset);font-weight:600}
+.sr-noresults-sub a:hover{text-decoration:underline}
+
+.sr-groups{display:flex;flex-direction:column;gap:var(--s5)}
+.sr-group-h{font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--sunset);
+  margin-bottom:var(--s2);display:flex;align-items:center;gap:.5rem}
+.sr-group-h span{font-size:.78rem;font-weight:700;color:var(--muted);background:var(--paper-2);
+  border-radius:20px;padding:.05rem .55rem;letter-spacing:0}
+
+.sr-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.sr-item a{display:flex;flex-direction:column;gap:.2rem;padding:.85rem 1rem;border:1px solid var(--line);
+  border-radius:12px;background:var(--card);transition:border-color .15s,box-shadow .15s,transform .15s}
+.sr-item a:hover{border-color:var(--sunset);box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+.sr-item-title{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+.sr-item a:hover .sr-item-title{color:var(--sunset)}
+.sr-item-sum{font-size:.88rem;color:var(--muted);line-height:1.45}

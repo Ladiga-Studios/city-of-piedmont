@@ -1,0 +1,23 @@
+/* ============================================================
+   CAREERS — uses the Warm Stone & Sunset tokens from globals.css
+   ============================================================ */
+
+.careers-wrap{max-width:760px;display:flex;flex-direction:column;gap:var(--s5)}
+
+.careers-block > h2{font-size:1.5rem;margin-bottom:1rem}
+
+.careers-eeo{
+  color:var(--ink-2);font-size:1.02rem;line-height:1.7;
+  border-left:3px solid var(--sunset);padding-left:1.1rem;margin-bottom:1.4rem;
+  max-width:70ch;
+}
+
+.careers-block p{color:var(--ink-2);line-height:1.7;max-width:70ch}
+/* Inline text links (e.g. the email/phone in "How to Apply") are maroon.
+   Scoped to paragraph links so it never overrides button text. */
+.careers-block p a{color:var(--sunset);font-weight:500}
+.careers-block p a:hover{text-decoration:underline}
+
+/* The application button is a .btn .btn-primary <a>; keep its text white. */
+.careers-apply{margin-top:.2rem;color:#fff}
+.careers-apply:hover{color:#fff}

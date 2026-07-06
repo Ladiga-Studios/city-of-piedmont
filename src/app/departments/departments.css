@@ -1,0 +1,53 @@
+/* Departments grid — photo cards for facilities we have images for,
+   clean text cards for the rest. Uses the shared design tokens. */
+.dept-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--s3);
+}
+.dept-card{
+  display:flex;
+  flex-direction:column;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.dept-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-md);
+}
+.dept-photo{
+  aspect-ratio:3 / 2;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--paper-2,#eee),var(--line));
+}
+.dept-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .35s ease;
+}
+.dept-card.has-photo:hover .dept-photo img{ transform:scale(1.05); }
+.dept-body{ padding:var(--s3); }
+.dept-body h3{ font-size:1.25rem; margin-bottom:.4rem; }
+.dept-body p{ font-size:.93rem; color:var(--muted); }
+
+@media (prefers-reduced-motion: reduce){
+  .dept-card, .dept-photo img{ transition:none; }
+  .dept-card:hover{ transform:none; }
+  .dept-card.has-photo:hover .dept-photo img{ transform:none; }
+}
+
+/* card as link */
+.dept-card{ color:inherit; text-decoration:none; }
+.dept-more{
+  display:inline-block;
+  margin-top:.7rem;
+  font-size:.85rem;
+  font-weight:600;
+  color:var(--sunset);
+}
+.dept-card:hover .dept-more{ text-decoration:underline; }

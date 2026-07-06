@@ -1,0 +1,58 @@
+/* ============================================================
+   EVENTS CALENDAR — Warm Stone & Sunset tokens from globals.css
+   ============================================================ */
+
+.ev-wrap{max-width:860px;display:flex;flex-direction:column;gap:var(--s5)}
+
+.ev-month-label{
+  font-size:clamp(1.3rem,3vw,1.7rem);margin-bottom:var(--s3);padding-bottom:.6rem;
+  border-bottom:2px solid var(--line);color:var(--ink);
+}
+
+.ev-list{list-style:none;display:flex;flex-direction:column;gap:var(--s2)}
+
+.ev-item{
+  display:flex;gap:var(--s3);align-items:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:1.1rem 1.3rem;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease);
+}
+.ev-item:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateX(2px)}
+
+/* maroon date chip */
+.ev-date{
+  flex:0 0 auto;width:62px;text-align:center;border-radius:10px;overflow:hidden;
+  background:var(--sunset);color:#fff;line-height:1;
+  box-shadow:var(--shadow-sm);
+}
+.ev-m{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.35rem 0 .2rem;background:rgba(0,0,0,.12)}
+.ev-d{display:block;font-size:1.5rem;font-weight:800;padding:.3rem 0 .45rem;font-family:var(--display)}
+
+.ev-main{min-width:0;flex:1}
+.ev-head{display:flex;align-items:flex-start;gap:.7rem;justify-content:space-between;flex-wrap:wrap}
+.ev-head h3{font-family:var(--display);font-size:1.18rem;line-height:1.25;color:var(--ink);font-weight:600}
+
+.ev-tag{
+  flex:0 0 auto;font-size:.7rem;font-weight:700;letter-spacing:.04em;border-radius:999px;
+  padding:.18rem .6rem;white-space:nowrap;
+}
+.ev-meeting{color:#1e3c24;background:rgba(30,60,36,.1);border:1px solid rgba(30,60,36,.25)}
+.ev-festival{color:var(--sunset);background:rgba(157,37,64,.08);border:1px solid rgba(157,37,64,.22)}
+.ev-recreation{color:#8a5a00;background:rgba(184,134,11,.12);border:1px solid rgba(184,134,11,.3)}
+.ev-holiday{color:#9d2540;background:rgba(157,37,64,.08);border:1px solid rgba(157,37,64,.22)}
+.ev-community{color:var(--ink-2);background:var(--paper-2);border:1px solid var(--line)}
+
+.ev-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-top:.35rem;
+  font-size:.86rem;color:var(--muted)}
+.ev-dot{opacity:.6}
+.ev-desc{margin-top:.55rem;color:var(--ink-2);line-height:1.6;font-size:.96rem}
+.ev-link{display:inline-block;margin-top:.55rem;color:var(--sunset);font-weight:600;font-size:.9rem}
+.ev-link:hover{text-decoration:underline}
+
+@media(max-width:540px){
+  .ev-item{padding:1rem}
+  .ev-date{width:54px}
+  .ev-d{font-size:1.3rem}
+  .ev-head h3{font-size:1.08rem}
+}
