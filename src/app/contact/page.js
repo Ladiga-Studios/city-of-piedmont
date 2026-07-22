@@ -2,7 +2,6 @@ import '../pages.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import ContactForm from '@/components/ContactForm';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 import LiveHoursBadge from '@/components/LiveHoursBadge';
 
 export const metadata = { title: 'Contact', description: 'Contact the City of Piedmont, Alabama. City Hall address, phone, email, and hours.' };
@@ -21,13 +20,12 @@ function Ico({ d }) {
 
 export default function Contact() {
   return (<>
-    <section className="page-hero"><div className="container inner has-photo">
+    <section className="page-hero"><div className="container inner">
       <div className="hero-text-col">
         <nav className="breadcrumb"><Link href="/">Home</Link><span>/</span><span>Contact</span></nav>
         <p className="eyebrow">Get in Touch</p><h1>Contact the City</h1>
         <p>Questions, requests, or feedback? Reach City Hall directly or send a message below.</p>
       </div>
-      <PageHeroPhoto src="/images/photos/eubanks-welcome-center.jpg" webp="/images/photos/eubanks-welcome-center.webp" alt="The Eubanks Welcome Center in Piedmont with its red railroad caboose" />
     </div></section>
 
     <section className="section"><div className="container contact-grid">

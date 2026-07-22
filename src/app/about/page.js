@@ -2,7 +2,6 @@ import '../pages.css';
 import '../about.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 
 export const metadata = {
   title: 'About Piedmont',
@@ -22,7 +21,7 @@ export default function About() {
     <>
       {/* HERO */}
       <section className="page-hero">
-        <div className="container inner has-photo">
+        <div className="container inner">
           <div className="hero-text-col">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link><span aria-hidden="true">/</span>
@@ -32,7 +31,6 @@ export default function About() {
             <h1>About Piedmont</h1>
             <p>From a hollow stump at a crossroads of Indian trails to a city at the foot of the mountains, Piedmont has carried five names across nearly two centuries.</p>
           </div>
-          <PageHeroPhoto src="/images/photos/downtown-mural.jpg" alt="The 'Welcome to Piedmont' mural on a downtown building, featuring the Chief Ladiga Trail" />
         </div>
       </section>
 

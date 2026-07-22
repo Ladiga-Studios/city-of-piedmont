@@ -83,9 +83,9 @@ export default function DepartmentPage({ params }) {
       <section className="section">
         <div className="container">
 
-          {/* 1: Intro, photo beside text (text-only if no photo) */}
-          <div className={`dd-intro${d.img ? '' : ' no-photo'}`}>
-            {d.img && (
+          {/* 1: Intro, photo beside text (text-only if no photo or photo is card-only) */}
+          <div className={`dd-intro${d.img && !d.cardImgOnly ? '' : ' no-photo'}`}>
+            {d.img && !d.cardImgOnly && (
               <figure className="dd-intro-media">
                 <picture>
                   <source srcSet={`${d.img}.webp`} type="image/webp" />
@@ -153,6 +153,14 @@ export default function DepartmentPage({ params }) {
           {d.offices && d.offices.map((o, i) => (
             <div className="dd-block dd-office" key={i}>
               <h2>{o.name}</h2>
+              {o.img && (
+                <figure className="dd-office-media">
+                  <picture>
+                    <source srcSet={`${o.img}.webp`} type="image/webp" />
+                    <img src={`${o.img}.jpg`} alt={o.alt || o.name} loading="lazy" width="378" height="203" />
+                  </picture>
+                </figure>
+              )}
               {o.note && <p className="dd-block-intro">{o.note}</p>}
               {o.staff && <StaffList staff={o.staff} />}
               <div className="dd-office-meta">
@@ -259,12 +267,22 @@ export default function DepartmentPage({ params }) {
               </ul>
             </div>
 
-            <div className="dd-map">
-              <ParkMap lat={d.lat} lng={d.lng} label={`${d.name}, Piedmont, AL`} />
-              <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="dd-directions">
-                Get directions &rarr;
-              </a>
-            </div>
+            {d.noMap ? (
+              <div className="dd-map dd-call-card">
+                <div className="dd-call-inner">
+                  <h3>Need to reach {d.name}?</h3>
+                  <p>Call City Hall and ask for the {d.name} Department.</p>
+                  <a href="tel:+12564473560" className="dd-call-btn">Call 256-447-3560</a>
+                </div>
+              </div>
+            ) : (
+              <div className="dd-map">
+                <ParkMap lat={d.lat} lng={d.lng} label={`${d.name}, Piedmont, AL`} />
+                <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="dd-directions">
+                  Get directions &rarr;
+                </a>
+              </div>
+            )}
           </div>
 
           {d.closing && <p className="dd-closing">{d.closing}</p>}

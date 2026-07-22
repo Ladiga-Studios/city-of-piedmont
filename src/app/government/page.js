@@ -1,6 +1,5 @@
 import '../pages.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 
 export const metadata = { title: 'City Government', description: 'Mayor, City Council, meeting minutes, ordinances, and public notices for the City of Piedmont, Alabama.' };
 
@@ -13,13 +12,12 @@ const CardArrow = () => (
 
 export default function Government() {
   return (<>
-    <section className="page-hero"><div className="container inner has-photo">
+    <section className="page-hero"><div className="container inner">
       <div className="hero-text-col">
         <nav className="breadcrumb"><Link href="/">Home</Link><span>/</span><span>Government</span></nav>
         <p className="eyebrow">City of Piedmont</p><h1>City Government</h1>
         <p>Piedmont operates under a Mayor–Council form of government. Find your representatives, read meeting minutes, and review public notices.</p>
       </div>
-      <PageHeroPhoto src="/images/history/old-city-hall.jpg" alt="Historic photograph of the old Piedmont City Hall with a fire engine out front" />
     </div></section>
 
     <section className="section"><div className="container">

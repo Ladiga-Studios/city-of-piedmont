@@ -1,20 +1,18 @@
 import '../pages.css';
 import './departments.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 import { DEPARTMENTS } from '@/lib/departments';
 
 export const metadata = { title: 'Departments', description: 'City of Piedmont departments: Power & Light, Water & Gas, Public Safety, Public Works, Revenue, Municipal Court, Building Inspection, and the Public Library.' };
 
 export default function Departments() {
   return (<>
-    <section className="page-hero"><div className="container inner has-photo">
+    <section className="page-hero"><div className="container inner">
       <div className="hero-text-col">
         <nav className="breadcrumb"><Link href="/">Home</Link><span>/</span><span>Departments</span></nav>
         <p className="eyebrow">City Services</p><h1>Departments</h1>
         <p>The people and services that keep Piedmont running. Contact information and service details for each department.</p>
       </div>
-      <PageHeroPhoto src="/images/departments/power-light.jpg" webp="/images/departments/power-light.webp" alt="A City of Piedmont Power & Light crew at work" />
     </div></section>
     <section className="section"><div className="container"><div className="dept-grid">
       {DEPARTMENTS.map(d => (

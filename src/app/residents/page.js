@@ -1,7 +1,6 @@
 import '../pages.css';
 import './residents.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 
 export const metadata = {
   title: 'Residents',
@@ -15,7 +14,7 @@ export default function Residents() {
   return (
     <>
       <section className="page-hero">
-        <div className="container inner has-photo">
+        <div className="container inner">
           <div className="hero-text-col">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link><span aria-hidden="true">/</span>
@@ -29,7 +28,6 @@ export default function Residents() {
               and voting. City Hall is at 109 North Center Ave, Piedmont, AL 36272.
             </p>
           </div>
-          <PageHeroPhoto src="/images/explore/community.jpg" webp="/images/explore/community.webp" alt="The Clyde H. Pike Civic Center in Piedmont" />
         </div>
       </section>
 

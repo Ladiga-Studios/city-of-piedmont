@@ -86,6 +86,8 @@ export const DEPARTMENTS = [
         links: [{ label: 'Calhoun County Website', href: 'http://www.calhouncounty.org/' }],
       },
     ],
+    img: '/images/departments/admin-building',
+    alt: 'The City of Piedmont Administrative Offices at the Calhoun County Courthouse Annex',
     lat: 33.9248, lng: -85.6112,
   },
 
@@ -236,6 +238,8 @@ export const DEPARTMENTS = [
     offices: [
       {
         name: 'Police Department',
+        img: '/images/departments/police-department',
+        alt: 'The Piedmont Police Department entrance with blue awnings',
         staff: [{ name: 'Nathan Johnson', role: 'Chief of Police' }],
         phones: [
           { label: 'Phone', number: '(256) 447-9091' },
@@ -245,6 +249,8 @@ export const DEPARTMENTS = [
       },
       {
         name: 'Fire Department',
+        img: '/images/departments/fire-department',
+        alt: 'The Piedmont Fire Department station with engines in the bays',
         staff: [{ name: 'Todd Kirkland', role: 'Fire Chief' }],
         lines: ['312 North Center Avenue', 'Piedmont, AL 36272'],
         phones: [
@@ -269,6 +275,9 @@ export const DEPARTMENTS = [
       address: '121 West Ladiga Street, Piedmont, AL 36272',
       phone: '(256) 447-9091',
     },
+    img: '/images/departments/public-safety',
+    alt: 'The Piedmont Fire Department station with engines in the bays',
+    cardImgOnly: true, // photo shows on the index card, not the detail-page intro (offices have their own photos)
     lat: 33.9236, lng: -85.6118,
   },
 
@@ -312,6 +321,8 @@ export const DEPARTMENTS = [
       address: '109 N Center Ave., Piedmont, AL 36272',
       phone: '(256) 447-3564',
     },
+    img: '/images/departments/admin-building',
+    alt: 'The City of Piedmont Administrative Offices, home of the Revenue Department',
     lat: 33.9248, lng: -85.6112,
   },
 
@@ -412,6 +423,9 @@ export const DEPARTMENTS = [
       address: 'Piedmont, AL 36272',
       phone: '(256) 447-3560',
     },
+    img: '/images/departments/public-works',
+    alt: 'The Piedmont Public Works facility with the brick castle marker out front',
+    noMap: true, // no fixed public address — direct visitors to call instead
     lat: 33.9248, lng: -85.6112,
   },
 

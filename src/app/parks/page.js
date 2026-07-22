@@ -1,17 +1,15 @@
 import '../pages.css';
 import '../departments/departments.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 export const metadata = { title: 'Parks & Recreation', description: 'Trails, parks, the aquatic center, sports complex, and recreation programs in Piedmont, Alabama.' };
 export default function Parks() {
   return (<>
-    <section className="page-hero"><div className="container inner has-photo">
+    <section className="page-hero"><div className="container inner">
       <div className="hero-text-col">
         <nav className="breadcrumb"><Link href="/">Home</Link><span>/</span><span>Parks &amp; Recreation</span></nav>
         <p className="eyebrow">Get Outside</p><h1>Parks &amp; Recreation</h1>
         <p>From the Chief Ladiga Trail to Terrapin Creek, Piedmont is built for the outdoors.</p>
       </div>
-      <PageHeroPhoto src="/images/photos/trail-fall.jpg" webp="/images/photos/trail-fall.webp" alt="Cyclists on the Chief Ladiga Trail under fall foliage" />
     </div></section>
     <section className="section"><div className="container"><div className="dept-grid">
       <Link href="/parks/chief-ladiga-trail" className="dept-card has-photo">

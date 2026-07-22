@@ -10,6 +10,12 @@
 .dd-intro-media img{width:100%;height:100%;max-height:380px;object-fit:cover;display:block;
   border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
 .dd-intro-text p{margin:0;color:var(--ink-2);font-size:1.05rem;line-height:1.7}
+
+/* Optional photo inside a sub-office/division block (e.g. the Fire Department
+   station). Kept contained (not stretched) so smaller source photos stay sharp. */
+.dd-office-media{margin:0 0 1rem;max-width:520px}
+.dd-office-media img{width:100%;height:auto;display:block;
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
 .dd-intro.no-photo .dd-intro-text{max-width:70ch}
 
 /* 2 — services: card with multi-column list */
@@ -43,6 +49,17 @@
 .dd-directions{display:block;padding:.85rem 1rem;font-weight:600;color:var(--sunset);text-align:center;
   border-top:1px solid var(--line)}
 .dd-directions:hover{background:var(--paper-2)}
+
+/* call card — shown in place of the map when a department has no public address */
+.dd-call-card{align-items:center;justify-content:center;padding:var(--s4);text-align:center;min-height:260px}
+.dd-call-inner{display:flex;flex-direction:column;align-items:center;gap:.6rem;max-width:32ch}
+.dd-call-inner h3{font-size:1.15rem}
+.dd-call-inner p{font-size:.95rem;color:var(--ink-2)}
+.dd-call-btn{display:inline-flex;align-items:center;justify-content:center;margin-top:.4rem;
+  padding:.85rem 1.5rem;min-height:44px;border-radius:999px;background:var(--sunset);color:#fff;
+  font-weight:700;transition:background .2s ease-out,transform .2s ease-out}
+.dd-call-btn:hover{background:var(--sunset-dark);transform:translateY(-1px)}
+.dd-call-btn:active{transform:translateY(0)}
 
 /* back link */
 .dd-back{display:inline-flex;gap:.4rem;align-items:center;color:var(--sunset);font-weight:600;margin-top:var(--s3)}

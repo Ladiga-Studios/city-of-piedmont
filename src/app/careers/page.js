@@ -2,7 +2,6 @@ import '../pages.css';
 import './careers.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 
 export const metadata = {
   title: 'Careers',
@@ -18,7 +17,7 @@ export default function CareersPage() {
   return (
     <>
       <section className="page-hero">
-        <div className="container inner has-photo">
+        <div className="container inner">
           <div className="hero-text-col">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link><span aria-hidden="true">/</span>
@@ -32,7 +31,6 @@ export default function CareersPage() {
               below and check the current openings.
             </p>
           </div>
-          <PageHeroPhoto src="/images/photos/downtown-2.jpg" webp="/images/photos/downtown-2.webp" alt="A downtown Piedmont street corner with historic brick buildings" />
         </div>
       </section>
 

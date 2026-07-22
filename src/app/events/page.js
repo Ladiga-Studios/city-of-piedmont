@@ -1,7 +1,6 @@
 import '../pages.css';
 import './events.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 import { createClient } from '@/lib/supabase-server';
 import {
   eventMonthAbbr, eventDayNum, eventTimeRange, eventLongDate,
@@ -55,7 +54,7 @@ export default async function EventsPage() {
   return (
     <>
       <section className="page-hero">
-        <div className="container inner has-photo">
+        <div className="container inner">
           <div className="hero-text-col">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link><span aria-hidden="true">/</span>
@@ -68,7 +67,6 @@ export default async function EventsPage() {
               call <a href="tel:2564473560" style={{ color: 'var(--amber)', fontWeight: 600 }}>256-447-3560</a>.
             </p>
           </div>
-          <PageHeroPhoto src="/images/photos/memorial-park.jpg" webp="/images/photos/memorial-park.webp" alt="Veterans Memorial Park in Piedmont" />
         </div>
       </section>
 

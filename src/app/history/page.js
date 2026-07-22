@@ -1,7 +1,6 @@
 import '../pages.css';
 import '../about.css';
 import Link from 'next/link';
-import PageHeroPhoto from '@/components/PageHeroPhoto';
 
 export const metadata = {
   title: 'History of Piedmont',
@@ -24,7 +23,7 @@ export default function History() {
     <>
       {/* HERO */}
       <section className="page-hero">
-        <div className="container inner has-photo">
+        <div className="container inner">
           <div className="hero-text-col">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link><span aria-hidden="true">/</span>
@@ -35,7 +34,6 @@ export default function History() {
             <h1>The History of Piedmont</h1>
             <p>Nearly two centuries at the crossroads, from a hollow stump and Indian trails to the city at the foot of the mountains.</p>
           </div>
-          <PageHeroPhoto src="/images/history/old-depot.jpg" alt="The historic Selma, Rome & Dalton Railroad depot in early Piedmont" />
         </div>
       </section>
 
