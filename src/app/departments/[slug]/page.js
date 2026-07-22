@@ -151,19 +151,12 @@ export default function DepartmentPage({ params }) {
 
           {/* 7: Divisions / sub-offices (Police & Fire, Filtration Plant, County Annex) */}
           {d.offices && d.offices.map((o, i) => (
-            <div className="dd-block dd-office" key={i}>
-              <h2>{o.name}</h2>
-              {o.img && (
-                <figure className="dd-office-media">
-                  <picture>
-                    <source srcSet={`${o.img}.webp`} type="image/webp" />
-                    <img src={`${o.img}.jpg`} alt={o.alt || o.name} loading="lazy" width="378" height="203" />
-                  </picture>
-                </figure>
-              )}
-              {o.note && <p className="dd-block-intro">{o.note}</p>}
-              {o.staff && <StaffList staff={o.staff} />}
-              <div className="dd-office-meta">
+            <div className={`dd-block dd-office${o.img ? ' has-photo' : ''}`} key={i}>
+              <div className="dd-office-body">
+                <h2>{o.name}</h2>
+                {o.note && <p className="dd-block-intro">{o.note}</p>}
+                {o.staff && <StaffList staff={o.staff} />}
+                <div className="dd-office-meta">
                 {o.lines && o.lines.length > 0 && (
                   <div className="dd-row"><span className="dd-label">Address</span><span>{o.lines.join(', ')}</span></div>
                 )}
@@ -182,7 +175,16 @@ export default function DepartmentPage({ params }) {
                     <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
                   </div>
                 ))}
+                </div>
               </div>
+              {o.img && (
+                <figure className="dd-office-media">
+                  <picture>
+                    <source srcSet={`${o.img}.webp`} type="image/webp" />
+                    <img src={`${o.img}.jpg`} alt={o.alt || o.name} loading="lazy" width="378" height="203" />
+                  </picture>
+                </figure>
+              )}
             </div>
           ))}
 

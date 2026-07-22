@@ -6,14 +6,15 @@
 /* 1 — intro: photo beside text */
 .dd-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--s5);align-items:center;margin-bottom:var(--s5)}
 .dd-intro.no-photo{grid-template-columns:1fr}
-.dd-intro-media{margin:0}
+.dd-intro-media{margin:0;order:2} /* photo sits right of the text on desktop */
+.dd-intro-text{order:1}
 .dd-intro-media img{width:100%;height:100%;max-height:380px;object-fit:cover;display:block;
   border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
 .dd-intro-text p{margin:0;color:var(--ink-2);font-size:1.05rem;line-height:1.7}
 
 /* Optional photo inside a sub-office/division block (e.g. the Fire Department
    station). Kept contained (not stretched) so smaller source photos stay sharp. */
-.dd-office-media{margin:0 0 1rem;max-width:520px}
+.dd-office-media{margin:0}
 .dd-office-media img{width:100%;height:auto;display:block;
   border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
 .dd-intro.no-photo .dd-intro-text{max-width:70ch}
@@ -68,7 +69,10 @@
 /* ---- responsive ---- */
 @media(max-width:900px){
   .dd-intro{grid-template-columns:1fr;gap:var(--s4)}
+  .dd-intro-media{order:0} /* photo stacks above the text on small screens */
   .dd-intro-media img{max-height:320px}
+  .dd-office.has-photo{grid-template-columns:1fr}
+  .dd-office.has-photo .dd-office-media{order:-1;max-width:520px}
   .dd-contact-band{grid-template-columns:1fr}
   .dd-map .leaflet-container{min-height:240px}
 }
@@ -112,9 +116,11 @@
 /* sub-offices / divisions */
 .dd-office{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius-lg);
   padding:var(--s4) var(--s4) calc(var(--s4) - .4rem)}
-.dd-office > h2{font-size:1.25rem}
+.dd-office h2{font-size:1.25rem}
 .dd-office-meta{margin-top:1rem;max-width:560px}
 .dd-office .dd-row{border-bottom-color:var(--line)}
+/* with a photo: text left, photo right on desktop */
+.dd-office.has-photo{display:grid;grid-template-columns:1.4fr 1fr;gap:var(--s4);align-items:start}
 
 /* notice callout */
 .dd-notice{background:linear-gradient(180deg,rgba(157,37,64,.05),var(--card));
