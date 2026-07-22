@@ -35,7 +35,7 @@ export default function Header() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
       <div className="container nav">
         <Link href="/" className="brand" aria-label={`${SITE.name} home`} onClick={() => setMenuOpen(false)}>
           <Seal size={160} />
