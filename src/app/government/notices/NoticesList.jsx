@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { fmtNoticeDate, isBidClosed } from '@/lib/notices-format';
+import AnchorBadge from '@/components/AnchorBadge';
 
 function DownloadIcon() {
   return (
@@ -23,6 +24,7 @@ function NoticeRow({ item, isBid }) {
             {closed ? 'Closed' : 'Closes'} {fmtNoticeDate(item.closes_date)}
           </span>
         )}
+        <AnchorBadge record={item} />
       </div>
       <a
         href={item.file_url}

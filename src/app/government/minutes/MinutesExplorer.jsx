@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { fmtMeetingDate as fmtDate, descriptorFromTitle } from '@/lib/minutes-format';
+import AnchorBadge from '@/components/AnchorBadge';
 
 function yearOf(d) { return (d || '').slice(0, 4) || 'Undated'; }
 
@@ -118,6 +119,8 @@ function DetailCard({ m }) {
         </svg>
         Download full minutes (PDF)
       </a>
+
+      <AnchorBadge record={m} />
     </article>
   );
 }

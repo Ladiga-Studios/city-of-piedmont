@@ -182,3 +182,34 @@
   .gov-feature .gf-media{min-height:260px}
   .gov-feature .gf-media img{object-position:center 20%}
 }
+
+/* ============================================================ PERMANENT RECORD (AnchorBadge) */
+/* Quiet trust mark under anchored records. Plain-language line;
+   technical proof expands on demand. Uses the site's design tokens. */
+.anchor-badge{margin-top:.9rem;max-width:560px}
+.anchor-badge-line{display:inline-flex;align-items:center;gap:.45rem;background:none;border:none;cursor:pointer;
+  font:inherit;font-size:.82rem;color:var(--muted);padding:.2rem 0;transition:color .2s var(--ease)}
+.anchor-badge-line:hover,.anchor-badge-line:focus-visible{color:var(--sunset)}
+.anchor-badge-line:focus-visible{outline:2px solid var(--sunset);outline-offset:3px;border-radius:4px}
+.anchor-badge-line svg:first-child{color:var(--success);flex:none}
+.anchor-caret{transition:transform .2s var(--ease);flex:none}
+.anchor-caret.open{transform:rotate(180deg)}
+.anchor-badge-detail{margin-top:.6rem;background:var(--paper-2);border:1px solid var(--line);
+  border-radius:10px;padding:.9rem 1rem;font-size:.85rem;animation:anchorIn .2s var(--ease)}
+@keyframes anchorIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.anchor-badge-detail{animation:none}}
+.anchor-explain{color:var(--ink-2);margin:0 0 .8rem;line-height:1.55}
+.anchor-explain a{color:var(--sunset);text-decoration:underline;text-underline-offset:2px}
+.anchor-facts{display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;margin:0}
+.anchor-facts dt{color:var(--muted);font-size:.78rem;white-space:nowrap;padding-top:.1rem}
+.anchor-facts dd{margin:0;min-width:0;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.anchor-facts code{font-size:.78rem;background:var(--card);border:1px solid var(--line);
+  border-radius:6px;padding:.15rem .45rem;word-break:break-all}
+.anchor-facts a{color:var(--sunset)}
+.anchor-copy{background:none;border:1px solid var(--line);border-radius:6px;padding:.12rem .5rem;
+  font:inherit;font-size:.74rem;color:var(--muted);cursor:pointer;transition:all .2s var(--ease)}
+.anchor-copy:hover{border-color:var(--sunset);color:var(--sunset)}
+@media(max-width:600px){.anchor-facts{grid-template-columns:1fr}.anchor-facts dt{padding-top:.3rem}}
+.anchor-credit{margin:.15rem 0 0 1.55rem;font-size:.74rem;color:var(--muted);line-height:1.5}
+.anchor-credit a{color:var(--muted);text-decoration:underline;text-underline-offset:2px;transition:color .2s var(--ease)}
+.anchor-credit a:hover,.anchor-credit a:focus-visible{color:var(--sunset)}

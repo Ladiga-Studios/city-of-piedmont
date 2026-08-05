@@ -14,6 +14,7 @@ const STATIC = [
   { path: '/government/council', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/government/minutes', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/government/notices', priority: 0.6, changeFrequency: 'weekly' },
+  { path: '/government/records', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/parks', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/parks/chief-ladiga-trail', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/parks/pinhoti-trail', priority: 0.7, changeFrequency: 'monthly' },

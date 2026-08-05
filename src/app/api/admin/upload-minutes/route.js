@@ -8,6 +8,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
 import { summarizeMinutesPdf } from '@/lib/summarize';
+import { sha256Of, tryAnchorRecord, minutesPayload } from '@/lib/fangorn-anchor';
 
 export const runtime = 'nodejs'; // needs Node (Buffer + Anthropic fetch)
 
@@ -43,6 +44,10 @@ export async function POST(request) {
   const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
   const path = `${meetingDate}-${safeName}`;
 
+  // Fingerprint the exact bytes being published. This is what gets
+  // anchored in the permanent record; the PDF itself stays in Storage.
+  const sha256 = sha256Of(bytes);
+
   // --- upload PDF to storage ---
   const { error: upErr } = await supabase.storage
     .from('minutes')
@@ -72,6 +77,7 @@ export async function POST(request) {
       meeting_date: meetingDate,
       file_url: pub.publicUrl,
       file_path: path,
+      sha256,
       ...summaryFields,
     })
     .select()
@@ -83,5 +89,17 @@ export async function POST(request) {
     return NextResponse.json({ error: `Database insert failed: ${insErr.message}` }, { status: 500 });
   }
 
-  return NextResponse.json({ minute: inserted, summaryWarning });
+  // --- anchor in the permanent record (never fails the upload) ---
+  // On failure the row stays 'pending'/'failed' and `npm run anchor`
+  // picks it up later.
+  const anchor = await tryAnchorRecord(
+    supabase, 'minutes', 'minutes', inserted, minutesPayload(inserted)
+  );
+
+  return NextResponse.json({
+    minute: inserted,
+    summaryWarning,
+    anchorWarning: anchor.error,
+    anchored: anchor.anchored,
+  });
 }
