@@ -121,7 +121,7 @@ export default function NewsAdmin() {
               <div className="field">
                 <label htmlFor="n-title">Headline</label>
                 <input id="n-title" type="text" value={form.title} onChange={(e) => set('title', e.target.value)} placeholder="e.g. 2026 Street Paving Project Begins" />
-                <span className="field-help">Keep it short and specific &mdash; this is the big bold line readers see first.</span>
+                <span className="field-help">Keep it short and specific. This is the big bold line readers see first.</span>
               </div>
 
               <div className="field">

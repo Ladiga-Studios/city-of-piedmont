@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { cityHallStatus } from '@/lib/city-hours';
 import { useWeather, WeatherGlyph } from '@/lib/use-weather';
 
-// Google Translate's site-proxy (translate.goog) — free, no key, no widget JS.
+// Google Translate's site-proxy (translate.goog) - free, no key, no widget JS.
 const TRANSLATE_HOST = 'https://www-piedmontcity-org.translate.goog';
 const LANGS = [
   ['es', 'Español'],

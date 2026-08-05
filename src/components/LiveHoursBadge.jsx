@@ -1,6 +1,6 @@
 'use client';
 
-// Small live open/closed badge for City Hall — reuses the shared hours logic.
+// Small live open/closed badge for City Hall - reuses the shared hours logic.
 // Renders nothing until mounted (SSR-safe), then refreshes every minute.
 
 import { useEffect, useState } from 'react';

@@ -1,4 +1,4 @@
-// Framed hero photo for page heroes — mirrors the business page treatment.
+// Framed hero photo for page heroes - mirrors the business page treatment.
 // Sits beside the hero text; the image is shown contained (never cropped) over
 // a blurred, zoomed copy of itself so off-ratio photos look clean without black
 // bars. Use inside a `.page-hero .inner` that has the `has-photo` modifier.

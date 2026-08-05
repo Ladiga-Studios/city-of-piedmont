@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase-server';
 export const metadata = {
   title: 'The Permanent Record',
   description:
-    'How the City of Piedmont preserves council minutes, public notices, and city news in a tamper-evident public archive — and how anyone can verify a record.',
+    'How the City of Piedmont preserves council minutes, public notices, and city news in a tamper-evident public archive, and how anyone can verify a record.',
   alternates: { canonical: 'https://www.piedmontcity.org/government/records' },
 };
 
@@ -45,8 +45,8 @@ export default async function RecordsPage() {
           <h1>The Permanent Record</h1>
           <p>
             Council minutes, public notices, and city news posted on this site are filed
-            in a public archive that cannot be quietly altered — not by a future website,
-            a change in staff, or the city itself.
+            in a public archive that cannot be quietly altered by a future website,
+            a change in staff, or even the city itself.
           </p>
         </div>
       </section>
@@ -66,7 +66,7 @@ export default async function RecordsPage() {
             A fingerprint (technically, a SHA-256 hash) is a short code computed from the
             exact contents of a file. Change even one letter in the file and the fingerprint
             changes completely. Because the fingerprint is filed in an archive no one can
-            edit, anyone can later prove that a document is — or is not — the same one the
+            edit, anyone can later prove that a document is, or is not, the same one the
             city originally posted.
           </p>
 
@@ -75,7 +75,7 @@ export default async function RecordsPage() {
             <li>
               <strong>Records can&rsquo;t be silently rewritten.</strong> If a posted document
               were ever altered, its fingerprint would no longer match the one on file.
-              Corrections are still possible — they simply appear as new entries rather than
+              Corrections are still possible. They simply appear as new entries rather than
               replacing history.
             </li>
             <li>
@@ -84,7 +84,7 @@ export default async function RecordsPage() {
               changes, and staff turnover.
             </li>
             <li>
-              <strong>You don&rsquo;t have to trust — you can check.</strong> Every filed
+              <strong>You don&rsquo;t have to take our word for it.</strong> Every filed
               record shows a &ldquo;Filed in the permanent record&rdquo; mark. Expand it to
               see the fingerprint and the public ledger entry.
             </li>
@@ -105,12 +105,12 @@ export default async function RecordsPage() {
             filed. If they don&rsquo;t, it isn&rsquo;t.
           </p>
 
-          <h2>What is — and isn&rsquo;t — in the archive</h2>
+          <h2>What is and isn&rsquo;t in the archive</h2>
           <p>
             Only fingerprints and basic public details (title, date, and where the document
             is posted) are filed. The documents themselves stay on the city&rsquo;s website,
             exactly as before. Nothing personal or private is placed in the archive, and the
-            archive adds no new information — it only proves what was already public.
+            archive adds no new information. It only proves what was already public.
           </p>
 
           <h2>The technical details</h2>

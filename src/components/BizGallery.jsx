@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Business photo gallery.
- *  - Masonry columns (CSS columns) so each photo keeps its real proportions —
+ *  - Masonry columns (CSS columns) so each photo keeps its real proportions -
  *    nothing is cropped and there are no black letterbox bars.
  *  - Click any photo to open it full-size in a lightbox (Esc or click to close;
  *    arrow keys to move between photos).

@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * Count-up animation for a single stat value.
  *
- * Accepts the same display strings used elsewhere on the page — e.g. "4,787",
- * "1888", "5", "30+" — and animates only the numeric portion while preserving
+ * Accepts the same display strings used elsewhere on the page - e.g. "4,787",
+ * "1888", "5", "30+" - and animates only the numeric portion while preserving
  * any prefix/suffix (the "+" in "30+") and re-inserting thousands separators
  * for values that originally had them.
  *

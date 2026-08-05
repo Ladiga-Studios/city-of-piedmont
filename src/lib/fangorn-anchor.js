@@ -1,5 +1,5 @@
 // ============================================================
-// Permanent Record anchoring — Fangorn integration (SERVER ONLY)
+// Permanent Record anchoring - Fangorn integration (SERVER ONLY)
 //
 // Anchors a SHA-256 fingerprint + metadata for each published
 // record (minutes, notices, news) into the city's Fangorn
@@ -8,15 +8,15 @@
 // check it against the anchored fingerprint.
 //
 // Design rules (do not break these):
-//  1. HASH ONLY — document bytes are never uploaded to IPFS.
+//  1. HASH ONLY - document bytes are never uploaded to IPFS.
 //     Only the fingerprint + public metadata leave the city's
 //     own storage. (Accidentally-posted private info in a PDF
 //     can still be pulled from Supabase; the anchor only proves
 //     a file with that hash existed.)
-//  2. NEVER BLOCKING — if anchoring fails or isn't configured,
+//  2. NEVER BLOCKING - if anchoring fails or isn't configured,
 //     uploads still succeed. Rows stay 'pending'/'failed' and
 //     `npm run anchor` (scripts/anchor-records.mjs) retries.
-//  3. ENV-GATED — with no FANGORN_* env vars the site behaves
+//  3. ENV-GATED - with no FANGORN_* env vars the site behaves
 //     exactly as before. See .env.local.example.
 //
 // The SDK is imported lazily so the site builds and runs even
@@ -61,7 +61,7 @@ export function anchoringEnabled() {
   );
 }
 
-// Lazy singleton — created on first anchor, reused after.
+// Lazy singleton - created on first anchor, reused after.
 let _client = null;
 async function getClient() {
   if (_client) return _client;
@@ -86,7 +86,7 @@ async function getClient() {
  * @param {'minutes'|'notices'|'news'} kind
  * @param {Array<{id: string, payload: object}>} records
  *   `id` is the Supabase row id (stable vertex id); `payload` is
- *   the public metadata to anchor — MUST already include sha256.
+ *   the public metadata to anchor - MUST already include sha256.
  * @returns {Promise<{commitCid: string, txHash: string, vertexCids: Record<string,string>}>}
  */
 export async function anchorBatch(kind, records) {
@@ -113,7 +113,7 @@ export async function anchorBatch(kind, records) {
 /**
  * Fire-and-report wrapper used by the admin upload routes.
  * Anchors a single record and writes the result back to its row.
- * NEVER throws — returns { anchored, error } so callers can pass
+ * NEVER throws - returns { anchored, error } so callers can pass
  * a warning to the admin UI without failing the upload.
  *
  * @param {object} supabase  server-side Supabase client (staff session)
@@ -124,7 +124,7 @@ export async function anchorBatch(kind, records) {
  */
 export async function tryAnchorRecord(supabase, table, kind, row, payload) {
   if (!anchoringEnabled()) {
-    return { anchored: false, error: null }; // silently off — row stays 'pending'
+    return { anchored: false, error: null }; // silently off - row stays 'pending'
   }
   try {
     const { commitCid, txHash, vertexCids } = await anchorBatch(kind, [
@@ -154,7 +154,7 @@ export async function tryAnchorRecord(supabase, table, kind, row, payload) {
 }
 
 /**
- * Public metadata payload builders — everything here is already
+ * Public metadata payload builders - everything here is already
  * public on the website; the anchor adds no new information,
  * only proof of what was published and when.
  */

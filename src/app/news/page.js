@@ -87,7 +87,7 @@ export default async function NewsPage() {
           <NewsletterSignup
             variant="panel"
             heading="Subscribe to city news"
-            blurb="Get Piedmont news, events, and announcements delivered straight to your inbox. No spam — just the latest from City Hall."
+            blurb="Get Piedmont news, events, and announcements delivered straight to your inbox. No spam, just the latest from City Hall."
           />
         </div>
       </section>

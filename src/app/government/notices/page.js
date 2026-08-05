@@ -7,7 +7,7 @@ import NoticesList from './NoticesList';
 export const metadata = {
   title: 'Public Notices & Bid Requests',
   description:
-    'Current City of Piedmont public notices, ordinances, legal announcements, and open bid requests \u2014 download the official PDFs.',
+    'Current City of Piedmont public notices, ordinances, legal announcements, and open bid requests. Download the official PDFs.',
   alternates: { canonical: 'https://www.piedmontcity.org/government/notices' },
 };
 

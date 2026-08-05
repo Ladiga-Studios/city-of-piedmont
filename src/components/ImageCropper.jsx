@@ -12,7 +12,7 @@ import { useRef, useState, useCallback } from 'react';
  * cover-scaling and the zoom. We measure the image's natural size to compute that
  * exactly, so dragging tracks the cursor 1:1 instead of jumping.
  *
- * We save { x, y, zoom }: x/y are 0-100% focal points, zoom is a scale >= 1 — the
+ * We save { x, y, zoom }: x/y are 0-100% focal points, zoom is a scale >= 1 - the
  * same values the public card renders with. The original image is never altered.
  *
  * Props:

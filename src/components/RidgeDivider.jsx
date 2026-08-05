@@ -1,4 +1,4 @@
-// Layered Appalachian ridgeline — the site's signature section transition,
+// Layered Appalachian ridgeline - the site's signature section transition,
 // echoing the hills on the city seal. Purely decorative (aria-hidden).
 //
 // Usage:
@@ -15,7 +15,7 @@ export default function RidgeDivider({ fill = 'var(--hx-green)', flip = false, c
       aria-hidden="true"
     >
       <svg viewBox="0 0 1440 90" preserveAspectRatio="none" focusable="false">
-        {/* Back range — soft, distant */}
+        {/* Back range - soft, distant */}
         <path
           d="M0 90 L0 62 Q120 30 260 52 T560 40 Q700 18 840 44 T1140 34 Q1300 14 1440 46 L1440 90 Z"
           fill={fill}
@@ -27,7 +27,7 @@ export default function RidgeDivider({ fill = 'var(--hx-green)', flip = false, c
           fill={fill}
           opacity=".62"
         />
-        {/* Front range — solid, meets the band */}
+        {/* Front range - solid, meets the band */}
         <path
           d="M0 90 L0 82 Q200 62 380 74 T740 68 Q920 52 1080 70 T1440 66 L1440 90 Z"
           fill={fill}

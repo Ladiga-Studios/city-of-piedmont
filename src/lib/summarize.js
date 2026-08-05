@@ -1,5 +1,5 @@
 // ============================================================
-// City of Piedmont — Council Minutes summarizer
+// City of Piedmont - Council Minutes summarizer
 // Server-only. Sends a meeting-minutes PDF to Claude (Sonnet)
 // and returns a structured, plain-language summary.
 //
@@ -7,7 +7,7 @@
 //   - the admin upload route (summarize on upload)
 //   - the backfill script (summarize the 59 existing minutes)
 //
-// NEVER import this into client code — it uses the secret API key.
+// NEVER import this into client code - it uses the secret API key.
 // ============================================================
 
 const ANTHROPIC_API = 'https://api.anthropic.com/v1/messages';

@@ -1,4 +1,4 @@
-// Shared helpers for the business directory — used by the public directory,
+// Shared helpers for the business directory - used by the public directory,
 // individual business pages, and the admin console so everything stays in sync.
 
 export const BUSINESS_CATEGORIES = [

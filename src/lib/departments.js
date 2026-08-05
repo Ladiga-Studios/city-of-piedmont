@@ -22,7 +22,7 @@
 // so the index cards and map keep working. contact may also include:
 //   contactName, contactEmail, customerEmail, altPhone, altPhoneLabel
 
-export const CITY_PHONE = '256-447-3560';
+export const CITY_PHONE = '256‑447‑3560';
 export const CITY_HALL = { lat: 33.9248, lng: -85.6112, address: '109 N Center Ave, Piedmont, AL 36272' };
 
 export const DEPARTMENTS = [
@@ -95,7 +95,7 @@ export const DEPARTMENTS = [
   {
     slug: 'power-light',
     name: 'Power & Light',
-    short: 'Piedmont\u2019s municipal electric utility \u2014 one of the oldest continuing businesses in the city.',
+    short: 'Piedmont\u2019s municipal electric utility, one of the oldest continuing businesses in the city.',
     intro:
       'Piedmont Power is one of the oldest continuing businesses in Piedmont.',
     about: [
@@ -144,7 +144,7 @@ export const DEPARTMENTS = [
     ],
     hours: [
       { d: 'Monday - Friday', h: '8:00 a.m. - 5:00 p.m.' },
-      { d: 'Outages', h: '24/7 \u2014 see numbers above' },
+      { d: 'Outages', h: '24/7 (see numbers above)' },
     ],
     contact: {
       contactName: 'Corey Horton - Electrical Manager',
@@ -183,7 +183,7 @@ export const DEPARTMENTS = [
     downloads: [
       { label: 'Application for Residential Utility Services', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/application_for_util.pdf' },
       { label: 'City of Piedmont Utilities Standard Service Policy', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/city_of_piedmont_uti.pdf' },
-      { label: 'Excess Flow Valves (EFV) \u2014 Natural Gas Customers', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/excess_flow_valves_city_of_piedmont.pdf' },
+      { label: 'Excess Flow Valves (EFV) for Natural Gas Customers', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/excess_flow_valves_city_of_piedmont.pdf' },
     ],
     downloadGroups: [
       {
@@ -205,7 +205,7 @@ export const DEPARTMENTS = [
       { label: 'Water Service Line Report', href: 'https://www.piedmontcity.org/service-line/' },
     ],
     closing:
-      'For more information on how Piedmont\u2019s Water & Gas Department can provide you with the utilities you need, please call us at 256-447-3560.',
+      'For more information on how Piedmont\u2019s Water & Gas Department can provide you with the utilities you need, please call us at 256‑447‑3560.',
     services: [
       'Water, natural gas, and sewer service',
       'Start, stop, or transfer service',
@@ -229,7 +229,7 @@ export const DEPARTMENTS = [
   {
     slug: 'public-safety',
     name: 'Public Safety',
-    short: 'Piedmont Police and Fire \u2014 dedicated to the safety of our citizens.',
+    short: 'Piedmont Police and Fire, dedicated to the safety of our citizens.',
     intro:
       'The Police and Fire Department in Piedmont are dedicated to the safety of our citizens. In times of emergency, the brave men and women of the Piedmont Police and Fire respond with skill, dedication, and confidence in their abilities to ensure the very best resolutions.',
     about: [
@@ -260,7 +260,7 @@ export const DEPARTMENTS = [
       },
     ],
     closing:
-      'For more information concerning Piedmont\u2019s emergency services, please call us at 256-447-9091 and speak to a member of our staff.',
+      'For more information concerning Piedmont\u2019s emergency services, please call us at 256‑447‑9091 and speak to a member of our staff.',
     services: [
       'Police patrol and emergency response',
       'Fire protection and rescue',
@@ -305,7 +305,7 @@ export const DEPARTMENTS = [
       { name: 'Amy Rawson', role: 'Revenue Officer', email: 'amy.rawson@piedmontcity.org' },
     ],
     closing:
-      'For more information concerning topics from the Revenue Department, please call the City of Piedmont at 256-447-3564.',
+      'For more information concerning topics from the Revenue Department, please call the City of Piedmont at 256‑447‑3564.',
     services: [
       'Business license applications and renewals',
       'Sales tax forms and filing',
@@ -348,7 +348,7 @@ export const DEPARTMENTS = [
       ],
     },
     closing:
-      'For more information concerning matters of the court, please contact the City of Piedmont at 256-447-3370.',
+      'For more information concerning matters of the court, please contact the City of Piedmont at 256‑447‑3370.',
     services: [
       'Traffic citation and ticket processing',
       'Misdemeanor violation cases',
@@ -408,7 +408,7 @@ export const DEPARTMENTS = [
       { name: 'Henry Reynolds', role: 'Maintenance Supervisor', phone: '(256) 447-3583' },
     ],
     closing:
-      'For more information concerning our Public Works and Street Maintenance Department, please call the City of Piedmont at 256-447-3560.',
+      'For more information concerning our Public Works and Street Maintenance Department, please call the City of Piedmont at 256‑447‑3560.',
     services: [
       'Street, curb, and sidewalk maintenance',
       'Garbage, brush, and leaf collection',
@@ -425,7 +425,7 @@ export const DEPARTMENTS = [
     },
     img: '/images/departments/public-works',
     alt: 'The Piedmont Public Works facility with the brick castle marker out front',
-    noMap: true, // no fixed public address — direct visitors to call instead
+    noMap: true, // no fixed public address - direct visitors to call instead
     lat: 33.9248, lng: -85.6112,
   },
 
@@ -460,7 +460,7 @@ export const DEPARTMENTS = [
       { label: 'East Alabama Code Officials Association', href: 'http://www.freewebs.com/eacoa/index.htm' },
     ],
     closing:
-      'For more information concerning building inspection in the City of Piedmont, please call us at 256-447-3582.',
+      'For more information concerning building inspection in the City of Piedmont, please call us at 256‑447‑3582.',
     services: [
       'Building permit applications',
       'Construction and renovation inspections',

@@ -1,7 +1,7 @@
 // GET /api/search?q=...
 // Searches static site content (pages, departments, parks) PLUS live database
 // rows (news, events, businesses). Returns a flat, ranked list of results.
-// Public — only surfaces already-public content (published news/events, approved
+// Public - only surfaces already-public content (published news/events, approved
 // businesses).
 
 import { NextResponse } from 'next/server';
@@ -19,7 +19,7 @@ export async function GET(request) {
   const q = (new URL(request.url).searchParams.get('q') || '').trim();
   if (!q) return NextResponse.json({ results: [], query: '' });
 
-  // 1) Static content (pages, departments, parks) — always available.
+  // 1) Static content (pages, departments, parks) - always available.
   const staticResults = searchEntries(staticEntries(), q, 40);
 
   // 2) Database content. Best-effort: if the DB is unreachable, we still return
@@ -71,7 +71,7 @@ export async function GET(request) {
       }
     }
   } catch {
-    // ignore — return static results only
+    // ignore - return static results only
   }
 
   // Merge, de-dupe by href, keep static (ranked) first then DB matches.

@@ -7,7 +7,7 @@ import MinutesExplorer from './MinutesExplorer';
 export const metadata = {
   title: 'Council Meeting Minutes',
   description:
-    'Read AI-summarized highlights and download official City of Piedmont City Council meeting minutes \u2014 decisions, votes, and action items from every meeting.',
+    'Read AI-summarized highlights and download official City of Piedmont City Council meeting minutes: decisions, votes, and action items from every meeting.',
 };
 
 export const revalidate = 60;

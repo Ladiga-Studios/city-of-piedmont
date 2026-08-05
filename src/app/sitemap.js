@@ -71,7 +71,7 @@ export default async function sitemap() {
       });
     }
   } catch {
-    // ignore — static + departments still returned
+    // ignore - static + departments still returned
   }
 
   return entries;

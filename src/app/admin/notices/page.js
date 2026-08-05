@@ -140,8 +140,8 @@ export default function NoticesAdmin() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder={category === 'bid'
-                  ? 'e.g. Bid Request \u2014 Center Ave Paving'
-                  : 'e.g. Ordinance 641 \u2014 Noise Control'}
+                  ? 'e.g. Bid Request - Center Ave Paving'
+                  : 'e.g. Ordinance 641 - Noise Control'}
               />
             </div>
 

@@ -43,7 +43,7 @@ export async function POST(request) {
 
   // Fingerprint the canonical published fields. On edit, if the
   // content changed, the new version gets anchored with a pointer
-  // to the fingerprint it replaced — corrections stay visible in
+  // to the fingerprint it replaced - corrections stay visible in
   // the permanent record instead of overwriting history.
   const sha = newsSha256(row);
   row.sha256 = sha;

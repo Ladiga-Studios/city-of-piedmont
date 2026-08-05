@@ -1,5 +1,5 @@
 // City Hall hours, computed live in Piedmont's timezone (America/Chicago).
-// One source of truth — used by the utility top bar and the homepage
+// One source of truth - used by the utility top bar and the homepage
 // "Today in Piedmont" panel. Update HOURS here if City Hall's schedule changes.
 
 const TZ = 'America/Chicago';

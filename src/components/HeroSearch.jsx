@@ -70,7 +70,7 @@ export default function HeroSearch() {
           value={q}
           onChange={(e) => { setQ(e.target.value); setOpen(false); }}
           onFocus={() => setFocused(true)}
-          placeholder="Search for anything — bills, permits, parks, businesses…"
+          placeholder="Search for anything: bills, permits, parks, businesses…"
           aria-label="Search the site"
           autoComplete="off"
         />

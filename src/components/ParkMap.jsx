@@ -4,18 +4,18 @@ import { useEffect, useRef } from 'react';
 
 /**
  * A small OpenStreetMap map rendered with Leaflet (loaded from CDN on demand).
- * Shows only the required "© OpenStreetMap contributors" attribution —
+ * Shows only the required "© OpenStreetMap contributors" attribution -
  * no donation prompt or extra links like the default OSM iframe embed.
  *
  * Props:
  *   lat, lng, label (single-marker mode), zoom (optional), height (px, optional)
- *   points (optional) — [{ lat, lng, label }] renders multiple markers with
+ *   points (optional) - [{ lat, lng, label }] renders multiple markers with
  *   popups and auto-fits the map view to show all of them.
  */
 export default function ParkMap({ lat, lng, label = 'Location', zoom = 16, points = null, height = 240 }) {
   const elRef = useRef(null);
   const mapRef = useRef(null);
-  // Stable dependency for the effect — a new array literal each render
+  // Stable dependency for the effect - a new array literal each render
   // would otherwise tear the map down and rebuild it.
   const pointsKey = points ? JSON.stringify(points) : '';
 
@@ -51,7 +51,7 @@ export default function ParkMap({ lat, lng, label = 'Location', zoom = 16, point
       mapRef.current = map;
 
       // Add an attribution control with the Leaflet prefix turned OFF, so the
-      // little "Leaflet" flag/link never shows — only the OSM credit appears.
+      // little "Leaflet" flag/link never shows - only the OSM credit appears.
       const attribution = L.control.attribution({ prefix: false });
       attribution.addTo(map);
       attribution.setPrefix(false); // belt-and-suspenders: force-clear the prefix

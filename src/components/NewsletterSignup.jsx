@@ -39,7 +39,7 @@ export default function NewsletterSignup({ variant = 'panel', heading, blurb }) 
       }
       setStatus('done');
       setMessage(data?.already
-        ? 'You\u2019re already on the list \u2014 thanks for your interest!'
+        ? 'You\u2019re already on the list. Thanks for your interest!'
         : 'You\u2019re subscribed. Watch your inbox for city news.');
       setEmail('');
     } catch {

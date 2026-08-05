@@ -1,7 +1,7 @@
 'use client';
 
 // ============================================================
-// AnchorBadge — "Filed in the permanent record"
+// AnchorBadge - "Filed in the permanent record"
 //
 // Shown on records that have been anchored. Leads with the plain-
 // language promise; the technical proof (fingerprint, commit id,
@@ -34,7 +34,7 @@ export default function AnchorBadge({ record }) {
       await navigator.clipboard.writeText(record.sha256);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch { /* clipboard unavailable — no-op */ }
+    } catch { /* clipboard unavailable - no-op */ }
   }
 
   return (
@@ -68,7 +68,7 @@ export default function AnchorBadge({ record }) {
         <div className="anchor-badge-detail">
           <p className="anchor-explain">
             When this document was posted, the city recorded its digital fingerprint in a
-            public archive that no one — including the city — can quietly alter. If the
+            public archive that no one, including the city, can quietly alter. If the
             file ever changed, its fingerprint would no longer match.{' '}
             <Link href="/government/records">How this works</Link>
           </p>

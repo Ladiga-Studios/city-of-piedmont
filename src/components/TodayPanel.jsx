@@ -1,6 +1,6 @@
 'use client';
 
-// "Today in Piedmont" — a live civic snapshot on the homepage:
+// "Today in Piedmont" - a live civic snapshot on the homepage:
 // current conditions + 3-day outlook (Open-Meteo, keyless), the live
 // City Hall open/closed status, and the next event on the calendar.
 // Renders a stable skeleton while loading and degrades gracefully:

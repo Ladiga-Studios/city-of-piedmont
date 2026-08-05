@@ -1,6 +1,6 @@
 'use client';
 
-// Admin Overview — the console home. Shows content counts, a "needs
+// Admin Overview - the console home. Shows content counts, a "needs
 // attention" panel (things an editor should act on), recent activity
 // across every content type, and one-click quick actions.
 
@@ -126,7 +126,7 @@ export default function AdminOverview() {
     attention.push({
       href: '/admin/events',
       tone: 'warn',
-      text: 'The events calendar has nothing upcoming — the homepage is showing its empty state',
+      text: 'The events calendar has nothing upcoming, so the homepage is showing its empty state',
       cta: 'Add an event',
     });
   }

@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
           <h2>Information we collect</h2>
           <p>We try to collect as little personal information as possible. Depending on how you use the site, that may include:</p>
           <ul>
-            <li><strong>Information you give us.</strong> If you subscribe to our newsletter, submit the contact or report-an-issue form, or otherwise message the City, we receive what you provide — typically your name, email address, and the content of your message.</li>
+            <li><strong>Information you give us.</strong> If you subscribe to our newsletter, submit the contact or report-an-issue form, or otherwise message the City, we receive what you provide, typically your name, email address, and the content of your message.</li>
             <li><strong>Basic technical information.</strong> Like most websites, our hosting may automatically log standard details such as browser type, device type, and pages visited, used to keep the site running and secure.</li>
           </ul>
 

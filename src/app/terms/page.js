@@ -51,7 +51,7 @@ export default function TermsConditions() {
 
           <h2>Links to other sites</h2>
           <p>
-            This site links to third-party websites — for example, the online payment
+            This site links to third-party websites, such as the online payment
             portal, state and county resources, and local businesses in our directory. We
             provide those links for convenience and do not control or endorse those sites.
             Their content and their own terms and privacy policies are their responsibility,

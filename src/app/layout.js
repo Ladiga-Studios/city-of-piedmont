@@ -25,11 +25,11 @@ const sourceSans = Source_Sans_3({
 export const metadata = {
   metadataBase: new URL('https://www.piedmontcity.org'),
   title: {
-    default: 'City of Piedmont, Alabama — Home of the Chief Ladiga Trail',
+    default: 'City of Piedmont, Alabama | Home of the Chief Ladiga Trail',
     template: '%s · City of Piedmont, Alabama',
   },
   description:
-    'Official website of the City of Piedmont, Alabama — a small city in the Appalachian foothills of Calhoun County and home of the Chief Ladiga Trail. Pay your utility bill, find city services and departments, explore parks and trails, browse local businesses, and read city news and events.',
+    'Official website of the City of Piedmont, Alabama, a small city in the Appalachian foothills of Calhoun County and home of the Chief Ladiga Trail. Pay your utility bill, find city services and departments, explore parks and trails, browse local businesses, and read city news and events.',
   applicationName: 'City of Piedmont, Alabama',
   authors: [{ name: 'City of Piedmont, Alabama' }],
   generator: 'Next.js',
@@ -47,7 +47,7 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'City of Piedmont, Alabama — Home of the Chief Ladiga Trail',
+    title: 'City of Piedmont, Alabama | Home of the Chief Ladiga Trail',
     description:
       'A small city in the Appalachian foothills and home of the Chief Ladiga Trail. Pay bills, find city services, and explore parks, trails, and local business.',
     url: 'https://www.piedmontcity.org/',
@@ -59,7 +59,7 @@ export const metadata = {
         url: '/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: 'City of Piedmont, Alabama — Home of the Chief Ladiga Trail',
+        alt: 'City of Piedmont, Alabama | Home of the Chief Ladiga Trail',
       },
     ],
   },
@@ -134,7 +134,7 @@ export default function RootLayout({ children }) {
         url: 'https://www.piedmontcity.org/',
         name: 'City of Piedmont, Alabama',
         description:
-          'Official website of the City of Piedmont, Alabama — home of the Chief Ladiga Trail.',
+          'Official website of the City of Piedmont, Alabama, home of the Chief Ladiga Trail.',
         publisher: { '@id': 'https://www.piedmontcity.org/#organization' },
         inLanguage: 'en-US',
         potentialAction: {
@@ -152,7 +152,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${sourceSans.variable}`}>
       <head>
-        {/* Weather API (Open-Meteo) — warm up the connection early */}
+        {/* Weather API (Open-Meteo) - warm up the connection early */}
         <link rel="preconnect" href="https://api.open-meteo.com" crossOrigin="anonymous" />
         {/* Set .js on <html> before paint so reveal animations are a progressive enhancement.
             If this script never runs (JS disabled/blocked), content stays visible by default. */}

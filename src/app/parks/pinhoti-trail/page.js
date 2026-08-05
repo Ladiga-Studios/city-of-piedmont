@@ -12,10 +12,10 @@ export const metadata = {
 // Pinhoti access points around Piedmont. Coordinates are the trailhead
 // parking areas (Alabama Recreation Trails / Pinhoti Trail Alliance data).
 const ACCESS_POINTS = [
-  { lat: 33.9226414, lng: -85.6071317, label: 'Eubanks Welcome Center — in-town access via the Chief Ladiga Trail' },
-  { lat: 33.97894, lng: -85.48037, label: 'High Point Trailhead — US 278, east of Piedmont' },
-  { lat: 33.87829, lng: -85.55144, label: 'North FS 500 Trailhead — Dugger Mountain Wilderness, north side' },
-  { lat: 33.83263, lng: -85.62484, label: 'Burns Trailhead — CR 55, Dugger Mountain Wilderness, south side' },
+  { lat: 33.9226414, lng: -85.6071317, label: 'Eubanks Welcome Center: in-town access via the Chief Ladiga Trail' },
+  { lat: 33.97894, lng: -85.48037, label: 'High Point Trailhead: US 278, east of Piedmont' },
+  { lat: 33.87829, lng: -85.55144, label: 'North FS 500 Trailhead: Dugger Mountain Wilderness, north side' },
+  { lat: 33.83263, lng: -85.62484, label: 'Burns Trailhead: CR 55, Dugger Mountain Wilderness, south side' },
 ];
 
 const dirUrl = (p) => `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
@@ -51,14 +51,14 @@ export default function Pinhoti() {
                   <li>Length: about 335 miles total; roughly 171 miles in Alabama</li>
                   <li>Use: foot travel only on the Alabama sections</li>
                   <li>Marked with blue blazes and the Pinhoti&rsquo;s turkey-track emblem</li>
-                  <li>Crosses the Dugger Mountain Wilderness south of Piedmont &mdash; over 9,000 acres, with 2,140-ft Dugger Mountain, Alabama&rsquo;s second-highest peak</li>
+                  <li>Crosses the Dugger Mountain Wilderness south of Piedmont: over 9,000 acres, with 2,140-ft Dugger Mountain, Alabama&rsquo;s second-highest peak</li>
                   <li>Backcountry shelters near Piedmont include Oakey Mountain and North Dugger Mountain</li>
                   <li>Connects to the Appalachian Trail via the Benton MacKaye Trail in Georgia</li>
                 </ul>
 
                 <h2>Getting on the trail</h2>
                 <p>Four access points serve the Piedmont area, shown on the map. The easiest walk-on access is from the Chief Ladiga Trail at the Eubanks Welcome Center; ride or walk north on the Ladiga to the marked Pinhoti junction. For day hikes by car, the High Point Trailhead on US 278 east of town has the largest parking area. The Burns Trailhead on County Road 55 and the North FS 500 Trailhead (reached by a gravel Forest Service road off CR 55) bracket the Dugger Mountain Wilderness section to the south.</p>
-                <p>For trail conditions and maps, see the Pinhoti Trail Alliance; for local information, call the City of Piedmont at 256-447-3560.</p>
+                <p>For trail conditions and maps, see the Pinhoti Trail Alliance; for local information, call the City of Piedmont at 256‑447‑3560.</p>
               </div>
 
               <figure className="photo-figure">
@@ -86,7 +86,7 @@ export default function Pinhoti() {
 
                 <div className="pd-row">
                   <span className="pd-label">Eubanks Welcome Center</span>
-                  <span>202 Dailey St &mdash; in-town access via the Chief Ladiga Trail</span>
+                  <span>202 Dailey St, with in-town access via the Chief Ladiga Trail</span>
                   <a href={dirUrl(ACCESS_POINTS[0])} target="_blank" rel="noopener noreferrer">Get directions &rarr;</a>
                 </div>
                 <div className="pd-row">
@@ -96,12 +96,12 @@ export default function Pinhoti() {
                 </div>
                 <div className="pd-row">
                   <span className="pd-label">North FS 500 Trailhead</span>
-                  <span>Gravel FS 500 off CR 55 &mdash; north side of Dugger Mountain Wilderness</span>
+                  <span>Gravel FS 500 off CR 55, on the north side of Dugger Mountain Wilderness</span>
                   <a href={dirUrl(ACCESS_POINTS[2])} target="_blank" rel="noopener noreferrer">Get directions &rarr;</a>
                 </div>
                 <div className="pd-row">
                   <span className="pd-label">Burns Trailhead</span>
-                  <span>CR 55 (Rabbittown Rd) &mdash; south side of Dugger Mountain Wilderness</span>
+                  <span>CR 55 (Rabbittown Rd), on the south side of Dugger Mountain Wilderness</span>
                   <a href={dirUrl(ACCESS_POINTS[3])} target="_blank" rel="noopener noreferrer">Get directions &rarr;</a>
                 </div>
               </div>

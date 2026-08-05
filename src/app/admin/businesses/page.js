@@ -83,7 +83,7 @@ export default function BusinessesAdmin() {
         // If the typed address was partial, upgrade it to Google's clean version.
         address: data.formatted || f.address,
       }));
-      setGeoMsg({ ok: true, text: 'Found it \u2014 map pin set. Adjust the address above if needed.' });
+      setGeoMsg({ ok: true, text: 'Found it! Map pin set. Adjust the address above if needed.' });
       toast('Location found', 'Map coordinates filled in.', 'success');
     } catch (err) {
       setGeoMsg({ ok: false, text: err.message });
@@ -142,7 +142,7 @@ export default function BusinessesAdmin() {
 
       let { error } = await doSave(payload);
       // If the image_crop column hasn't been added to the DB yet, retry without
-      // it so saving still works — just without the custom card crop.
+      // it so saving still works - just without the custom card crop.
       if (error && /image_crop/.test(error.message || '')) {
         const { image_crop, ...rest } = payload;
         ({ error } = await doSave(rest));
@@ -279,7 +279,7 @@ export default function BusinessesAdmin() {
                     </button>
                   </div>
                   <span className="field-help">
-                    Type the street address and click &ldquo;Find on map&rdquo; &mdash; the map pin is set automatically.
+                    Type the street address and click &ldquo;Find on map&rdquo; and the map pin is set automatically.
                   </span>
                   {geoMsg && <span className={geoMsg.ok ? 'bf-geo-ok' : 'bf-geo-err'}>{geoMsg.text}</span>}
                 </div>

@@ -36,7 +36,7 @@ export function eventDayNum(value) {
   return d ? String(d.getDate()).padStart(2, '0') : '';
 }
 
-// "4:00 PM" — empty when the event is all-day or has no meaningful time.
+// "4:00 PM" - empty when the event is all-day or has no meaningful time.
 export function eventTime(value, allDay) {
   if (allDay) return '';
   const d = parseEventDate(value);

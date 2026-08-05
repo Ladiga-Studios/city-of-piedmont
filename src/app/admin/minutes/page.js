@@ -79,7 +79,7 @@ export default function Dashboard() {
       if (!res.ok) throw new Error(data.error || 'Upload failed');
 
       if (data.summaryWarning) {
-        toast('Uploaded (summary pending)', 'PDF saved. The AI summary didn\u2019t generate \u2014 use Regenerate to retry.', 'info');
+        toast('Uploaded (summary pending)', 'PDF saved. The AI summary didn\u2019t generate, so use Regenerate to retry.', 'info');
       } else {
         toast('Uploaded', 'Minutes posted and summarized.', 'success');
       }

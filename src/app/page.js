@@ -68,7 +68,7 @@ export default async function Home() {
   // Pull the latest news and upcoming events from Supabase. If the database
   // isn't reachable or is empty, fall back to the built-in sample arrays so
   // the homepage always renders something sensible.
-  // Start empty. Only the database fills these — when there's nothing, the
+  // Start empty. Only the database fills these - when there's nothing, the
   // homepage shows a friendly empty state rather than stale sample content.
   let NEWS = [];
   let EVENTS = [];
@@ -183,7 +183,7 @@ export default async function Home() {
                         </div>
                       </article>
                     ) : (
-                      /* No photo: a deliberate "city bulletin" card — deep green,
+                      /* No photo: a deliberate "city bulletin" card - deep green,
                          gold date. Text-only news looks
                          designed, not like a missing image. */
                       <article key={n.title} className="hx2-news-card hx2-bulletin">
@@ -250,7 +250,7 @@ export default async function Home() {
                   <rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" />
                 </svg>
                 <p className="hx2-ne-empty-title">No upcoming events</p>
-                <p className="hx2-ne-empty-sub">Nothing on the calendar right now — check back for what&rsquo;s next.</p>
+                <p className="hx2-ne-empty-sub">Nothing on the calendar right now. Check back for what&rsquo;s next.</p>
               </div>
             )}
           </aside>
@@ -284,7 +284,7 @@ export default async function Home() {
           <p className="hx2-section-eyebrow hx2-rule-center">Why Piedmont?</p>
           <p className="hx2-why-lead">
             Piedmont offers economic and recreational opportunity for everyone who lives
-            here and everyone who visits — a great place to work, to live, and to play,
+            here and everyone who visits: a great place to work, to live, and to play,
             with the infrastructure for growth and the Chief Ladiga Trail running right
             through the heart of it.
           </p>

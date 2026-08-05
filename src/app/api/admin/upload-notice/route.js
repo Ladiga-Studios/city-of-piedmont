@@ -60,7 +60,7 @@ export async function POST(request) {
   }
   const { data: pub } = supabase.storage.from(BUCKET).getPublicUrl(path);
 
-  // Fingerprint the exact bytes being published — this is what gets
+  // Fingerprint the exact bytes being published - this is what gets
   // anchored in the permanent record.
   const sha256 = sha256Of(bytes);
 
