@@ -36,7 +36,7 @@ export default function Residents() {
           <div className="rp-lead">
             <p>
               Most of what residents need from the City runs through a few departments,
-              all reachable at City Hall: 256-447-3560. Start with the quick actions below,
+              all reachable at City Hall: 256‑447‑3560. Start with the quick actions below,
               or jump to a service area.
             </p>
           </div>

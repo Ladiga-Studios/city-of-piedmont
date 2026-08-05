@@ -44,7 +44,7 @@ export default function Trail() {
                   <li>Intersects the <Link href="/parks/pinhoti-trail">Pinhoti Trail</Link> north of Piedmont</li>
                 </ul>
                 <h2>Getting there</h2>
-                <p>The Eubanks Welcome Center on Dailey Street serves the Piedmont section, with parking, restrooms, water, and a shaded gazebo for riders. For trail information, call the City of Piedmont at 256-447-3560.</p>
+                <p>The Eubanks Welcome Center on Dailey Street serves the Piedmont section, with parking, restrooms, water, and a shaded gazebo for riders. For trail information, call the City of Piedmont at 256‑447‑3560.</p>
               </div>
 
               <figure className="photo-figure">

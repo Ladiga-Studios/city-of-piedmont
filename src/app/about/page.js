@@ -82,7 +82,7 @@ export default function About() {
             <div className="fact"><span className="fact-k">Founded As</span><span className="fact-v">Cross Plains (renamed 1888)</span></div>
             <div className="fact"><span className="fact-k">ZIP Code</span><span className="fact-v">36272</span></div>
             <div className="fact"><span className="fact-k">City Hall</span><span className="fact-v">312 N. Center Ave, Piedmont, AL 36272</span></div>
-            <div className="fact"><span className="fact-k">Phone</span><span className="fact-v">256-447-3560</span></div>
+            <div className="fact"><span className="fact-k">Phone</span><span className="fact-v">256‑447‑3560</span></div>
           </div>
         </div>
       </section>

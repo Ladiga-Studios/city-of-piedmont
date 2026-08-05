@@ -41,8 +41,8 @@ export default function Creek() {
                 <h2>Outfitters &amp; rentals</h2>
                 <p>Several local outfitters rent canoes and kayaks and run shuttle service so you can paddle one direction and get a ride back to your car:</p>
                 <ul>
-                  <li>Terrapin Outdoor Center: rentals, sales, and shuttles (256-447-8383)</li>
-                  <li>Redneck Yacht Club: canoe and kayak rentals with shuttle service (256-447-8690)</li>
+                  <li>Terrapin Outdoor Center: rentals, sales, and shuttles (256‑447‑8383)</li>
+                  <li>Redneck Yacht Club: canoe and kayak rentals with shuttle service (256‑447‑8690)</li>
                 </ul>
                 <h2>Good to know</h2>
                 <p>Many take-out points downstream of the public launch are on private property, so the simplest way to plan a float is to go through one of the outfitters above, who handle access and shuttles. Always check current water conditions and wear a life jacket.</p>
