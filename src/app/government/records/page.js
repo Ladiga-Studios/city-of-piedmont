@@ -126,11 +126,6 @@ export default async function RecordsPage() {
             filed record opens the corresponding settlement transaction, which anyone can
             inspect without an account.
           </p>
-          <p>
-            This system is currently running as a pilot on a test network while the city
-            evaluates it. The fingerprints shown on each record are computed and stored the
-            moment a document is posted and are verifiable today, as described above.
-          </p>
 
           <p>
             Questions about a specific record?{' '}
