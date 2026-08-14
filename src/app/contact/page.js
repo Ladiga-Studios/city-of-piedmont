@@ -60,7 +60,7 @@ export default function Contact() {
           <Ico d="M12 22a10 10 0 100-20 10 10 0 000 20zM12 6v6l4 2" />
           <div className="cc-body">
             <h3>Hours</h3>
-            <p>Monday – Thursday: 7:30 AM – 4:30 PM<br />Friday: 7:30 AM – 11:30 AM</p>
+            <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
             <LiveHoursBadge />
           </div>
         </div>

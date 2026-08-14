@@ -4,7 +4,12 @@ import './department.css';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DEPARTMENTS, getDepartment } from '@/lib/departments';
+import { getDepartmentStaff, getDepartmentDocuments, mergeDownloadGroups } from '@/lib/people';
 import ParkMap from '@/components/ParkMap';
+
+// Revalidate so staff and document changes made in the admin console
+// show up on the public page within a minute.
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return DEPARTMENTS.map((d) => ({ slug: d.slug }));
@@ -58,9 +63,18 @@ function DownloadLink({ label, href }) {
   );
 }
 
-export default function DepartmentPage({ params }) {
+export default async function DepartmentPage({ params }) {
   const d = getDepartment(params.slug);
   if (!d) notFound();
+
+  // Admin-managed content (People + Documents consoles). Falls back to
+  // the static data above when the tables are empty or unavailable.
+  const [dbStaff, dbDocs] = await Promise.all([
+    getDepartmentStaff(d.slug),
+    getDepartmentDocuments(d.slug),
+  ]);
+  const staff = dbStaff || d.staff;
+  const downloadGroups = mergeDownloadGroups(d.downloadGroups, dbDocs);
 
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}`;
   const aboutParas = d.about && d.about.length ? d.about : [d.intro];
@@ -141,11 +155,11 @@ export default function DepartmentPage({ params }) {
             </div>
           )}
 
-          {/* 6: Staff */}
-          {d.staff && d.staff.length > 0 && (
+          {/* 6: Staff (admin-managed via /admin/people, static fallback) */}
+          {staff && staff.length > 0 && (
             <div className="dd-block">
               <h2>Staff</h2>
-              <StaffList staff={d.staff} />
+              <StaffList staff={staff} />
             </div>
           )}
 
@@ -206,8 +220,8 @@ export default function DepartmentPage({ params }) {
             </div>
           )}
 
-          {/* 10: Download groups (Water Quality Reports, Revenue forms, Building downloads) */}
-          {d.downloadGroups && d.downloadGroups.map((g, i) => (
+          {/* 10: Download groups (static + admin uploads from /admin/documents) */}
+          {downloadGroups && downloadGroups.map((g, i) => (
             <div className="dd-block" key={i}>
               <h2>{g.heading}</h2>
               <div className="dd-downloads">

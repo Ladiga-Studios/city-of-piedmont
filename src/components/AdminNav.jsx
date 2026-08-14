@@ -13,6 +13,8 @@ const ITEMS = [
   { href: '/admin/events', label: 'Events', icon: 'M3 4h18v17H3zM3 9h18M8 2v4M16 2v4' },
   { href: '/admin/alerts', label: 'Site Alerts', icon: 'M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z' },
   { href: '/admin/businesses', label: 'Businesses', icon: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5' },
+  { href: '/admin/people', label: 'People', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
+  { href: '/admin/documents', label: 'City Documents', icon: 'M14 3v5h5M7 3h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2zM12 11v6m0 0l-3-3m3 3l3-3' },
 ];
 
 export default function AdminNav() {

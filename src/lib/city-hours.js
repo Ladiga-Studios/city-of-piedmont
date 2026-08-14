@@ -5,13 +5,14 @@
 const TZ = 'America/Chicago';
 
 // Minutes-from-midnight open/close per weekday (0 = Sunday … 6 = Saturday).
-// Mon–Thu 7:30 AM – 4:30 PM · Fri 7:30 – 11:30 AM · closed weekends.
+// Mon–Fri 8:00 AM – 5:00 PM · closed weekends. (Confirmed at the
+// August 2026 walkthrough with City Hall staff.)
 const HOURS = {
-  1: [450, 990], // Mon 7:30–16:30
-  2: [450, 990],
-  3: [450, 990],
-  4: [450, 990],
-  5: [450, 690], // Fri 7:30–11:30
+  1: [480, 1020], // Mon 8:00–17:00
+  2: [480, 1020],
+  3: [480, 1020],
+  4: [480, 1020],
+  5: [480, 1020], // Fri 8:00–17:00
 };
 
 const DAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
@@ -45,7 +46,7 @@ const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frid
  * Returns the live City Hall status:
  * { open: boolean, label: string, detail: string }
  * e.g. { open: true,  label: 'City Hall is open',   detail: 'Closes 4:30 PM' }
- *      { open: false, label: 'City Hall is closed', detail: 'Opens Monday 7:30 AM' }
+ *      { open: false, label: 'City Hall is closed', detail: 'Opens Monday 8 AM' }
  */
 export function cityHallStatus() {
   const { day, minutes } = nowInPiedmont();

@@ -131,10 +131,10 @@ export default function Residents() {
 
               <div className="rp-card">
                 <h3>Pay Your Bill</h3>
-                <p>Pay water, gas, sewer, and electric online, or in person at City Hall. Bills are issued monthly.</p>
+                <p>Pay water, gas, sewer, and electric online, or in person at the utility office at 128 South Center Ave. Bills are issued monthly.</p>
                 <ul>
                   <li><span className="rp-k">Online</span><span className="rp-v"><a href={PAY_BILL} target="_blank" rel="noopener noreferrer">payACP portal</a></span></li>
-                  <li><span className="rp-k">In person</span><span className="rp-v">109 N Center Ave</span></li>
+                  <li><span className="rp-k">In person</span><span className="rp-v">128 South Center Ave</span></li>
                   <li><span className="rp-k">Billing</span><span className="rp-v"><a href="tel:2564473560">256-447-3560</a></span></li>
                 </ul>
                 <div className="rp-card-links">
@@ -227,8 +227,8 @@ export default function Residents() {
                 <h3>Business License</h3>
                 <p>Businesses operating in Piedmont need a city business license through the Revenue department.</p>
                 <ul>
-                  <li><span className="rp-k">Department</span><span className="rp-v">Revenue</span></li>
-                  <li><span className="rp-k">Phone</span><span className="rp-v"><a href="tel:2564473560">256-447-3560</a></span></li>
+                  <li><span className="rp-k">Contact</span><span className="rp-v">Amy Rawson, Revenue</span></li>
+                  <li><span className="rp-k">Phone</span><span className="rp-v"><a href="tel:2564473564">256-447-3564</a></span></li>
                   <li><span className="rp-k">Details</span><span className="rp-v">Confirm fees <span className="rp-placeholder">verify</span></span></li>
                 </ul>
                 <div className="rp-card-links">

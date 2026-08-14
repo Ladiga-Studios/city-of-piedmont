@@ -59,6 +59,7 @@ export default function CivicCenter() {
               <div className="cc-row"><span className="cc-label">Address</span><span>500 Mill St, Piedmont, AL 36272</span></div>
               <div className="cc-row"><span className="cc-label">Phone</span><a href="tel:2564473367">(256) 447-3367</a></div>
               <div className="cc-row"><span className="cc-label">Fax</span><span>(256) 447-2497</span></div>
+              <div className="cc-row"><span className="cc-label">Membership</span><span>Brittany Humphrey, Membership Coordinator</span></div>
               <h3 className="cc-sub">Hours</h3>
               <ul className="cc-hours">
                 <li><span>Mon to Thu</span><span>6:00 AM to 8:00 PM</span></li>

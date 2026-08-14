@@ -7,10 +7,10 @@
 /* Sticky header: pinned to the top of the viewport, stays in view as the user
    scrolls down. A translucent cream backdrop (with a subtle blur once scrolled)
    keeps the wordmark + menu legible over any content beneath it. */
-.site-header{position:sticky;top:0;z-index:100;background:rgba(247,243,236,.92);
+.site-header{position:sticky;top:0;z-index:100;background:rgba(247,243,236,.97);
   -webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);
   border-bottom:1px solid transparent;transition:background .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
-.site-header.scrolled{box-shadow:var(--shadow-sm);border-bottom-color:var(--line);background:rgba(247,243,236,.97)}
+.site-header.scrolled{box-shadow:var(--shadow-md);border-bottom-color:var(--line-strong,var(--line));background:#f7f3ec}
 /* When the mobile menu is open, lift the entire header stacking context above
    all page content so the fixed full-screen panel inside it can cover the page. */
 .site-header.menu-open{z-index:1200}

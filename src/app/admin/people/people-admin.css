@@ -1,0 +1,22 @@
+/* /admin/people — extends the shared admin design system in admin.css.
+   Only page-specific pieces live here. */
+
+/* One-time setup callout when the people table doesn't exist yet */
+.pa-setup{background:var(--paper-2);border:1.5px solid var(--line-strong);border-left:4px solid var(--sunset);
+  border-radius:10px;padding:.9rem 1.1rem;margin-bottom:var(--s4);font-size:.92rem;line-height:1.55;color:var(--ink-2)}
+.pa-setup code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.1rem .35rem;font-size:.84em}
+
+/* Two fields side by side (email / phone) */
+.pa-two{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+@media (max-width:560px){.pa-two{grid-template-columns:1fr}}
+
+/* "New person instead" reset link in the panel head */
+.pa-clear{background:none;border:none;color:var(--sunset);font-weight:600;font-size:.85rem;cursor:pointer;padding:0}
+.pa-clear:hover{text-decoration:underline}
+
+/* Person rows in the list */
+.pa-person{display:flex;align-items:center;gap:.8rem;min-width:0;flex:1}
+.pa-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+  border:1.5px solid var(--line);background:var(--paper-2)}
+.pa-avatar-empty{display:inline-flex;align-items:center;justify-content:center;
+  font-weight:700;color:var(--muted);font-size:1rem}

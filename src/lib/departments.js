@@ -53,7 +53,6 @@ export const DEPARTMENTS = [
       { name: 'Leanne Pike', role: 'Accounts Payable', email: 'leanne.pike@piedmontcity.org' },
       { name: 'Tessa Maddox', role: 'Accounting/Payroll', email: 'tessa.maddox@piedmontcity.org' },
       { name: 'Amy Rawson', role: 'Business License/Revenue', email: 'amy.rawson@piedmontcity.org' },
-      { name: 'Patti Byers', role: 'Administrative Assistant', email: 'patti.byers@piedmontcity.org' },
       { name: 'Tashia Blackerby', role: 'City Clerk', email: 'tashia.blackerby@piedmontcity.org' },
       { name: 'Ben Singleton', role: 'IT Manager/Building and Zoning', email: 'ben.singleton@piedmontcity.org' },
     ],
@@ -169,8 +168,8 @@ export const DEPARTMENTS = [
     staff: [
       { name: 'Byrian Watts', role: 'Water, Gas, & Sewer Manager', email: 'abwatts@piedmontcity.org' },
       { name: 'Tammy Maddox', role: 'Utility Clerk', email: 'tammy.maddox@piedmontcity.org' },
-      { name: 'Brittany Humphrey', role: 'Utility Clerk', email: 'brittany.humphrey@piedmontcity.org' },
       { name: 'Mackenzie Hightower', role: 'Utility Clerk', email: 'mackenzie.hightower@piedmontcity.org' },
+      { name: 'Patti Byers', role: 'Utility Clerk', email: 'patti.byers@piedmontcity.org' },
     ],
     offices: [
       {
@@ -417,7 +416,8 @@ export const DEPARTMENTS = [
       'Cemetery maintenance',
     ],
     hours: [
-      { d: 'Monday - Friday', h: '7:00 a.m. - 4:00 p.m.' },
+      { d: 'Monday - Friday (daylight saving time)', h: '6:00 a.m. - 2:30 p.m.' },
+      { d: 'Monday - Friday (standard time)', h: '7:00 a.m. - 3:30 p.m.' },
     ],
     contact: {
       address: 'Piedmont, AL 36272',

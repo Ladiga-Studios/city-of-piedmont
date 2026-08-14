@@ -32,3 +32,8 @@
   .council-grid{grid-template-columns:repeat(2,1fr);gap:var(--s4) var(--s2)}
   .person.featured{max-width:260px}
 }
+
+/* Optional "get to know them" bio under a council card (managed at /admin/people) */
+.person-bio{font-size:.92rem;color:var(--ink-2,#444);line-height:1.55;padding-top:.45rem;
+  text-align:left;max-width:36ch;margin:0 auto;white-space:pre-line}
+.person.featured .person-bio{max-width:46ch}

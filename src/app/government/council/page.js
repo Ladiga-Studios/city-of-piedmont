@@ -1,6 +1,10 @@
 import '../../pages.css';
 import '../../council.css';
 import Link from 'next/link';
+import { getCouncilPeople } from '@/lib/people';
+
+// Revalidate so changes made in /admin/people show within a minute.
+export const revalidate = 60;
 
 export const metadata = {
   title: 'Mayor & City Council',
@@ -20,7 +24,7 @@ const COUNCIL = [
   { name: 'Matt Rogers', role: 'District 7', img: '/images/council/matt-rogers.jpg' },
 ];
 
-function PersonCard({ name, role, img, featured }) {
+function PersonCard({ name, role, img, bio, featured }) {
   return (
     <figure className={`person ${featured ? 'featured' : ''} reveal`}>
       <div className="person-photo">
@@ -29,12 +33,23 @@ function PersonCard({ name, role, img, featured }) {
       <figcaption>
         <span className="person-name">{name}</span>
         <span className="person-role">{role}</span>
+        {bio && <span className="person-bio">{bio}</span>}
       </figcaption>
     </figure>
   );
 }
 
-export default function Council() {
+export default async function Council() {
+  // Admin-managed (/admin/people). Falls back to the static lists below
+  // if the people table is empty or the migration hasn't been run.
+  const db = await getCouncilPeople();
+  const mayor = db?.mayor
+    ? { name: db.mayor.name, role: db.mayor.role, img: db.mayor.photo_url || MAYOR.img, bio: db.mayor.bio }
+    : MAYOR;
+  const council = db?.council?.length
+    ? db.council.map((p) => ({ name: p.name, role: p.role, img: p.photo_url || '/images/council/placeholder.svg', bio: p.bio }))
+    : COUNCIL;
+
   return (
     <>
       <section className="page-hero">
@@ -53,11 +68,11 @@ export default function Council() {
       <section className="section">
         <div className="container">
           <div className="mayor-row">
-            <PersonCard {...MAYOR} featured />
+            <PersonCard {...mayor} featured />
           </div>
 
           <div className="council-grid">
-            {COUNCIL.map((m) => (
+            {council.map((m) => (
               <PersonCard key={m.role} {...m} />
             ))}
           </div>
