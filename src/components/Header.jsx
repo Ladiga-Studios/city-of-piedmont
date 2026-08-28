@@ -7,15 +7,8 @@ import Seal from './Seal';
 import HeaderSearch from './HeaderSearch';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -35,7 +28,7 @@ export default function Header() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
+    <header className={`site-header ${menuOpen ? 'menu-open' : ''}`}>
       <div className="container nav">
         <Link href="/" className="brand" aria-label={`${SITE.name} home`} onClick={() => setMenuOpen(false)}>
           <Seal size={160} />

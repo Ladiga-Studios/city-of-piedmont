@@ -12,7 +12,11 @@
 }
 
 /* ============ HERO ============ */
-.hx2-hero{position:relative;min-height:clamp(560px,80vh,760px);display:flex;flex-direction:column;
+/* z-index:5 matters: isolation:isolate makes the hero its own stacking context,
+   which traps the search dock/dropdown z-indexes inside it. Without a raised
+   z-index here, later positioned sections (e.g. the Today panel) paint OVER the
+   open search suggestions that hang below the hero. */
+.hx2-hero{position:relative;z-index:5;min-height:clamp(560px,80vh,760px);display:flex;flex-direction:column;
   justify-content:center;overflow:visible;background:var(--umber-900);isolation:isolate;
   padding-bottom:clamp(3rem,7vw,5rem)}
 .hx2-hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--umber-900)}

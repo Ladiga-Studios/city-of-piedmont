@@ -115,7 +115,7 @@
 .legal-updated{font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:var(--s3)}
 .legal-disclaimer{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line);
   font-size:.85rem;color:var(--muted)}
-.prose h2{scroll-margin-top:90px}
+.prose h2{scroll-margin-top:16px} /* small breathing room; header is no longer sticky */
 
 /* ============================================================
    PAGE HERO v2 — plain background
