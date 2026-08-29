@@ -7,7 +7,7 @@ import NewsletterSignup from '@/components/NewsletterSignup';
 import TodayPanel from '@/components/TodayPanel';
 import { createClient } from '@/lib/supabase-server';
 import { newsDate, eventMonthAbbr, eventDayNum, eventTimeRange } from '@/lib/news-events';
-import { FLYERS } from '@/lib/flyers';
+import { FLYERS as FALLBACK_FLYERS } from '@/lib/flyers';
 
 export const revalidate = 60;
 
@@ -73,15 +73,33 @@ export default async function Home() {
   // homepage shows a friendly empty state rather than stale sample content.
   let NEWS = [];
   let EVENTS = [];
+  // Bulletin board: the 3 newest active flyers, managed at /admin/flyers.
+  // Falls back to the static list in src/lib/flyers.js until the `flyers`
+  // table exists (i.e. before supabase-flyers.sql has been run).
+  let FLYERS = FALLBACK_FLYERS;
   try {
     const supabase = createClient();
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
 
-    const [newsRes, eventsRes] = await Promise.all([
+    const [newsRes, eventsRes, flyersRes] = await Promise.all([
       supabase.from('news').select('*').order('published_at', { ascending: false }).limit(3),
       supabase.from('events').select('*').order('event_date', { ascending: true }),
+      supabase.from('flyers').select('*').eq('active', true).order('created_at', { ascending: false }).limit(3),
     ]);
+
+    if (!flyersRes.error) {
+      // Table exists: it is the source of truth, even when empty.
+      FLYERS = (flyersRes.data || []).map((f) => ({
+        title: f.title,
+        caption: f.caption || '',
+        image: f.image_url,
+        width: f.image_width || undefined,
+        height: f.image_height || undefined,
+        href: f.link_url || null,
+        linkLabel: f.link_label || 'View flyer',
+      }));
+    }
 
     if (!newsRes.error && newsRes.data && newsRes.data.length) {
       NEWS = newsRes.data.map((n) => ({
@@ -265,28 +283,29 @@ export default async function Home() {
           <div className="container">
             <p className="hx2-section-eyebrow hx2-rule-center">On the Bulletin Board</p>
             <div className="hx2-board" data-count={FLYERS.length}>
-              {FLYERS.map((f) => (
-                <a
-                  key={f.title}
-                  href={f.href}
-                  className="hx2-flyer"
-                  {...(f.href.endsWith('.pdf') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  <span className="hx2-flyer-pin" aria-hidden="true" />
-                  <img
-                    src={f.image}
-                    alt={`Flyer: ${f.title}`}
-                    width={f.width}
-                    height={f.height}
-                    loading="lazy"
-                  />
-                  <span className="hx2-flyer-meta">
-                    <strong>{f.title}</strong>
-                    <span>{f.caption}</span>
-                    <em>{f.linkLabel} →</em>
-                  </span>
-                </a>
-              ))}
+              {FLYERS.map((f) => {
+                const Tag = f.href ? 'a' : 'div';
+                const linkProps = f.href
+                  ? { href: f.href, ...(f.href.endsWith('.pdf') ? { target: '_blank', rel: 'noopener noreferrer' } : {}) }
+                  : {};
+                return (
+                  <Tag key={f.title} className="hx2-flyer" {...linkProps}>
+                    <span className="hx2-flyer-pin" aria-hidden="true" />
+                    <img
+                      src={f.image}
+                      alt={`Flyer: ${f.title}`}
+                      width={f.width}
+                      height={f.height}
+                      loading="lazy"
+                    />
+                    <span className="hx2-flyer-meta">
+                      <strong>{f.title}</strong>
+                      {f.caption && <span>{f.caption}</span>}
+                      {f.href && <em>{f.linkLabel} →</em>}
+                    </span>
+                  </Tag>
+                );
+              })}
             </div>
           </div>
         </section>

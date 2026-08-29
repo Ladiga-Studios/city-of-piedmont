@@ -1,15 +1,12 @@
 // ------------------------------------------------------------------
-// CITY BULLETIN BOARD — flyers shown on the homepage.
+// CITY BULLETIN BOARD — FALLBACK LIST ONLY.
 //
-// To post a new flyer:
-//   1. Drop the PDF in  public/documents/            (lowercase-hyphen name)
-//   2. Save a preview image of page 1 in  public/images/flyers/
-//      (a phone screenshot of the PDF works; ~600px wide is plenty)
-//   3. Add an entry below with the image's pixel width/height
-//      (right-click the image file > Properties > Details on Windows)
-//
-// To take a flyer down, delete its entry. Order here = order on the page.
-// The section hides itself automatically when this list is empty.
+// The homepage board is now managed in the admin console at
+// /admin/flyers (backed by the Supabase `flyers` table; see
+// supabase-flyers.sql). This static list is used only if that table
+// doesn't exist yet — once the SQL has been run, the database is the
+// source of truth and this file is ignored, even when the table is
+// empty.
 // ------------------------------------------------------------------
 
 export const FLYERS = [

@@ -13,6 +13,7 @@ const ICONS = {
   notices: 'M3 5h18M3 12h18M3 19h12M19 16l2 2-2 2',
   news: 'M4 4h16v16H4zM8 8h8M8 12h8M8 16h5',
   events: 'M3 4h18v17H3zM3 9h18M8 2v4M16 2v4',
+  flyers: 'M12 2v4M12 6l-6 4v10h12V10l-6-4zM9 20v-5h6v5',
   alerts: 'M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z',
   businesses: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5',
   people: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
@@ -145,6 +146,7 @@ export default function AdminOverview() {
   const quick = [
     { href: '/admin/news', label: 'Post news', desc: 'Publish an article to the homepage and news page', icon: ICONS.news },
     { href: '/admin/events', label: 'Add an event', desc: 'Put something on the community calendar', icon: ICONS.events },
+    { href: '/admin/flyers', label: 'Post a flyer', desc: 'Pin a flyer to the homepage bulletin board', icon: ICONS.flyers },
     { href: '/admin/minutes', label: 'Upload minutes', desc: 'Post council meeting minutes (PDF)', icon: ICONS.minutes },
     { href: '/admin/notices', label: 'Post a notice or bid', desc: 'Public notices and bid opportunities', icon: ICONS.notices },
     { href: '/admin/alerts', label: 'Post a site alert', desc: 'Banner across the top of every page', icon: ICONS.alerts },

@@ -11,6 +11,7 @@ const ITEMS = [
   { href: '/admin/notices', label: 'Notices & Bids', icon: 'M3 5h18M3 12h18M3 19h12M19 16l2 2-2 2' },
   { href: '/admin/news', label: 'News', icon: 'M4 4h16v16H4zM8 8h8M8 12h8M8 16h5' },
   { href: '/admin/events', label: 'Events', icon: 'M3 4h18v17H3zM3 9h18M8 2v4M16 2v4' },
+  { href: '/admin/flyers', label: 'Bulletin Board', icon: 'M12 2v4M12 6l-6 4v10h12V10l-6-4zM9 20v-5h6v5' },
   { href: '/admin/alerts', label: 'Site Alerts', icon: 'M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z' },
   { href: '/admin/businesses', label: 'Businesses', icon: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5' },
   { href: '/admin/people', label: 'People', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
