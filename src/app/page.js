@@ -7,6 +7,7 @@ import NewsletterSignup from '@/components/NewsletterSignup';
 import TodayPanel from '@/components/TodayPanel';
 import { createClient } from '@/lib/supabase-server';
 import { newsDate, eventMonthAbbr, eventDayNum, eventTimeRange } from '@/lib/news-events';
+import { FLYERS } from '@/lib/flyers';
 
 export const revalidate = 60;
 
@@ -256,6 +257,40 @@ export default async function Home() {
           </aside>
         </div>
       </section>
+
+      {/* ============ CITY BULLETIN BOARD (flyers) ============ */}
+      {/* Managed in src/lib/flyers.js — hides itself when the list is empty. */}
+      {FLYERS.length > 0 && (
+        <section className="section hx2-board-sec" aria-label="City bulletin board">
+          <div className="container">
+            <p className="hx2-section-eyebrow hx2-rule-center">On the Bulletin Board</p>
+            <div className="hx2-board" data-count={FLYERS.length}>
+              {FLYERS.map((f) => (
+                <a
+                  key={f.title}
+                  href={f.href}
+                  className="hx2-flyer"
+                  {...(f.href.endsWith('.pdf') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  <span className="hx2-flyer-pin" aria-hidden="true" />
+                  <img
+                    src={f.image}
+                    alt={`Flyer: ${f.title}`}
+                    width={f.width}
+                    height={f.height}
+                    loading="lazy"
+                  />
+                  <span className="hx2-flyer-meta">
+                    <strong>{f.title}</strong>
+                    <span>{f.caption}</span>
+                    <em>{f.linkLabel} →</em>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ============ DISCOVER PIEDMONT ============ */}
       <section className="section hx2-explore-sec">
