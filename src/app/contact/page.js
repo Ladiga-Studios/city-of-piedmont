@@ -1,7 +1,6 @@
 import '../pages.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import ContactForm from '@/components/ContactForm';
 import LiveHoursBadge from '@/components/LiveHoursBadge';
 
 export const metadata = { title: 'Contact', description: 'Contact the City of Piedmont, Alabama. City Hall address, phone, email, and hours.' };
@@ -24,11 +23,11 @@ export default function Contact() {
       <div className="hero-text-col">
         <nav className="breadcrumb"><Link href="/">Home</Link><span>/</span><span>Contact</span></nav>
         <p className="eyebrow">Get in Touch</p><h1>Contact the City</h1>
-        <p>Questions, requests, or feedback? Reach City Hall directly or send a message below.</p>
+        <p>Questions, requests, or feedback? Call, email, or visit City Hall — every way to reach the city is below.</p>
       </div>
     </div></section>
 
-    <section className="section"><div className="container contact-grid">
+    <section className="section"><div className="container contact-grid contact-grid-solo">
       <div className="contact-cards">
         <div className="cc-card">
           <Ico d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11zM12 12a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
@@ -65,7 +64,11 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <ContactForm />
+      {/* Contact form temporarily removed until email sending (Resend) is
+          configured. To restore: re-add
+            import ContactForm from '@/components/ContactForm';
+          at the top and <ContactForm /> here, and change the grid class
+          below back from "contact-grid contact-grid-solo" to "contact-grid". */}
     </div></section>
   </>);
 }

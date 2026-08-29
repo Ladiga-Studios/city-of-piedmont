@@ -34,7 +34,13 @@ which (if any) ran before. Delete the older .sql files from the repo.
 7. **Electronic Work Order** — unlisted /electronic-work-order page,
    noindex, matches the old Google Form; emails payments@piedmontcity.org
    with photo attached. Needs RESEND_API_KEY (see below).
-8. **Contact form** — now actually sends (to info@piedmontcity.org).
+8. **Contact form — removed for now.** Until Resend is configured, the
+   contact page shows the contact cards only (phone, email, address, hours)
+   in a clean two-up layout, so nothing on the public site depends on email
+   sending. The form component and its /api/contact route stay in the repo,
+   fully wired; restore instructions are commented in `contact/page.js`.
+   The Electronic Work Order page stays live — it's internal-only and shows
+   a friendly "could not send" error until the key is added.
 
 ## Still required
 

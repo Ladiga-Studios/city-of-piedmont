@@ -56,29 +56,22 @@ export default async function NewsPage() {
               {items.map((n) => (
                 <article key={n.id} className="news-item">
                   {n.image_url && (
-                    <a
+                    <Link
                       className="news-item-img"
-                      href={n.image_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View full-size image: ${n.title}`}
+                      href={n.slug ? `/news/${n.slug}` : '/news'}
+                      aria-label={`Read article: ${n.title}`}
                     >
                       <img src={n.image_url} alt={n.image_alt || n.title} loading="lazy" />
-                    </a>
+                    </Link>
                   )}
                   <div className="news-item-body">
                     <span className="news-item-date">{newsDate(n.published_at)}</span>
-                    <h2>{n.title}</h2>
+                    <h2>{n.slug ? <Link href={`/news/${n.slug}`}>{n.title}</Link> : n.title}</h2>
                     <p>{n.body}</p>
-                    {n.content && (
-                      <details className="news-more">
-                        <summary>Read more</summary>
-                        <div className="news-content">
-                          {n.content.split('\n').filter(Boolean).map((para, i) => (
-                            <p key={i}>{para}</p>
-                          ))}
-                        </div>
-                      </details>
+                    {n.slug && (
+                      <Link href={`/news/${n.slug}`} className="news-readmore">
+                        Read the full article →
+                      </Link>
                     )}
                   </div>
                 </article>

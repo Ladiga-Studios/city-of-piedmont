@@ -89,6 +89,7 @@ export default async function Home() {
         body: truncate(n.body, 120),
         img: n.image_url || null, // null -> show a newspaper icon placeholder
         alt: n.image_alt || n.title,
+        href: n.slug ? `/news/${n.slug}` : '/news',
       }));
     }
 
@@ -172,39 +173,35 @@ export default async function Home() {
                 <div className="hx2-news-grid">
                   {NEWS.map((n) =>
                     n.img ? (
-                      <article key={n.title} className="hx2-news-card">
-                        <a
-                          className="hx2-news-img"
-                          href={n.img}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`View full-size image: ${n.title}`}
-                        >
+                      <Link key={n.title} href={n.href} className="hx2-news-card">
+                        <span className="hx2-news-img">
                           <img src={n.img} alt={n.alt} loading="lazy" />
-                        </a>
-                        <div className="hx2-news-body">
+                        </span>
+                        <span className="hx2-news-body">
                           <span className="hx2-news-date">{n.date}</span>
                           <h3>{n.title}</h3>
                           <p>{n.body}</p>
-                        </div>
-                      </article>
+                          <span className="hx2-news-more">Read more →</span>
+                        </span>
+                      </Link>
                     ) : (
                       /* No photo: a deliberate "city bulletin" card - deep green,
                          gold date. Text-only news looks
                          designed, not like a missing image. */
-                      <article key={n.title} className="hx2-news-card hx2-bulletin">
-                        <div className="hx2-bulletin-tag">
+                      <Link key={n.title} href={n.href} className="hx2-news-card hx2-bulletin">
+                        <span className="hx2-bulletin-tag">
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                             <path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 8.7l5.4-.8z" />
                           </svg>
                           City Bulletin
-                        </div>
-                        <div className="hx2-news-body">
+                        </span>
+                        <span className="hx2-news-body">
                           <span className="hx2-news-date">{n.date}</span>
                           <h3>{n.title}</h3>
                           <p>{n.body}</p>
-                        </div>
-                      </article>
+                          <span className="hx2-news-more">Read more →</span>
+                        </span>
+                      </Link>
                     )
                   )}
                 </div>

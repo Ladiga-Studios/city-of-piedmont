@@ -70,6 +70,20 @@ export default async function sitemap() {
         priority: 0.5,
       });
     }
+
+    const { data: newsRows } = await supabase
+      .from('news')
+      .select('slug, published_at')
+      .not('slug', 'is', null);
+    for (const n of newsRows || []) {
+      if (!n.slug) continue;
+      entries.push({
+        url: `${BASE}/news/${n.slug}`,
+        lastModified: n.published_at ? new Date(n.published_at) : now,
+        changeFrequency: 'yearly',
+        priority: 0.5,
+      });
+    }
   } catch {
     // ignore - static + departments still returned
   }

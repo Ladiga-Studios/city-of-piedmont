@@ -22,18 +22,21 @@
    It no longer stretches/shrinks when "Read more" expands the article —
    the photo stays the exact same size open or closed. */
 .news-item-img{display:block;align-self:start;padding:1rem 0 1rem 1rem}
-/* The image links to its full-size version; give a gentle hover cue. */
-a.news-item-img img{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-a.news-item-img:hover img,a.news-item-img:focus-visible img{transform:scale(1.015);box-shadow:var(--shadow-md)}
-@media (prefers-reduced-motion: reduce){a.news-item-img img{transition:none}a.news-item-img:hover img{transform:none}}
-.news-item-img img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
-  border-radius:12px;box-shadow:var(--shadow-sm)}
+/* The image links to the article page; give a gentle hover cue. */
+.news-item-img img{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.news-item-img:hover img,.news-item-img:focus-visible img{transform:scale(1.015);box-shadow:var(--shadow-md)}
+@media (prefers-reduced-motion: reduce){.news-item-img img{transition:none}.news-item-img:hover img{transform:none}}
+/* Show the WHOLE image (flyers are often portrait) — no cropping. */
+.news-item-img img{width:100%;height:auto;display:block;
+  border-radius:12px;box-shadow:var(--shadow-sm);background:#fff}
 
 .news-item-body{padding:var(--s3) var(--s4);min-width:0}
 .news-item-date{
   font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sunset);
 }
 .news-item-body h2{font-size:1.3rem;line-height:1.25;margin:.35rem 0 .5rem;color:var(--ink);overflow-wrap:anywhere}
+.news-item-body h2 a{color:inherit}
+.news-item-body h2 a:hover{color:var(--sunset)}
 .news-item-body p{color:var(--ink-2);line-height:1.65;overflow-wrap:anywhere}
 .news-content p{overflow-wrap:anywhere}
 
@@ -55,3 +58,30 @@ a.news-item-img:hover img,a.news-item-img:focus-visible img{transform:scale(1.01
 }
 
 .news-signup-sec{padding-top:0}
+
+
+/* "Read the full article" link on the list cards. */
+.news-readmore{display:inline-block;margin-top:.7rem;font-weight:700;font-size:.92rem;color:var(--sunset)}
+.news-readmore:hover{text-decoration:underline}
+
+/* ============================================================
+   ARTICLE PAGE — /news/[slug]
+   ============================================================ */
+.article-wrap{max-width:760px;display:flex;flex-direction:column;gap:var(--s4)}
+
+/* The flyer, shown WHOLE at a readable size; taps open the raw image. */
+.article-figure{display:block;position:relative;align-self:center;max-width:640px;width:100%;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:.9rem;box-shadow:var(--shadow-md);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.article-figure:hover,.article-figure:focus-visible{transform:translateY(-3px);box-shadow:0 18px 40px rgba(40,30,20,.22)}
+.article-figure img{width:100%;height:auto;display:block;border-radius:6px;background:#fff}
+.article-figure-hint{display:block;text-align:center;margin-top:.6rem;
+  font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.article-figure:hover .article-figure-hint{color:var(--sunset)}
+@media (prefers-reduced-motion: reduce){.article-figure{transition:none}.article-figure:hover{transform:none}}
+
+.article-body p{color:var(--ink-2);line-height:1.75;margin-bottom:1rem;overflow-wrap:anywhere;max-width:70ch}
+
+.article-back{display:inline-block;font-weight:700;color:var(--sunset)}
+.article-back:hover{text-decoration:underline}

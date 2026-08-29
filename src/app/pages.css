@@ -166,6 +166,13 @@
 .cc-live.is-closed{color:var(--muted)}
 @media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
 
+/* While the contact form is removed (no email sending yet), the cards fill
+   the page as a two-up grid instead of a narrow left column. Delete this
+   block when the form returns. */
+.contact-grid.contact-grid-solo{grid-template-columns:1fr;max-width:880px;margin-inline:auto}
+.contact-grid-solo .contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:640px){.contact-grid-solo .contact-cards{grid-template-columns:1fr}}
+
 /* ============================================================
    GOVERNMENT PAGE — mayor/council feature band
    ============================================================ */
