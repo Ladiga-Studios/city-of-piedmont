@@ -56,9 +56,15 @@ export default async function NewsPage() {
               {items.map((n) => (
                 <article key={n.id} className="news-item">
                   {n.image_url && (
-                    <div className="news-item-img">
+                    <a
+                      className="news-item-img"
+                      href={n.image_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View full-size image: ${n.title}`}
+                    >
                       <img src={n.image_url} alt={n.image_alt || n.title} loading="lazy" />
-                    </div>
+                    </a>
                   )}
                   <div className="news-item-body">
                     <span className="news-item-date">{newsDate(n.published_at)}</span>

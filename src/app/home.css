@@ -170,7 +170,7 @@
 .hx2-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2)}
 .hx2-news-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--hx-cream-2);transition:transform .18s var(--ease),box-shadow .18s}
 .hx2-news-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.hx2-news-img{aspect-ratio:16/10;background:linear-gradient(135deg,var(--paper-2),var(--line));overflow:hidden}
+.hx2-news-img{display:block;aspect-ratio:16/10;background:linear-gradient(135deg,var(--paper-2),var(--line));overflow:hidden}
 .hx2-news-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s var(--ease)}
 .hx2-news-card:hover .hx2-news-img img{transform:scale(1.05)}
 .hx2-news-body{padding:.85rem .9rem 1rem}
@@ -353,80 +353,3 @@
 .hx2-bulletin h3{color:#fff;font-family:var(--display);font-weight:500;font-size:1.18rem;line-height:1.25}
 .hx2-bulletin p{color:rgba(247,243,236,.72)}
 .hx2-bulletin:hover{box-shadow:var(--shadow-md)}
-
-/* ============================================================
-   CITY BULLETIN BOARD — homepage flyer section
-   Flyers pinned to a corkboard-feel panel: warm paper cards with
-   a pin dot and a slight alternating tilt that straightens on
-   hover. Data lives in src/lib/flyers.js.
-   ============================================================ */
-
-.hx2-board-sec{background:var(--paper-2)}
-
-.hx2-board{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(240px, 340px));
-  justify-content:center;
-  gap:clamp(1.4rem, 4vw, 2.6rem);
-  margin-top:clamp(1.6rem, 3.5vw, 2.4rem);
-}
-
-.hx2-flyer{
-  position:relative;
-  display:flex;flex-direction:column;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:6px;
-  padding:.9rem .9rem 1rem;
-  box-shadow:var(--shadow-md);
-  transition:transform .25s var(--ease), box-shadow .25s var(--ease);
-}
-/* Alternating gentle tilt, like real pinned paper. */
-.hx2-flyer:nth-child(odd){transform:rotate(-1.1deg)}
-.hx2-flyer:nth-child(even){transform:rotate(1deg)}
-.hx2-flyer:hover,
-.hx2-flyer:focus-visible{
-  transform:rotate(0deg) translateY(-4px);
-  box-shadow:0 18px 40px rgba(40,30,20,.22);
-  z-index:1;
-}
-
-/* Pin dot at the top edge. */
-.hx2-flyer-pin{
-  position:absolute;top:-9px;left:50%;transform:translateX(-50%);
-  width:16px;height:16px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%, #e8875a, var(--sunset) 60%, #7c3416);
-  box-shadow:0 2px 4px rgba(0,0,0,.35);
-}
-
-.hx2-flyer img{
-  width:100%;height:auto;display:block;
-  border:1px solid var(--line);border-radius:3px;
-  background:#fff;
-}
-
-.hx2-flyer-meta{display:flex;flex-direction:column;gap:.15rem;padding-top:.75rem}
-.hx2-flyer-meta strong{
-  font-family:var(--display);font-weight:600;font-size:1.06rem;color:var(--umber-800);line-height:1.25;
-}
-.hx2-flyer-meta span{font-size:.86rem;color:var(--ink-2)}
-.hx2-flyer-meta em{
-  font-style:normal;font-size:.86rem;font-weight:600;color:var(--sunset);margin-top:.35rem;
-  transition:transform .2s var(--ease);
-}
-.hx2-flyer:hover .hx2-flyer-meta em{transform:translateX(3px)}
-
-/* One flyer: keep it modest, not a giant lone poster. */
-.hx2-board[data-count="1"]{grid-template-columns:minmax(240px, 340px)}
-
-@media (max-width: 640px){
-  .hx2-board{grid-template-columns:minmax(220px, 320px)}
-}
-
-@media (prefers-reduced-motion: reduce){
-  .hx2-flyer,
-  .hx2-flyer:nth-child(odd),
-  .hx2-flyer:nth-child(even){transform:none;transition:none}
-  .hx2-flyer:hover{transform:none}
-  .hx2-flyer:hover .hx2-flyer-meta em{transform:none}
-}
