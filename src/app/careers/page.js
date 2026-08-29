@@ -10,8 +10,43 @@ export const metadata = {
   alternates: { canonical: 'https://www.piedmontcity.org/careers' },
 };
 
-const APPLICATION_PDF =
-  'https://www.piedmontcity.org/wp-content/uploads/2021/12/APPLICATION.pdf';
+// Self-hosted so the link keeps working after the old WordPress site goes away.
+// The PDF lives at public/documents/employment-application.pdf.
+const APPLICATION_PDF = '/documents/employment-application.pdf';
+
+// ------------------------------------------------------------------
+// Current openings. To add or remove a posting, edit this array —
+// each entry renders as a card in the "Current Positions" section.
+// Drop the full announcement PDF in public/documents/ and reference it
+// in `announcementPdf`. Leave the array empty to show the
+// "no open positions" note again.
+// ------------------------------------------------------------------
+const OPENINGS = [
+  {
+    title: 'Recreation Coordinator',
+    department: 'Parks & Recreation',
+    deadline: 'Friday, September 4, 2026 at 5:00 PM',
+    announcementPdf: '/documents/recreation-coordinator-job-announcement.pdf',
+    summary:
+      'Runs Piedmont\u2019s league sports and youth programs end to end: scheduling and registration, recruiting coaches and participants, supervising Aquatic Center staff during swim season, maintaining the Sports Complex, and serving as point of contact for partner leagues.',
+    duties: [
+      'Organize, schedule, and market league sports, tournaments, and youth clinics',
+      'Manage registrations, fees, rosters, and records for each season',
+      'Supervise Aquatic Center employees; maintain pool chemical levels; open/close during swim season',
+      'Maintain sports equipment, Sports Complex fields and buildings, and the city vehicle',
+      'Run the department\u2019s social media; support the Civic Center front desk as needed',
+    ],
+    benefits:
+      'RSA/State Retirement \u00b7 Vacation, sick, and personal time accrued \u00b7 BC/BS health, dental, and vision insurance',
+    applyText: (
+      <>
+        Apply in person at the Piedmont Administration Office, 109 N Center Ave, Piedmont, AL, or
+        email City Clerk Tashia Blackerby at{' '}
+        <a href="mailto:tashia.blackerby@piedmontcity.org">tashia.blackerby@piedmontcity.org</a>.
+      </>
+    ),
+  },
+];
 
 export default function CareersPage() {
   return (
@@ -60,9 +95,40 @@ export default function CareersPage() {
           {/* Current Positions */}
           <div className="careers-block">
             <h2>Current Positions</h2>
-            <div className="empty-note">
-              We&rsquo;re sorry, but there are no open positions at this time. Please check back later!
-            </div>
+            {OPENINGS.length === 0 ? (
+              <div className="empty-note">
+                We&rsquo;re sorry, but there are no open positions at this time. Please check back later!
+              </div>
+            ) : (
+              <ul className="job-list">
+                {OPENINGS.map((job) => (
+                  <li key={job.title} className="job-card">
+                    <div className="job-head">
+                      <h3>{job.title}</h3>
+                      <span className="job-dept">{job.department}</span>
+                    </div>
+                    <p className="job-deadline">
+                      <strong>Deadline to apply:</strong> {job.deadline}
+                    </p>
+                    <p>{job.summary}</p>
+                    <h4>What you&rsquo;ll do</h4>
+                    <ul className="job-duties">
+                      {job.duties.map((d) => <li key={d}>{d}</li>)}
+                    </ul>
+                    <p className="job-benefits"><strong>Benefits:</strong> {job.benefits}</p>
+                    <p>{job.applyText}</p>
+                    <a
+                      href={job.announcementPdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline job-pdf"
+                    >
+                      Full Job Announcement (PDF)
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           {/* How to submit */}

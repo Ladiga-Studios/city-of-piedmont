@@ -6,8 +6,9 @@ import { useToast } from './ClientEffects';
 export default function ContactForm() {
   const toast = useToast();
   const [errs, setErrs] = useState({});
+  const [sending, setSending] = useState(false);
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
     const f = e.target;
     const next = {};
@@ -15,9 +16,27 @@ export default function ContactForm() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value)) next.email = 'Enter a valid email.';
     if (!f.message.value.trim()) next.message = 'Please enter a message.';
     setErrs(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: f.name.value.trim(),
+          email: f.email.value.trim(),
+          message: f.message.value.trim(),
+        }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || 'send failed');
       toast('Message sent', "We'll get back to you soon.");
       f.reset();
+    } catch {
+      toast('Could not send', 'Your message did not go through. Please try again or call 256-447-3560.', 'error');
+    } finally {
+      setSending(false);
     }
   }
 
@@ -38,7 +57,9 @@ export default function ContactForm() {
         <textarea id="message" name="message" rows="5" />
         {errs.message && <span className="err">{errs.message}</span>}
       </div>
-      <button className="btn btn-primary" type="submit">Send Message</button>
+      <button className="btn btn-primary" type="submit" disabled={sending}>
+        {sending ? 'Sending…' : 'Send Message'}
+      </button>
     </form>
   );
 }

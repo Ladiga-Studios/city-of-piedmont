@@ -73,10 +73,8 @@ export default function Footer() {
           <div className="foot-col">
             <h4>Hours</h4>
             <ul>
-              <li>Monday – Thursday</li>
-              <li className="foot-dim">7:30 AM – 4:30 PM</li>
-              <li style={{ marginTop: '.5rem' }}>Friday</li>
-              <li className="foot-dim">7:30 AM – 11:30 AM</li>
+              <li>Monday – Friday</li>
+              <li className="foot-dim">8:00 AM – 5:00 PM</li>
               <li style={{ marginTop: '.6rem' }}>City Hall</li>
               <li className="foot-dim">{SITE.address}</li>
               <li className="foot-dim">{SITE.cityState}</li>

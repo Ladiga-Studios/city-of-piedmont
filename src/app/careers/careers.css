@@ -21,3 +21,30 @@
 /* The application button is a .btn .btn-primary <a>; keep its text white. */
 .careers-apply{margin-top:.2rem;color:#fff}
 .careers-apply:hover{color:#fff}
+
+/* ---------- Current openings ---------- */
+.job-list{list-style:none;display:flex;flex-direction:column;gap:var(--s4, 1.5rem);padding:0;margin:0}
+
+.job-card{
+  background:var(--card, #fff);
+  border:1px solid var(--line, rgba(0,0,0,.08));
+  border-radius:var(--radius, 12px);
+  padding:clamp(1.2rem, 3vw, 1.8rem);
+  box-shadow:var(--shadow-sm, 0 1px 3px rgba(0,0,0,.06));
+}
+
+.job-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .9rem;margin-bottom:.35rem}
+.job-head h3{font-size:1.28rem;margin:0}
+.job-dept{
+  font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--sunset);background:color-mix(in srgb, var(--sunset) 10%, transparent);
+  border:1px solid color-mix(in srgb, var(--sunset) 30%, transparent);
+  padding:.2rem .6rem;border-radius:999px;
+}
+
+.job-deadline{margin:.2rem 0 .8rem;color:var(--ink-2)}
+.job-card h4{font-size:1rem;margin:.9rem 0 .4rem}
+.job-duties{margin:0 0 .9rem;padding-left:1.2rem;color:var(--ink-2);line-height:1.65}
+.job-duties li{margin-bottom:.3rem}
+.job-benefits{margin-bottom:.9rem}
+.job-pdf{margin-top:.4rem}

@@ -1,0 +1,35 @@
+/* ============================================================
+   ELECTRONIC WORK ORDER — internal staff form
+   Reuses the global .field / .err / .btn styles; this file only
+   handles the two-column layout and small extras.
+   ============================================================ */
+
+.wo-wrap{max-width:760px}
+
+.wo-form{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg, 16px);
+  box-shadow:var(--shadow-sm);
+  padding:clamp(1.3rem, 3.5vw, 2.2rem);
+}
+
+.wo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.4rem}
+.wo-full{grid-column:1 / -1}
+
+/* Selects and the date/file inputs inherit .field input styling in globals;
+   make sure selects fill their column even if globals only targets input/textarea. */
+.wo-form select,
+.wo-form input[type="date"],
+.wo-form input[type="file"]{width:100%}
+
+.wo-hint{display:block;margin-top:.35rem;font-size:.85rem;color:var(--ink-2)}
+
+.wo-submit{margin-top:1.4rem;min-height:44px}
+
+/* Honeypot: visually removed but still in the form for bots to fill. */
+.wo-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
+@media (max-width: 640px){
+  .wo-grid{grid-template-columns:1fr}
+}
