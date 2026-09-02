@@ -1,0 +1,51 @@
+/* /share/[token] — public shared-folder page. Uses the site's page-hero
+   from pages.css; everything below is specific to this page. */
+
+.share-hero .inner{max-width:820px}
+.share-from{color:var(--amber);font-weight:700;font-size:.92rem;margin-bottom:.4rem}
+.share-hero h1{margin:0 0 .6rem;overflow-wrap:anywhere}
+.share-summary{font-size:1.05rem;color:rgba(247,243,236,.85)}
+.share-note{margin-top:.6rem;font-size:1.02rem;color:rgba(247,243,236,.8);max-width:62ch;line-height:1.55}
+
+.share-dl{margin-top:1.6rem;display:flex;flex-direction:column;gap:.7rem;align-items:flex-start}
+.share-dl-btn{font-size:1.08rem;padding:1rem 1.6rem;border-radius:12px}
+.share-dl-btn:disabled{opacity:.75;cursor:progress;transform:none;box-shadow:none}
+.share-dl-btn svg{transition:none}
+.share-dl-btn:hover svg{transform:none}
+.share-hint{font-size:.9rem;color:rgba(247,243,236,.65);max-width:60ch}
+.share-progress{width:100%;max-width:520px}
+.share-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.15);overflow:hidden}
+.share-bar span{display:block;height:100%;background:var(--amber);border-radius:999px;transition:width .25s var(--ease)}
+.share-progress p{margin-top:.5rem;font-size:.88rem;color:rgba(247,243,236,.8)}
+.share-status{font-size:.95rem;padding:.55rem .9rem;border-radius:9px;max-width:60ch}
+.share-status.ok{background:rgba(63,107,70,.28);color:#e8f0e9;border:1px solid rgba(255,255,255,.18)}
+.share-status.err{background:rgba(163,47,52,.32);color:#fbe9ea;border:1px solid rgba(255,255,255,.18)}
+
+.share-body{padding-block:var(--s5)}
+.share-empty{color:var(--muted)}
+
+.share-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.9rem}
+.share-tile{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  transition:border-color .18s,box-shadow .18s,transform .18s}
+.share-tile:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.share-tile-media{display:block;aspect-ratio:4/3;background:var(--paper-2);overflow:hidden}
+.share-tile-media img{width:100%;height:100%;object-fit:cover;display:block}
+.share-tile-ico{display:grid;place-items:center;width:100%;height:100%;color:var(--stone-300)}
+.share-tile-meta{padding:.55rem .75rem .65rem;display:flex;flex-direction:column;gap:.15rem;font-size:.82rem;line-height:1.35}
+.share-tile-name{font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.share-tile-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.share-tile-row a{color:var(--sunset);font-weight:700;padding:.2rem .1rem;min-height:0}
+.share-tile-row a:hover{color:var(--sunset-dark);text-decoration:underline}
+
+.share-setup{max-width:640px}
+.share-setup h1{font-size:2rem;margin-bottom:.6rem}
+.share-setup code{background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:.1rem .35rem;font-size:.9em}
+
+@media(max-width:640px){
+  .share-grid{grid-template-columns:repeat(2,1fr);gap:.6rem}
+  .share-dl-btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .share-tile,.share-bar span{transition:none}
+  .share-tile:hover{transform:none}
+}

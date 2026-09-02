@@ -18,6 +18,7 @@ const ICONS = {
   businesses: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5',
   people: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
   documents: 'M14 3v5h5M7 3h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2zM12 11v6m0 0l-3-3m3 3l3-3',
+  drive: 'M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7zM12 11v5m0 0l-2-2m2 2l2-2',
 };
 
 function Icon({ d, size = 20 }) {
@@ -50,7 +51,7 @@ export default function AdminOverview() {
   const [stats, setStats] = useState({
     minutes: null, notices: null, news: null, events: null,
     alerts: null, businesses: null, draftBiz: null,
-    people: null, documents: null,
+    people: null, documents: null, drive: null,
   });
   const [activity, setActivity] = useState(null); // null = loading, [] = none
 
@@ -61,7 +62,7 @@ export default function AdminOverview() {
       const todayISO = new Date().toISOString();
 
       // Counts (unchanged queries) + a small recent-activity pull per table.
-      const [m, pn, nw, ev, a, b, d, ppl, docs, rNews, rEvents, rMinutes, rNotices] = await Promise.all([
+      const [m, pn, nw, ev, a, b, d, ppl, docs, drv, rNews, rEvents, rMinutes, rNotices] = await Promise.all([
         supabase.from('minutes').select('id', { count: 'exact', head: true }),
         supabase.from('public_notices').select('id', { count: 'exact', head: true }),
         supabase.from('news').select('id', { count: 'exact', head: true }),
@@ -71,6 +72,7 @@ export default function AdminOverview() {
         supabase.from('businesses').select('id', { count: 'exact', head: true }).eq('approved', false),
         supabase.from('people').select('id', { count: 'exact', head: true }),
         supabase.from('city_documents').select('id', { count: 'exact', head: true }),
+        supabase.from('drive_folders').select('id', { count: 'exact', head: true }),
         supabase.from('news').select('title, created_at').order('created_at', { ascending: false }).limit(3),
         supabase.from('events').select('title, created_at').order('created_at', { ascending: false }).limit(3),
         supabase.from('minutes').select('title, created_at').order('created_at', { ascending: false }).limit(3),
@@ -88,6 +90,8 @@ export default function AdminOverview() {
         // null until supabase-add-people-documents.sql has been run
         people: ppl.error ? null : (ppl.count ?? 0),
         documents: docs.error ? null : (docs.count ?? 0),
+        // null until supabase-drive.sql has been run
+        drive: drv.error ? null : (drv.count ?? 0),
       });
 
       // Merge the four recent pulls into one feed, newest first.
@@ -113,6 +117,7 @@ export default function AdminOverview() {
     { href: '/admin/alerts', label: 'Active Alerts', value: stats.alerts, sub: 'showing on site', icon: ICONS.alerts },
     { href: '/admin/people', label: 'People', value: stats.people ?? 0, sub: 'council & staff listed', icon: ICONS.people },
     { href: '/admin/documents', label: 'City Documents', value: stats.documents ?? 0, sub: 'uploaded', icon: ICONS.documents },
+    { href: '/admin/drive', label: 'File Drive', value: stats.drive ?? 0, sub: 'shared folders', icon: ICONS.drive },
   ];
 
   // Things an editor should look at, derived from the counts.
@@ -153,6 +158,7 @@ export default function AdminOverview() {
     { href: '/admin/businesses', label: 'Add a business', desc: 'Grow the local business directory', icon: ICONS.businesses },
     { href: '/admin/documents', label: 'Upload a document', desc: 'Water quality reports, forms, and other city PDFs', icon: ICONS.documents },
     { href: '/admin/people', label: 'Update people', desc: 'Add, edit, or remove council members and staff', icon: ICONS.people },
+    { href: '/admin/drive', label: 'Share a batch of files', desc: 'Upload photos or documents and send one download link', icon: ICONS.drive },
   ];
 
   return (
