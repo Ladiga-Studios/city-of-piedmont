@@ -1,0 +1,41 @@
+/* /admin/careers — extends admin.css + the shared .na-* list styles. */
+
+.ca-setup{background:var(--paper-2);border:1.5px solid var(--line-strong);border-left:4px solid var(--sunset);
+  border-radius:10px;padding:.9rem 1.1rem;margin-bottom:var(--s4);font-size:.92rem;line-height:1.55;color:var(--ink-2)}
+.ca-setup code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.1rem .35rem;font-size:.84em}
+
+.ca-clear{background:none;border:none;padding:0;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--sunset)}
+.ca-clear:hover{text-decoration:underline}
+
+.ca-two{display:grid;grid-template-columns:1fr 1fr;gap:0 .8rem}
+.ca-deadline{grid-template-columns:minmax(150px,.8fr) 1.4fr}
+@media(max-width:560px){.ca-two{grid-template-columns:1fr}}
+
+/* uploaded announcement card */
+.ca-file{display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.ca-file-ico{flex:0 0 auto;width:52px;height:64px;border-radius:7px;overflow:hidden;display:grid;place-items:center;
+  background:var(--paper-2);color:var(--umber-700)}
+.ca-file-ico img{width:100%;height:100%;object-fit:cover}
+.ca-file-main{min-width:0;display:flex;flex-direction:column;gap:.2rem}
+.ca-file-main strong{font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ca-file-main small{font-size:.82rem;color:var(--muted)}
+.ca-file-main small a,.ca-file-main small button{background:none;border:none;padding:0;cursor:pointer;font:inherit;font-weight:600;color:var(--sunset)}
+.ca-file-main small a:hover,.ca-file-main small button:hover:not(:disabled){text-decoration:underline}
+.ca-file-main small button:disabled{color:var(--muted);cursor:wait}
+
+/* AI status line */
+.ca-read{margin-top:.55rem;font-size:.86rem;line-height:1.45;color:var(--success);
+  padding:.55rem .75rem;border-radius:8px;background:rgba(63,107,70,.09);border:1px solid rgba(63,107,70,.22)}
+.ca-read.busy{color:var(--ink-2);background:var(--paper-2);border-color:var(--line)}
+.ca-read.busy::before{content:"";display:inline-block;width:10px;height:10px;margin-right:.5rem;border-radius:50%;
+  border:2px solid var(--stone-300);border-top-color:var(--sunset);vertical-align:-1px;animation:caSpin .8s linear infinite}
+@keyframes caSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.ca-read.busy::before{animation:none}}
+
+/* list tags */
+.ca-tag{font-size:.72rem;font-weight:600;border-radius:999px;padding:.12rem .55rem;white-space:nowrap}
+.ca-tag.open{color:var(--success);background:rgba(63,107,70,.12);border:1px solid rgba(63,107,70,.25)}
+.ca-tag.soon{color:#8a5a00;background:rgba(201,138,27,.14);border:1px solid rgba(201,138,27,.35)}
+.ca-tag.closed{color:var(--muted);background:var(--paper-2);border:1px solid var(--line)}
+.ca-tag.news{color:var(--seal-blue);background:rgba(91,134,168,.12);border:1px solid rgba(91,134,168,.3)}
+.na-item.ca-muted{opacity:.6}

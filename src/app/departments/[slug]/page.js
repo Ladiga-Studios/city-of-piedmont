@@ -73,7 +73,13 @@ export default async function DepartmentPage({ params }) {
     getDepartmentStaff(d.slug),
     getDepartmentDocuments(d.slug),
   ]);
-  const staff = dbStaff || d.staff;
+  // General staff list = DB rows with no office; each sub-office uses its
+  // own DB rows when it has any, otherwise the static list for that office.
+  const staff = dbStaff ? dbStaff.filter((p) => !p.office) : d.staff;
+  const officeStaff = (o) => {
+    const rows = dbStaff ? dbStaff.filter((p) => p.office === o.name) : [];
+    return rows.length ? rows : o.staff;
+  };
   const downloadGroups = mergeDownloadGroups(d.downloadGroups, dbDocs);
 
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}`;
@@ -169,7 +175,7 @@ export default async function DepartmentPage({ params }) {
               <div className="dd-office-body">
                 <h2>{o.name}</h2>
                 {o.note && <p className="dd-block-intro">{o.note}</p>}
-                {o.staff && <StaffList staff={o.staff} />}
+                {officeStaff(o) && <StaffList staff={officeStaff(o)} />}
                 <div className="dd-office-meta">
                 {o.lines && o.lines.length > 0 && (
                   <div className="dd-row"><span className="dd-label">Address</span><span>{o.lines.join(', ')}</span></div>

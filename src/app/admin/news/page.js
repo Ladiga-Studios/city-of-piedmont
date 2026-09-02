@@ -186,6 +186,8 @@ export default function NewsAdmin() {
                     <div className="ne-meta">
                       <span>{newsDate(n.published_at)}</span>
                       {n.is_sample && <span className="ne-tag">Sample</span>}
+                      {n.expires_at && new Date(n.expires_at) < new Date() && <span className="ne-tag" title="Past its deadline; hidden from visitors">Expired — hidden</span>}
+                      {n.expires_at && new Date(n.expires_at) >= new Date() && <span className="ne-tag">Expires {new Date(n.expires_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>}
                     </div>
                   </div>
                   <div className="ne-actions">

@@ -37,16 +37,17 @@ export async function getDepartmentStaff(slug) {
     const supabase = createClient();
     const { data, error } = await supabase
       .from('people')
-      .select('name, role, email, phone, sort_order')
+      .select('name, role, email, phone, office, sort_order')
       .eq('group_type', 'staff')
       .eq('department_slug', slug)
       .order('sort_order', { ascending: true });
     if (error || !data || data.length === 0) return null;
-    return data.map(({ name, role, email, phone }) => ({
+    return data.map(({ name, role, email, phone, office }) => ({
       name,
       role,
       email: email || undefined,
       phone: phone || undefined,
+      office: office || undefined, // sub-office on the page (e.g. 'Fire Department'), if any
     }));
   } catch {
     return null;

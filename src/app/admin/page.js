@@ -19,6 +19,7 @@ const ICONS = {
   people: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
   documents: 'M14 3v5h5M7 3h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2zM12 11v6m0 0l-3-3m3 3l3-3',
   drive: 'M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7zM12 11v5m0 0l-2-2m2 2l2-2',
+  careers: 'M3 8h18v12H3zM8 8V5a2 2 0 012-2h4a2 2 0 012 2v3M3 13h18',
 };
 
 function Icon({ d, size = 20 }) {
@@ -51,7 +52,7 @@ export default function AdminOverview() {
   const [stats, setStats] = useState({
     minutes: null, notices: null, news: null, events: null,
     alerts: null, businesses: null, draftBiz: null,
-    people: null, documents: null, drive: null,
+    people: null, documents: null, drive: null, jobs: null,
   });
   const [activity, setActivity] = useState(null); // null = loading, [] = none
 
@@ -62,7 +63,7 @@ export default function AdminOverview() {
       const todayISO = new Date().toISOString();
 
       // Counts (unchanged queries) + a small recent-activity pull per table.
-      const [m, pn, nw, ev, a, b, d, ppl, docs, drv, rNews, rEvents, rMinutes, rNotices] = await Promise.all([
+      const [m, pn, nw, ev, a, b, d, ppl, docs, drv, jobs, rNews, rEvents, rMinutes, rNotices] = await Promise.all([
         supabase.from('minutes').select('id', { count: 'exact', head: true }),
         supabase.from('public_notices').select('id', { count: 'exact', head: true }),
         supabase.from('news').select('id', { count: 'exact', head: true }),
@@ -73,6 +74,7 @@ export default function AdminOverview() {
         supabase.from('people').select('id', { count: 'exact', head: true }),
         supabase.from('city_documents').select('id', { count: 'exact', head: true }),
         supabase.from('drive_folders').select('id', { count: 'exact', head: true }),
+        supabase.from('job_postings').select('id', { count: 'exact', head: true }).gte('deadline_date', todayISO.slice(0, 10)),
         supabase.from('news').select('title, created_at').order('created_at', { ascending: false }).limit(3),
         supabase.from('events').select('title, created_at').order('created_at', { ascending: false }).limit(3),
         supabase.from('minutes').select('title, created_at').order('created_at', { ascending: false }).limit(3),
@@ -92,6 +94,7 @@ export default function AdminOverview() {
         documents: docs.error ? null : (docs.count ?? 0),
         // null until supabase-drive.sql has been run
         drive: drv.error ? null : (drv.count ?? 0),
+        jobs: jobs.error ? null : (jobs.count ?? 0),
       });
 
       // Merge the four recent pulls into one feed, newest first.
@@ -118,6 +121,7 @@ export default function AdminOverview() {
     { href: '/admin/people', label: 'People', value: stats.people ?? 0, sub: 'council & staff listed', icon: ICONS.people },
     { href: '/admin/documents', label: 'City Documents', value: stats.documents ?? 0, sub: 'uploaded', icon: ICONS.documents },
     { href: '/admin/drive', label: 'File Drive', value: stats.drive ?? 0, sub: 'shared folders', icon: ICONS.drive },
+    { href: '/admin/careers', label: 'Job Openings', value: stats.jobs ?? 0, sub: 'accepting applications', icon: ICONS.careers },
   ];
 
   // Things an editor should look at, derived from the counts.
@@ -151,6 +155,7 @@ export default function AdminOverview() {
   const quick = [
     { href: '/admin/news', label: 'Post news', desc: 'Publish an article to the homepage and news page', icon: ICONS.news },
     { href: '/admin/events', label: 'Add an event', desc: 'Put something on the community calendar', icon: ICONS.events },
+    { href: '/admin/careers', label: 'Post a job opening', desc: 'Upload the announcement; the overview drafts itself', icon: ICONS.careers },
     { href: '/admin/flyers', label: 'Post a flyer', desc: 'Pin a flyer to the homepage bulletin board', icon: ICONS.flyers },
     { href: '/admin/minutes', label: 'Upload minutes', desc: 'Post council meeting minutes (PDF)', icon: ICONS.minutes },
     { href: '/admin/notices', label: 'Post a notice or bid', desc: 'Public notices and bid opportunities', icon: ICONS.notices },

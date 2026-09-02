@@ -21,12 +21,20 @@ const PLACES = [
   { slug: 'civic-center', name: 'Clyde H. Pike Civic Center' },
 ];
 
+// Departments whose page has sub-offices with their own staff lists
+// (Public Safety → Police Department / Fire Department, etc.). A person
+// can be placed in one of those instead of the department's main list.
+const OFFICES = Object.fromEntries(
+  DEPARTMENTS.filter((d) => d.offices?.length).map((d) => [d.slug, d.offices.map((o) => o.name)])
+);
+
 const EMPTY = {
   id: null,
   name: '',
   role: '',
   group_type: 'staff',
   department_slug: PLACES[0].slug,
+  office: '',
   sort_order: 100,
   email: '',
   phone: '',
@@ -70,15 +78,17 @@ export default function PeopleAdmin() {
   const staffByPlace = useMemo(() => {
     const map = new Map();
     for (const p of items.filter((x) => x.group_type === 'staff')) {
-      const key = p.department_slug || 'unassigned';
+      const key = p.office ? `${p.department_slug || 'unassigned'}::${p.office}` : (p.department_slug || 'unassigned');
       if (!map.has(key)) map.set(key, []);
       map.get(key).push(p);
     }
     return map;
   }, [items]);
 
-  function placeName(slug) {
-    return PLACES.find((p) => p.slug === slug)?.name || slug || 'Unassigned';
+  function placeName(key) {
+    const [slug, office] = String(key).split('::');
+    const name = PLACES.find((p) => p.slug === slug)?.name || slug || 'Unassigned';
+    return office ? `${name} · ${office}` : name;
   }
 
   function startEdit(p) {
@@ -88,6 +98,7 @@ export default function PeopleAdmin() {
       role: p.role || '',
       group_type: p.group_type || 'staff',
       department_slug: p.department_slug || PLACES[0].slug,
+      office: p.office || '',
       sort_order: p.sort_order ?? 100,
       email: p.email || '',
       phone: p.phone || '',
@@ -115,6 +126,7 @@ export default function PeopleAdmin() {
         role: form.role.trim(),
         group_type: form.group_type,
         department_slug: form.group_type === 'staff' ? form.department_slug : null,
+        office: form.group_type === 'staff' && OFFICES[form.department_slug]?.includes(form.office) ? form.office : null,
         sort_order: Number(form.sort_order) || 100,
         email: form.email.trim() || null,
         phone: form.phone.trim() || null,
@@ -219,7 +231,18 @@ export default function PeopleAdmin() {
                 </select>
                 <span className="field-help">They&rsquo;ll show in the Staff list on this department&rsquo;s page.</span>
               </div>
-            ) : (
+            ) : null}
+
+            {form.group_type === 'staff' && OFFICES[form.department_slug] ? (
+              <div className="field">
+                <label htmlFor="p-office">Office on that page</label>
+                <select id="p-office" value={form.office} onChange={setInput('office')}>
+                  <option value="">Main staff list</option>
+                  {OFFICES[form.department_slug].map((o) => <option key={o} value={o}>{o}</option>)}
+                </select>
+                <span className="field-help">Public Safety, for example, lists the Police and Fire departments separately.</span>
+              </div>
+            ) : form.group_type === 'staff' ? null : (
               <div className="field">
                 <label className="check-row">
                   <input

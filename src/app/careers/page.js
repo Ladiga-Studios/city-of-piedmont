@@ -2,6 +2,11 @@ import '../pages.css';
 import './careers.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { createClient } from '@/lib/supabase-server';
+
+// Postings are managed at /admin/careers. Re-check every minute so a
+// new posting shows up quickly and an expired one drops off on time.
+export const revalidate = 60;
 
 export const metadata = {
   title: 'Careers',
@@ -22,13 +27,12 @@ export const metadata = {
 // ------------------------------------------------------------------
 
 // ------------------------------------------------------------------
-// Current openings. To add or remove a posting, edit this array —
-// each entry renders as a card in the "Current Positions" section.
-// Drop the full announcement PDF in public/documents/ and reference it
-// in `announcementPdf`. Leave the array empty to show the
-// "no open positions" note again.
+// FALLBACK ONLY. Openings now come from the `job_postings` table
+// (managed at /admin/careers, see supabase-careers.sql). This array is
+// used only if that table doesn't exist yet. Once the SQL has been run
+// the database is the source of truth, even when it's empty.
 // ------------------------------------------------------------------
-const OPENINGS = [
+const FALLBACK_OPENINGS = [
   {
     title: 'Recreation Coordinator',
     department: 'Parks & Recreation',
@@ -55,7 +59,56 @@ const OPENINGS = [
   },
 ];
 
-export default function CareersPage() {
+/** Make emails and links in staff-written text clickable. */
+function linkify(text) {
+  const parts = String(text || '').split(/(\bhttps?:\/\/[^\s)]+|\b[\w.+-]+@[\w-]+\.[\w.-]+\b)/g);
+  return parts.map((part, i) => {
+    if (/^https?:\/\//.test(part)) return <a key={i} href={part} target="_blank" rel="noopener noreferrer">{part.replace(/^https?:\/\//, '')}</a>;
+    if (/^[\w.+-]+@[\w-]+\.[\w.-]+$/.test(part)) return <a key={i} href={`mailto:${part}`}>{part}</a>;
+    return part;
+  });
+}
+
+function longDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d, 12)).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
+
+/** Live postings from the database; null if the table isn't there yet. */
+async function getOpenings() {
+  try {
+    const supabase = createClient();
+    // RLS already hides unpublished and expired rows from public reads;
+    // the date filter is a belt-and-braces guard for cached pages.
+    const { data, error } = await supabase
+      .from('job_postings')
+      .select('id, title, department, deadline_date, deadline_text, summary, duties, benefits, pay, apply_text, file_url, file_kind')
+      .order('deadline_date', { ascending: true });
+    if (error) return null;
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+    return (data || [])
+      .filter((j) => j.deadline_date >= today)
+      .map((j) => ({
+        key: j.id,
+        title: j.title,
+        department: j.department,
+        deadline: j.deadline_text || longDate(j.deadline_date),
+        announcementPdf: j.file_url,
+        fileKind: j.file_kind,
+        summary: j.summary,
+        duties: j.duties || [],
+        benefits: j.benefits,
+        pay: j.pay,
+        applyText: j.apply_text ? linkify(j.apply_text) : null,
+      }));
+  } catch {
+    return null;
+  }
+}
+
+export default async function CareersPage() {
+  const dbOpenings = await getOpenings();
+  const OPENINGS = dbOpenings ?? FALLBACK_OPENINGS;
   return (
     <>
       <section className="page-hero">
@@ -102,29 +155,36 @@ export default function CareersPage() {
             ) : (
               <ul className="job-list">
                 {OPENINGS.map((job) => (
-                  <li key={job.title} className="job-card">
+                  <li key={job.key || job.title} className="job-card">
                     <div className="job-head">
                       <h3>{job.title}</h3>
-                      <span className="job-dept">{job.department}</span>
+                      {job.department && <span className="job-dept">{job.department}</span>}
                     </div>
                     <p className="job-deadline">
                       <strong>Deadline to apply:</strong> {job.deadline}
                     </p>
                     <p>{job.summary}</p>
-                    <h4>What you&rsquo;ll do</h4>
-                    <ul className="job-duties">
-                      {job.duties.map((d) => <li key={d}>{d}</li>)}
-                    </ul>
-                    <p className="job-benefits"><strong>Benefits:</strong> {job.benefits}</p>
-                    <p>{job.applyText}</p>
-                    <a
-                      href={job.announcementPdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline job-pdf"
-                    >
-                      View Full Job Announcement
-                    </a>
+                    {job.duties.length > 0 && (
+                      <>
+                        <h4>What you&rsquo;ll do</h4>
+                        <ul className="job-duties">
+                          {job.duties.map((d) => <li key={d}>{d}</li>)}
+                        </ul>
+                      </>
+                    )}
+                    {job.pay && <p className="job-benefits"><strong>Pay:</strong> {job.pay}</p>}
+                    {job.benefits && <p className="job-benefits"><strong>Benefits:</strong> {job.benefits}</p>}
+                    {job.applyText && <p>{job.applyText}</p>}
+                    {job.announcementPdf && (
+                      <a
+                        href={job.announcementPdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline job-pdf"
+                      >
+                        View Full Job Announcement{job.fileKind === 'pdf' ? ' (PDF)' : ''}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
