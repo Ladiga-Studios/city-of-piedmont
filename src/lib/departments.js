@@ -295,8 +295,8 @@ export const DEPARTMENTS = [
       {
         heading: 'Download Forms',
         items: [
-          { label: 'Sales Tax Form (PDF)', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/sales_tax_form_2015.pdf' },
-          { label: 'Business License Application (PDF)', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/business_license_app_form.pdf' },
+          { label: 'Sales Tax Form (PDF)', href: '/documents/sales-tax-form.pdf' },
+          { label: 'Business License Application (PDF)', href: '/documents/business-license-application.pdf' },
         ],
       },
     ],
@@ -448,11 +448,11 @@ export const DEPARTMENTS = [
       {
         heading: 'Downloads',
         items: [
-          { label: 'Building Permit Application', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/permit_application.doc' },
-          { label: 'Residential Sub-Contractor List', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/residential_sub.doc' },
-          { label: 'Commercial Sub-Contractor List', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/commercial_sub.doc' },
-          { label: 'Zoning Map', href: 'https://www.piedmontcity.org/wp-content/uploads/2026/04/PIEDMONT-ZONING-MAP.pdf' },
-          { label: 'Zoning Ordinance Book', href: 'https://www.piedmontcity.org/wp-content/uploads/2026/04/PIEDMONT-ZONING-ORDINANCE-2004.pdf' },
+          { label: 'Building Permit Application (PDF)', href: '/documents/building-permit-application.pdf' },
+          { label: 'Residential Sub-Contractor List (PDF)', href: '/documents/residential-sub-contractor-list.pdf' },
+          { label: 'Commercial Sub-Contractor List (PDF)', href: '/documents/commercial-sub-contractor-list.pdf' },
+          { label: 'Zoning Map (PDF)', href: '/documents/zoning-map.pdf' },
+          { label: 'Zoning Ordinance (2004) (PDF)', href: '/documents/zoning-ordinance-2004.pdf' },
         ],
       },
     ],

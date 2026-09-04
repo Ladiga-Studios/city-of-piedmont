@@ -190,9 +190,9 @@ export default function Residents() {
                   <li><span className="rp-k">Office</span><span className="rp-v">109 N Center Ave</span></li>
                 </ul>
                 <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2021/05/permit_application.doc" target="_blank" rel="noopener noreferrer">Building permit application &rarr;</a>
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2021/05/residential_sub.doc" target="_blank" rel="noopener noreferrer">Residential sub-contractor list &rarr;</a>
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2021/05/commercial_sub.doc" target="_blank" rel="noopener noreferrer">Commercial sub-contractor list &rarr;</a>
+                  <a href="/documents/building-permit-application.pdf" target="_blank" rel="noopener noreferrer">Building permit application (PDF) &rarr;</a>
+                  <a href="/documents/residential-sub-contractor-list.pdf" target="_blank" rel="noopener noreferrer">Residential sub-contractor list (PDF) &rarr;</a>
+                  <a href="/documents/commercial-sub-contractor-list.pdf" target="_blank" rel="noopener noreferrer">Commercial sub-contractor list (PDF) &rarr;</a>
                 </div>
               </div>
 
@@ -204,8 +204,8 @@ export default function Residents() {
                   <li><span className="rp-k">Phone</span><span className="rp-v"><a href="tel:2564473582">256-447-3582</a></span></li>
                 </ul>
                 <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2026/04/PIEDMONT-ZONING-MAP.pdf" target="_blank" rel="noopener noreferrer">Zoning map (PDF) &rarr;</a>
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2026/04/PIEDMONT-ZONING-ORDINANCE-2004.pdf" target="_blank" rel="noopener noreferrer">Zoning ordinance (PDF) &rarr;</a>
+                  <a href="/documents/zoning-map.pdf" target="_blank" rel="noopener noreferrer">Zoning map (PDF) &rarr;</a>
+                  <a href="/documents/zoning-ordinance-2004.pdf" target="_blank" rel="noopener noreferrer">Zoning ordinance (PDF) &rarr;</a>
                 </div>
               </div>
 
@@ -232,7 +232,8 @@ export default function Residents() {
                   <li><span className="rp-k">Details</span><span className="rp-v">Confirm fees <span className="rp-placeholder">verify</span></span></li>
                 </ul>
                 <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/departments/revenue/" target="_blank" rel="noopener noreferrer">Revenue department &rarr;</a>
+                  <a href="/documents/business-license-application.pdf" target="_blank" rel="noopener noreferrer">Business license application (PDF) &rarr;</a>
+                  <a href="/departments/revenue">Revenue department &rarr;</a>
                 </div>
               </div>
             </div>
