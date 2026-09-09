@@ -2,7 +2,7 @@ import '../pages.css';
 import './news.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
-import { newsDate } from '@/lib/news-events';
+import { newsDate, onlyLiveNews } from '@/lib/news-events';
 import NewsletterSignup from '@/components/NewsletterSignup';
 
 export const metadata = {
@@ -18,10 +18,13 @@ export default async function NewsPage() {
   let dbError = false;
   try {
     const supabase = createClient();
-    const { data, error } = await supabase
-      .from('news')
-      .select('*')
-      .order('published_at', { ascending: false });
+    // onlyLiveNews() is required here: RLS alone lets signed-in staff see
+    // expired articles on the public page.
+    const { data, error } = await onlyLiveNews(
+      supabase
+        .from('news')
+        .select('*')
+    ).order('published_at', { ascending: false });
     if (error) dbError = true;
     else items = data || [];
   } catch {

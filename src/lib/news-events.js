@@ -61,6 +61,29 @@ export function eventTimeRange(start, end, allDay) {
   return s || 'Time TBA';
 }
 
+// ---------- News expiry ----------
+// A news row can carry an optional `expires_at`. Job-posting articles set it
+// from the application deadline; any article can use it.
+//
+// IMPORTANT: the RLS policy on `news` is NOT enough on its own. The public
+// pages read through the anon client *with cookies*, and the "staff write news"
+// policy is FOR ALL — which includes SELECT — so a signed-in staff member's
+// session makes expired rows visible again on the public pages. Every public
+// read of `news` must therefore apply this filter explicitly, exactly the way
+// /careers already guards `job_postings` with a deadline check.
+
+/** PostgREST filter: keep only news that has not expired. */
+export function onlyLiveNews(query) {
+  return query.or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
+}
+
+/** In-memory equivalent, for rows already fetched. */
+export function isNewsLive(row) {
+  if (!row?.expires_at) return true;
+  const t = new Date(row.expires_at);
+  return isNaN(t) ? true : t > new Date();
+}
+
 // "May 20, 2026" for news
 export function newsDate(dateStr) {
   if (!dateStr) return '';

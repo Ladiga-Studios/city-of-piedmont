@@ -3,18 +3,20 @@ import '../news.css';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
-import { newsDate } from '@/lib/news-events';
+import { newsDate, onlyLiveNews } from '@/lib/news-events';
 
 export const revalidate = 60;
 
 async function getArticle(slug) {
   try {
     const supabase = createClient();
-    const { data, error } = await supabase
-      .from('news')
-      .select('*')
-      .eq('slug', slug)
-      .maybeSingle();
+    // Expired articles 404 rather than staying reachable by direct link.
+    const { data, error } = await onlyLiveNews(
+      supabase
+        .from('news')
+        .select('*')
+        .eq('slug', slug)
+    ).maybeSingle();
     if (error) return null;
     return data;
   } catch {

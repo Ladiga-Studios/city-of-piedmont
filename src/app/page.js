@@ -6,7 +6,7 @@ import HeroSearch from '@/components/HeroSearch';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import TodayPanel from '@/components/TodayPanel';
 import { createClient } from '@/lib/supabase-server';
-import { newsDate, eventMonthAbbr, eventDayNum, eventTimeRange } from '@/lib/news-events';
+import { newsDate, eventMonthAbbr, eventDayNum, eventTimeRange, onlyLiveNews } from '@/lib/news-events';
 
 export const revalidate = 60;
 
@@ -78,7 +78,7 @@ export default async function Home() {
     todayStart.setHours(0, 0, 0, 0);
 
     const [newsRes, eventsRes] = await Promise.all([
-      supabase.from('news').select('*').order('published_at', { ascending: false }).limit(3),
+      onlyLiveNews(supabase.from('news').select('*')).order('published_at', { ascending: false }).limit(3),
       supabase.from('events').select('*').order('event_date', { ascending: true }),
     ]);
 

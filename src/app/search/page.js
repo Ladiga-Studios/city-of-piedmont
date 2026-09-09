@@ -3,6 +3,7 @@ import './search.css';
 import Link from 'next/link';
 import { staticEntries, searchEntries, TYPE_ORDER } from '@/lib/search';
 import { createClient } from '@/lib/supabase-server';
+import { onlyLiveNews } from '@/lib/news-events';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,7 +30,7 @@ async function runSearch(q) {
     const supabase = createClient();
     const like = `%${q}%`;
     const [newsRes, eventsRes, bizRes] = await Promise.all([
-      supabase.from('news').select('title, slug, body').or(`title.ilike.${like},body.ilike.${like}`).limit(20),
+      onlyLiveNews(supabase.from('news').select('title, slug, body')).or(`title.ilike.${like},body.ilike.${like}`).limit(20),
       supabase.from('events').select('title, location, description').or(`title.ilike.${like},location.ilike.${like},description.ilike.${like}`).limit(20),
       supabase.from('businesses').select('name, slug, tagline, category, description').eq('approved', true)
         .or(`name.ilike.${like},tagline.ilike.${like},category.ilike.${like},description.ilike.${like}`).limit(20),

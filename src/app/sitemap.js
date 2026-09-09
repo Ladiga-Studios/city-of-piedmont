@@ -1,5 +1,6 @@
 import { DEPARTMENTS } from '@/lib/departments';
 import { createClient } from '@/lib/supabase-server';
+import { isNewsLive } from '@/lib/news-events';
 
 const BASE = 'https://www.piedmontcity.org';
 
@@ -74,10 +75,10 @@ export default async function sitemap() {
 
     const { data: newsRows } = await supabase
       .from('news')
-      .select('slug, published_at')
+      .select('slug, published_at, expires_at')
       .not('slug', 'is', null);
     for (const n of newsRows || []) {
-      if (!n.slug) continue;
+      if (!n.slug || !isNewsLive(n)) continue;
       entries.push({
         url: `${BASE}/news/${n.slug}`,
         lastModified: n.published_at ? new Date(n.published_at) : now,

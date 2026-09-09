@@ -1,5 +1,65 @@
 # Update Notes
 
+## FIX — Expired news articles were visible to signed-in staff on the public site (this delivery)
+
+### Reported
+The Recreation Coordinator job announcement shows "Expired — hidden" in the News
+admin console but was still appearing on the live News page. On /careers the same
+posting shows expired and is correctly gone.
+
+### Cause
+Not a data problem — the article's `expires_at` is set correctly. The public pages
+were relying on Row Level Security alone to hide expired news, and RLS does not do
+the job here.
+
+The `news` table has two permissive policies, and Postgres OR's them together:
+
+    "public read news"   for select  using (expires_at is null or expires_at > now())
+    "staff write news"   for ALL     using (auth.role() = 'authenticated')
+
+`FOR ALL` includes SELECT. `createClient()` in `lib/supabase-server.js` uses the anon
+key **plus the request cookies**, and `/news` is a dynamic route, so when a signed-in
+staff member browses the public site their admin session travels with the request.
+The second policy then evaluates true and the expired row comes back.
+
+Residents were never seeing it. /careers was unaffected because `getOpenings()` has
+always carried an explicit application-level guard —
+`.filter((j) => j.deadline_date >= today)` — described in its own comment as
+"belt-and-braces". News had no equivalent. That asymmetry is the whole bug.
+
+### Fix
+Added the same belt-and-braces guard to news, in `src/lib/news-events.js`:
+
+    onlyLiveNews(query)   PostgREST filter: expires_at is null or in the future
+    isNewsLive(row)       in-memory equivalent for rows already fetched
+
+Applied to every public read of `news`:
+- `/news` list
+- homepage "City Bulletin" block
+- `/news/[slug]` — an expired article now 404s instead of staying live by direct link
+- `/api/search` and `/search`
+- `sitemap.xml`
+
+The homepage fix matters beyond visibility: `.limit(3)` previously ran *before* any
+expiry filtering, so an expired article consumed one of the three bulletin slots. The
+filter is now applied in the query, so three live articles are returned.
+
+RLS is deliberately left as-is: the admin console needs to read expired rows, which is
+exactly what the `FOR ALL` staff policy is for. The fix belongs at the app layer.
+
+### Verified
+`next build` compiles clean, 78/78 static pages generated. Generated query confirmed as
+`?select=*&or=(expires_at.is.null,expires_at.gt.<now>)&order=published_at.desc&limit=3`.
+
+### Files changed
+`src/lib/news-events.js`, `src/app/news/page.js`, `src/app/news/[slug]/page.js`,
+`src/app/page.js`, `src/app/search/page.js`, `src/app/api/search/route.js`,
+`src/app/sitemap.js`.
+
+---
+
+# Update Notes
+
 ## NEW — City Ordinances page; three ordinances moved off the old WordPress site (this delivery)
 
 ### The problem this fixes
