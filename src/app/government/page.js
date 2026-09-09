@@ -32,6 +32,11 @@ export default function Government() {
           <h3>Council Meeting Minutes</h3><p>Read and download official records of council proceedings.</p>
           <CardArrow />
         </Link>
+        <Link href="/government/ordinances" className="info-card">
+          <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 4v16M5 8l7-4 7 4M3 12l2-4 2 4a2 2 0 01-4 0zM17 12l2-4 2 4a2 2 0 01-4 0zM8 20h8"/></svg></span>
+          <h3>City Ordinances</h3><p>Recently adopted ordinances, summarized in plain language, with the signed PDFs.</p>
+          <CardArrow />
+        </Link>
         <Link href="/government/notices" className="info-card">
           <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 5h18M3 12h18M3 19h12M19 16l2 2-2 2"/></svg></span>
           <h3>Public Notices &amp; Bids</h3><p>Current public notices, bid requests, and legal announcements.</p>

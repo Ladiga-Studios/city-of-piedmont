@@ -1,5 +1,96 @@
 # Update Notes
 
+## NEW — City Ordinances page; three ordinances moved off the old WordPress site (this delivery)
+
+### The problem this fixes
+The three adopted ordinances (636, 639, 640) existed only as rows in `public_notices`
+pointing at `piedmontcity.org/wp-content/uploads/...` — the OLD WordPress install.
+Every ordinance link on the site was a dependency on a host that is going away, and
+residents got a bare PDF with no indication of what the ordinance actually says.
+
+### New page: /government/ordinances
+- Each ordinance rendered as a card: number, adopted date, what part of the code it
+  amends, a one-sentence summary, who it binds, the substantive requirements as
+  bullets, exceptions, penalties, and the signed PDF.
+- Real detail, not gloss: the $100 STR license cap, the $500,000 liability minimum,
+  two-per-bedroom-plus-two occupancy, the 15- and 30-day license suspensions under
+  639, the private-event carve-out in 640.
+- States plainly that the PDF is the official text and that this page is NOT the
+  complete Code of Ordinances — the Clerk holds that.
+- JSON-LD: `BreadcrumbList` plus a Schema.org `Legislation` entry per ordinance, each
+  with its adopted date, jurisdiction, and a link to the PDF.
+- Server component, zero client JS (209 B route). Jump links at the top; cards use
+  `scroll-margin-top` so an anchored card is not clipped.
+
+### PDFs now hosted here
+Added to `public/documents/` with descriptive filenames:
+- `ordinance-636-short-term-rentals.pdf`
+- `ordinance-639-prohibiting-thc-products.pdf`
+- `ordinance-640-brown-bagging-alcoholic-beverages.pdf`
+
+### Data lives in one file
+`src/lib/ordinances.js` holds the ORDINANCES array. To publish the next ordinance:
+drop the PDF in `public/documents/`, add one object to the top of the array. The page,
+the jump links, the sitemap, and site search all read from it — no other edits.
+
+### Wired in
+- Government nav dropdown, Government index card grid, footer.
+- `sitemap.js` (`/government/ordinances`, monthly, 0.6).
+- Site search: a new `Ordinance` result type, ordered after Departments. Entries are
+  generated per ordinance and deep-link to the anchor, so "airbnb" lands on 636 and
+  "delta 8" lands on 639 rather than on a generic page. Verified against the running
+  build.
+- `/residents#permits`: new Short-Term Rentals card (license, insurance, 24/7 contact,
+  occupancy, who to call), plus ordinance links from the Business License and Zoning
+  cards.
+
+### Database — ACTION REQUIRED
+`supabase-ordinances-local-pdfs.sql` (run once, after deploy) repoints the three
+`public_notices` rows at the local PDFs and writes each file's SHA-256.
+
+The original Fangorn backfill anchored these three records using the bytes of the
+WordPress-hosted files. The files supplied for this delivery hash to:
+- 636 `c94597067808d0c9ade16bb0c5ab55300374fa2ae5e872829030fd5b3351262b`
+- 639 `1f24a35c2df196d6e1e65d2cfef16ba54d79632bfad1f1fe5a4ee5a4252c4d09`
+- 640 `7799b69eb4eac8e757e1b71e1c6baf060315c73d6594749413dc0a7efdf9ac4b`
+
+If a stored fingerprint differs, the script flips that row back to `anchor_status =
+'pending'` so `npm run anchor` re-anchors it. This matters: the whole promise on
+/government/records is that a resident can re-hash a downloaded PDF and have it match.
+A stale fingerprint would break that silently. Rows whose hash already matches are
+left anchored and untouched.
+
+`supabase-add-public-notices.sql` seed block updated to the local paths for fresh
+installs.
+
+### Two things flagged for the city
+- **Ordinance 640 has a drafting error.** Subsection (c)(1) applies the private-event
+  exception to "subsections (a)(1) and (2)", but (a) has no numbered subsections — the
+  brown-bagging prohibitions are at (b)(1) and (2). As written the exception points at
+  nothing. The page summarizes it as applying to the brown-bagging ban, which is
+  clearly the intent, but this warrants a corrective amendment.
+- **No scroll reveals on this page**, matching the site-wide decision recorded in
+  `ClientEffects.jsx` rather than the default build standard. Say the word and the
+  local IntersectionObserver pattern from `NoticesList.jsx` can be added.
+
+### Verified against a production build
+`next build` compiles clean; `/government/ordinances` returns 200 with one `<h1>`, no
+skipped heading levels, correct canonical/title/description, all three PDFs serving as
+`application/pdf`, the sitemap entry present, and search returning the right ordinance
+for airbnb / delta 8 / brown bagging / thc.
+
+### Files
+- Added: `src/app/government/ordinances/page.js`, `src/app/government/ordinances/ordinances.css`,
+  `src/lib/ordinances.js`, `supabase-ordinances-local-pdfs.sql`, and the three PDFs.
+- Changed: `src/lib/site.js`, `src/lib/search.js`, `src/lib/search-index.js`,
+  `src/app/sitemap.js`, `src/app/government/page.js`, `src/app/residents/page.js`,
+  `src/app/search/page.js`, `src/components/Footer.jsx`,
+  `supabase-add-public-notices.sql`.
+
+---
+
+# Update Notes
+
 ## NEW — About page: modern photo for "Schools, Industry & Today" (this delivery)
 - The "Schools, Industry & Today" block on /about swapped the historic Frances E. Willard School photo for a modern-day shot of downtown Piedmont (`downtown-2.jpg/webp`, the storefront with the vintage Coca-Cola mural), caption "Downtown Piedmont today" — matching the block's modern-era content. Willard School still appears in the era gallery on /history.
 - File changed: `src/app/about/page.js`.

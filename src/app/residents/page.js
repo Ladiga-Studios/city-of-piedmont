@@ -206,6 +206,7 @@ export default function Residents() {
                 <div className="rp-card-links">
                   <a href="/documents/zoning-map.pdf" target="_blank" rel="noopener noreferrer">Zoning map (PDF) &rarr;</a>
                   <a href="/documents/zoning-ordinance-2004.pdf" target="_blank" rel="noopener noreferrer">Zoning ordinance (PDF) &rarr;</a>
+                  <a href="/government/ordinances">Recently adopted ordinances &rarr;</a>
                 </div>
               </div>
 
@@ -234,6 +235,23 @@ export default function Residents() {
                 <div className="rp-card-links">
                   <a href="/documents/business-license-application.pdf" target="_blank" rel="noopener noreferrer">Business license application (PDF) &rarr;</a>
                   <a href="/departments/revenue">Revenue department &rarr;</a>
+                  <a href="/government/ordinances#ordinance-639">Ordinance 639: prohibited products &rarr;</a>
+                </div>
+              </div>
+
+              <div className="rp-card">
+                <h3>Short-Term Rentals</h3>
+                <p>Renting a house or room for less than 30 days requires a city STR license under Ordinance 636. Get licensed before you list.</p>
+                <ul>
+                  <li><span className="rp-k">License</span><span className="rp-v">Annual, per unit, up to $100</span></li>
+                  <li><span className="rp-k">Insurance</span><span className="rp-v">$500,000 general liability minimum</span></li>
+                  <li><span className="rp-k">Contact required</span><span className="rp-v">24/7, on site within 12 hours</span></li>
+                  <li><span className="rp-k">Occupancy</span><span className="rp-v">Two per bedroom, plus two</span></li>
+                  <li><span className="rp-k">Apply</span><span className="rp-v">Business License Division, <a href="tel:2564473564">256-447-3564</a></span></li>
+                </ul>
+                <div className="rp-card-links">
+                  <a href="/government/ordinances#ordinance-636">Ordinance 636: short-term rentals &rarr;</a>
+                  <a href="/documents/ordinance-636-short-term-rentals.pdf" target="_blank" rel="noopener noreferrer">Full ordinance (PDF) &rarr;</a>
                 </div>
               </div>
             </div>

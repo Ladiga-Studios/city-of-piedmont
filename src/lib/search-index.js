@@ -15,6 +15,8 @@ export const STATIC_INDEX = [
     keywords: 'mayor council members elected officials district' },
   { title: 'Council Minutes & Agendas', href: '/government/minutes', type: 'Page', summary: 'Meeting agendas and minutes from the city council.',
     keywords: 'minutes agendas council meeting records documents' },
+  { title: 'City Ordinances', href: '/government/ordinances', type: 'Page', summary: 'Recently adopted city ordinances with plain-language summaries and the signed PDFs.',
+    keywords: 'ordinance ordinances city code law laws rules regulations adopted council short term rental thc alcohol brown bagging' },
   { title: 'Public Notices & Bids', href: '/government/notices', type: 'Page', summary: 'Public notices, legal notices, and bid opportunities.',
     keywords: 'notices bids public legal rfp proposals procurement' },
   { title: 'About Piedmont', href: '/about', type: 'Page', summary: 'About the City of Piedmont, Alabama.',

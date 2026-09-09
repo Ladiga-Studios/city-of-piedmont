@@ -13,6 +13,7 @@ const STATIC = [
   { path: '/government', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/government/council', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/government/minutes', priority: 0.6, changeFrequency: 'weekly' },
+  { path: '/government/ordinances', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/government/notices', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/government/records', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/parks', priority: 0.8, changeFrequency: 'monthly' },

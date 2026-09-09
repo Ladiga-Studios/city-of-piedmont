@@ -1,0 +1,209 @@
+/* ============================================================
+   ADOPTED ORDINANCES
+   Uses the Warm Stone & Sunset tokens from globals.css.
+   ============================================================ */
+
+.ord-wrap { max-width: 880px; }
+
+/* screen-reader-only text (no global utility exists in this project) */
+.ord-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- jump links ---------- */
+.ord-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s3);
+  border-bottom: 2px solid var(--line);
+}
+.ord-toc-label {
+  width: 100%;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .2rem;
+}
+.ord-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: .92rem;
+  font-weight: 600;
+  transition: color .2s var(--ease), border-color .2s var(--ease),
+              background-color .2s var(--ease), transform .2s var(--ease);
+}
+.ord-toc a:hover,
+.ord-toc a:focus-visible {
+  color: var(--sunset);
+  border-color: var(--sunset);
+  background: rgba(157, 37, 64, .06);
+  transform: translateY(-1px);
+}
+
+/* ---------- ordinance card ---------- */
+.ord-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  margin: 0;
+  padding: 0;
+}
+
+.ord-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--sunset);
+  border-radius: var(--radius);
+  padding: var(--s3) clamp(1.1rem, 3vw, 2rem);
+  /* clears the fixed page header when a jump link lands here */
+  scroll-margin-top: 24px;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.ord-card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); }
+.ord-card:target { box-shadow: 0 0 0 3px rgba(157, 37, 64, .18); }
+
+.ord-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--line);
+}
+.ord-num {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  padding: .5rem .6rem;
+  border-radius: 10px;
+  background: var(--umber-800);
+  color: var(--paper);
+  line-height: 1.1;
+}
+.ord-num small {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.ord-num b { font-family: var(--display); font-size: 1.5rem; font-weight: 600; }
+
+.ord-headings { min-width: 0; }
+.ord-card h2 {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 .35rem;
+}
+.ord-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .9rem;
+  font-size: .82rem;
+  color: var(--muted);
+}
+.ord-meta span { display: inline-flex; align-items: center; gap: .35rem; }
+.ord-meta span + span::before {
+  content: "";
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--stone-300);
+  margin-right: .5rem;
+}
+
+.ord-summary {
+  margin: var(--s2) 0 0;
+  font-size: 1.05rem;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+/* ---------- body blocks ---------- */
+.ord-block { margin-top: var(--s3); }
+.ord-block h3 {
+  font-family: var(--body);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sunset);
+  margin: 0 0 .5rem;
+}
+.ord-block p { color: var(--ink-2); margin: 0; }
+.ord-block ul { margin: 0 0 0 1.1rem; color: var(--ink-2); }
+.ord-block li { margin-bottom: .5rem; }
+.ord-block li::marker { color: var(--amber); }
+
+.ord-block.penalty {
+  background: var(--paper-2);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.ord-block.penalty h3 { color: var(--ink); }
+
+/* ---------- download row ---------- */
+.ord-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: var(--s3);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+}
+.ord-dl { padding: .7rem 1.2rem; font-size: .95rem; }
+.ord-foot-note { font-size: .85rem; color: var(--muted); margin: 0; }
+
+/* ---------- related documents ---------- */
+.ord-related {
+  margin-top: var(--s5);
+  padding-top: var(--s3);
+  border-top: 2px solid var(--line);
+}
+.ord-related h2 { font-size: 1.5rem; margin-bottom: .6rem; }
+.ord-related p { color: var(--ink-2); margin-bottom: 1rem; }
+.ord-related ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin: 0; padding: 0; }
+.ord-related a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--sunset);
+  font-weight: 600;
+  transition: color .2s var(--ease), transform .2s var(--ease);
+}
+.ord-related a:hover,
+.ord-related a:focus-visible { color: var(--sunset-dark); transform: translateX(2px); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .ord-head { flex-direction: column; gap: .8rem; }
+  .ord-num { flex-direction: row; gap: .5rem; min-width: 0; align-self: flex-start; }
+  .ord-dl { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ord-card, .ord-toc a, .ord-related a { transition: none; }
+  .ord-toc a:hover, .ord-related a:hover { transform: none; }
+}

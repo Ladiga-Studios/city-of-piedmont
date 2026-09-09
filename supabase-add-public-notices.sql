@@ -60,21 +60,20 @@ create policy "staff write public_notices"
 --     using (bucket_id = 'notices-files');
 
 -- ============================================================
--- OPTIONAL: seed the three notices currently on the live site.
--- These reference the PDFs already hosted on piedmontcity.org,
--- so they work immediately even before anything is re-uploaded.
--- Re-upload them through /admin/notices when convenient to move
--- the files into your own Storage bucket.
+-- OPTIONAL: seed the three ordinances currently on the site.
+-- These reference the signed PDFs shipped with the site under
+-- public/documents/, so they work on a fresh install with no
+-- Storage upload needed.
 -- ============================================================
 insert into public.public_notices (title, category, posted_date, file_url, file_path)
 values
   ('Ordinance 640 — Prohibiting Brown Bagging Alcoholic Beverages', 'notice', '2025-04-15',
-   'https://www.piedmontcity.org/wp-content/uploads/2025/04/ORDINANCE-640-PROHIBITING-BROWN-BAGGING-ALCOHOLIC-BEVERAGES.pdf',
-   'external/ORDINANCE-640-PROHIBITING-BROWN-BAGGING-ALCOHOLIC-BEVERAGES.pdf'),
+   'https://www.piedmontcity.org/documents/ordinance-640-brown-bagging-alcoholic-beverages.pdf',
+   'documents/ordinance-640-brown-bagging-alcoholic-beverages.pdf'),
   ('Ordinance 639 — Prohibiting THC Products', 'notice', '2025-04-15',
-   'https://www.piedmontcity.org/wp-content/uploads/2025/04/ORDINANCE-639-PROHIBITING-THC-PRODUCTS.pdf',
-   'external/ORDINANCE-639-PROHIBITING-THC-PRODUCTS.pdf'),
+   'https://www.piedmontcity.org/documents/ordinance-639-prohibiting-thc-products.pdf',
+   'documents/ordinance-639-prohibiting-thc-products.pdf'),
   ('Ordinance 636 — Short-Term Rentals', 'notice', '2023-02-07',
-   'https://www.piedmontcity.org/wp-content/uploads/2023/03/ORDINANCE-636-SHORT-TERM-RENTALS.pdf',
-   'external/ORDINANCE-636-SHORT-TERM-RENTALS.pdf')
+   'https://www.piedmontcity.org/documents/ordinance-636-short-term-rentals.pdf',
+   'documents/ordinance-636-short-term-rentals.pdf')
 on conflict do nothing;

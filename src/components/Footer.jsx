@@ -35,6 +35,7 @@ export default function Footer() {
             <ul>
               <li><Link href="/government/council">Mayor &amp; Council</Link></li>
               <li><Link href="/government/minutes">Agendas &amp; Minutes</Link></li>
+              <li><Link href="/government/ordinances">City Ordinances</Link></li>
               <li><Link href="/government/notices">Public Notices &amp; Bids</Link></li>
               <li><Link href="/departments">Departments</Link></li>
             </ul>

@@ -19,6 +19,7 @@ export const NAV = [
     children: [
       { label: 'Mayor & City Council', href: '/government/council' },
       { label: 'Council Meeting Minutes', href: '/government/minutes' },
+      { label: 'City Ordinances', href: '/government/ordinances' },
       { label: 'Public Notices & Bids', href: '/government/notices' },
     ],
   },

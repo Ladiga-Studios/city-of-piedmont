@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 const TYPE_LABEL = {
-  Page: 'Pages', Department: 'Departments', Park: 'Parks & Recreation',
+  Page: 'Pages', Department: 'Departments', Ordinance: 'Ordinances', Park: 'Parks & Recreation',
   News: 'News', Event: 'Events', Business: 'Local Business',
 };
 

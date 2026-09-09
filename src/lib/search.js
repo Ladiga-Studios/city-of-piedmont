@@ -8,6 +8,7 @@
 
 import { STATIC_INDEX } from './search-index';
 import { DEPARTMENTS } from './departments';
+import { ORDINANCES } from './ordinances';
 
 // Turn the departments data into searchable index entries.
 export function departmentEntries() {
@@ -25,9 +26,22 @@ export function departmentEntries() {
   });
 }
 
-// All static, non-database entries (pages + parks + departments).
+// Turn the adopted ordinances into searchable index entries, so a resident
+// searching "airbnb" or "delta 8" lands on the right ordinance, not just the
+// ordinances page. Each result deep-links to that ordinance's anchor.
+export function ordinanceEntries() {
+  return ORDINANCES.map((o) => ({
+    title: `Ordinance ${o.number} \u2014 ${o.title}`,
+    href: `/government/ordinances#${o.id}`,
+    type: 'Ordinance',
+    summary: o.summary,
+    keywords: `ordinance ${o.number} ${o.title} ${o.keywords}`,
+  }));
+}
+
+// All static, non-database entries (pages + parks + departments + ordinances).
 export function staticEntries() {
-  return [...STATIC_INDEX, ...departmentEntries()];
+  return [...STATIC_INDEX, ...departmentEntries(), ...ordinanceEntries()];
 }
 
 function norm(s) {
@@ -75,4 +89,4 @@ export function searchEntries(entries, query, limit = 50) {
 }
 
 // Order in which result groups appear on the results page.
-export const TYPE_ORDER = ['Page', 'Department', 'Park', 'News', 'Event', 'Business'];
+export const TYPE_ORDER = ['Page', 'Department', 'Ordinance', 'Park', 'News', 'Event', 'Business'];
