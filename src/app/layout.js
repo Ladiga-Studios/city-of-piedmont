@@ -2,6 +2,7 @@ import './globals.css';
 import './chrome.css';
 import './extras.css';
 import { Fraunces, Source_Sans_3 } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import ClientEffects from '@/components/ClientEffects';
 import SmoothScroll from '@/components/SmoothScroll';
 import AlertBarServer from '@/components/AlertBarServer';
@@ -178,6 +179,7 @@ export default function RootLayout({ children }) {
           </SiteChrome>
           <BackToTop />
         </ClientEffects>
+        <Analytics />
       </body>
     </html>
   );
