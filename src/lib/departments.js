@@ -179,27 +179,9 @@ export const DEPARTMENTS = [
         phones: [{ label: 'Phone', number: '(256) 447-6656' }],
       },
     ],
-    downloads: [
-      { label: 'Application for Residential Utility Services', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/application_for_util.pdf' },
-      { label: 'City of Piedmont Utilities Standard Service Policy', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/city_of_piedmont_uti.pdf' },
-      { label: 'Excess Flow Valves (EFV) for Natural Gas Customers', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/excess_flow_valves_city_of_piedmont.pdf' },
-    ],
-    downloadGroups: [
-      {
-        heading: 'Water Quality Reports',
-        items: [
-          { label: 'Water Quality Report 2024', href: 'https://www.piedmontcity.org/wp-content/uploads/2025/06/PIEDMONT-2024-ANNUAL-DRINKING-WATER-QUALITY-REPORT.pdf' },
-          { label: 'Water Quality Report 2023', href: 'https://www.piedmontcity.org/wp-content/uploads/2024/06/2023-WATER-QUALITY-REPORT.pdf' },
-          { label: 'Water Quality Report 2022', href: 'https://www.piedmontcity.org/wp-content/uploads/2023/06/2022-ANNUAL-DRINKING-WATER-QUALITY-REPORT.pdf' },
-          { label: 'Water Quality Report 2021', href: 'https://www.piedmontcity.org/wp-content/uploads/2023/04/2021-ANNUAL-DRINKING-WATER-QUALITY-REPORT.pdf' },
-          { label: 'Water Quality Report 2020', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/08/2020-WATER-QUALITY-REPORT.pdf' },
-          { label: 'Water Quality Report 2019', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/water_quality_control_2019.pdf' },
-          { label: 'Water Quality Report 2018', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/water_quality_control_2018.pdf' },
-          { label: 'Water Quality Report 2017', href: 'https://www.piedmontcity.org/wp-content/uploads/2021/05/water_quality_control_2017.pdf' },
-          { label: 'PFOS/PFAS Results', href: 'https://www.piedmontcity.org/wp-content/uploads/2025/06/PIEDMONT-PFAS-PFOS-RESULTS.pdf' },
-        ],
-      },
-    ],
+    // Forms and water quality reports are managed in the admin console
+    // (/admin/documents), under the sections "Service Forms & Applications"
+    // and "Water Quality Reports". They show here and on /residents.
     links: [
       { label: 'Water Service Line Report', href: 'https://www.piedmontcity.org/service-line/' },
     ],
@@ -494,8 +476,6 @@ export const DEPARTMENTS = [
       { name: 'Cathy Posey', role: 'Clerk' },
     ],
     links: [
-      { label: 'Story Time Program (toddlers & preschoolers)', href: 'https://www.piedmontcity.org/wp-content/uploads/2024/08/2024-2025-PIEDMONT-PUBLIC-LIBRARY-STORY-TIME-SCHEDULE.pdf' },
-      { label: 'Summer Reading Program', href: 'https://www.piedmontcity.org/events/library-summer-reading-program-2024/' },
       { label: 'Library Catalog', href: 'https://piedmont.bywatersolutions.com/' },
     ],
     services: [

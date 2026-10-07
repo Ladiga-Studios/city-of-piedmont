@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { DEPARTMENTS, getDepartment } from '@/lib/departments';
 import { getDepartmentStaff, getDepartmentDocuments, mergeDownloadGroups } from '@/lib/people';
 import ParkMap from '@/components/ParkMap';
+import { headingId, fileTypeLabel } from '@/lib/document-sections';
 
 // Revalidate so staff and document changes made in the admin console
 // show up on the public page within a minute.
@@ -51,14 +52,15 @@ function StaffList({ staff }) {
 }
 
 function DownloadLink({ label, href }) {
-  const isExternalDoc = /\.(pdf|doc|docx)$/i.test(href);
+  const type = fileTypeLabel(href);
+  const isExternalDoc = type && ['PDF', 'DOC', 'DOCX', 'XLS', 'XLSX'].includes(type);
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="dd-download">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
         <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
       </svg>
       <span>{label}</span>
-      {isExternalDoc && <span className="dd-download-type">{href.split('.').pop().toUpperCase()}</span>}
+      {isExternalDoc && <span className="dd-download-type">{type}</span>}
     </a>
   );
 }
@@ -228,7 +230,7 @@ export default async function DepartmentPage({ params }) {
 
           {/* 10: Download groups (static + admin uploads from /admin/documents) */}
           {downloadGroups && downloadGroups.map((g, i) => (
-            <div className="dd-block" key={i}>
+            <div className="dd-block" key={i} id={headingId(g.heading)}>
               <h2>{g.heading}</h2>
               <div className="dd-downloads">
                 {g.items.map((dl, j) => <DownloadLink key={j} {...dl} />)}

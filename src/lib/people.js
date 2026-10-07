@@ -5,6 +5,7 @@
 // the static data in departments.js and the council page.
 
 import { createClient } from '@/lib/supabase-server';
+import { sameHeading } from '@/lib/document-sections';
 
 /**
  * Mayor + council from the `people` table.
@@ -64,9 +65,10 @@ export async function getDepartmentDocuments(slug) {
     const supabase = createClient();
     const { data, error } = await supabase
       .from('city_documents')
-      .select('title, group_heading, file_url, posted_date')
+      .select('title, group_heading, file_url, posted_date, created_at')
       .eq('department_slug', slug)
-      .order('posted_date', { ascending: false });
+      .order('posted_date', { ascending: false })
+      .order('created_at', { ascending: false });
     if (error || !data || data.length === 0) return [];
     const byHeading = new Map();
     for (const doc of data) {
@@ -90,11 +92,18 @@ export function mergeDownloadGroups(staticGroups = [], uploadedGroups = []) {
   if (!uploadedGroups.length) return staticGroups;
   const merged = staticGroups.map((g) => ({ heading: g.heading, items: [...g.items] }));
   for (const up of uploadedGroups) {
-    const match = merged.find(
-      (g) => g.heading.trim().toLowerCase() === up.heading.trim().toLowerCase()
-    );
+    const match = merged.find((g) => sameHeading(g.heading, up.heading));
     if (match) match.items = [...up.items, ...match.items];
     else merged.push(up);
   }
   return merged;
+}
+
+/**
+ * One named section of a department's uploaded documents, e.g. the
+ * Water & Gas "Water Quality Reports". Returns [{ label, href }].
+ */
+export async function getDocumentSection(slug, heading) {
+  const groups = await getDepartmentDocuments(slug);
+  return groups.find((g) => sameHeading(g.heading, heading))?.items || [];
 }

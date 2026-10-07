@@ -1,6 +1,10 @@
 import '../pages.css';
 import './residents.css';
 import Link from 'next/link';
+import { getDocumentSection } from '@/lib/people';
+import {
+  WATER_FORMS_SECTION, WATER_QUALITY_SECTION, headingId, fileTypeLabel,
+} from '@/lib/document-sections';
 
 export const metadata = {
   title: 'Residents',
@@ -10,7 +14,32 @@ export const metadata = {
 
 const PAY_BILL = 'https://piedmontcity.payacp.com/home';
 
-export default function Residents() {
+// Water & Gas documents come from the admin console (/admin/documents),
+// so refresh within a minute of staff posting or removing one.
+export const revalidate = 60;
+
+// How many water quality documents to show on the card before linking
+// to the full list on the Water & Gas page.
+const WATER_QUALITY_LIMIT = 3;
+
+function DocLink({ label, href }) {
+  const type = fileTypeLabel(href);
+  const showType = type && !label.toUpperCase().includes(`(${type})`);
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {label}{showType ? ` (${type})` : ''} &rarr;
+    </a>
+  );
+}
+
+export default async function Residents() {
+  const [serviceForms, waterQualityDocs] = await Promise.all([
+    getDocumentSection('water-gas', WATER_FORMS_SECTION),
+    getDocumentSection('water-gas', WATER_QUALITY_SECTION),
+  ]);
+  const waterQualityShown = waterQualityDocs.slice(0, WATER_QUALITY_LIMIT);
+  const waterQualityMore = waterQualityDocs.length > WATER_QUALITY_LIMIT;
+
   return (
     <>
       <section className="page-hero">
@@ -123,10 +152,11 @@ export default function Residents() {
                   <li><span className="rp-k">Hours</span><span className="rp-v">Mon–Fri, 8am–5pm</span></li>
                   <li><span className="rp-k">Phone</span><span className="rp-v"><a href="tel:2564473560">256-447-3560</a></span></li>
                 </ul>
-                <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2021/05/application_for_util.pdf" target="_blank" rel="noopener noreferrer">Residential service application (PDF) &rarr;</a>
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2021/05/city_of_piedmont_uti.pdf" target="_blank" rel="noopener noreferrer">Standard service policy (PDF) &rarr;</a>
-                </div>
+                {serviceForms.length > 0 && (
+                  <div className="rp-card-links">
+                    {serviceForms.map((doc) => <DocLink key={doc.href} {...doc} />)}
+                  </div>
+                )}
               </div>
 
               <div className="rp-card">
@@ -160,10 +190,16 @@ export default function Residents() {
                   <li><span className="rp-k">Plant</span><span className="rp-v">1739 US Hwy 278 E</span></li>
                   <li><span className="rp-k">Phone</span><span className="rp-v"><a href="tel:2564476656">256-447-6656</a></span></li>
                 </ul>
-                <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2025/06/PIEDMONT-2024-ANNUAL-DRINKING-WATER-QUALITY-REPORT.pdf" target="_blank" rel="noopener noreferrer">2024 Water Quality Report (PDF) &rarr;</a>
-                  <a href="https://www.piedmontcity.org/wp-content/uploads/2025/06/PIEDMONT-PFAS-PFOS-RESULTS.pdf" target="_blank" rel="noopener noreferrer">PFAS/PFOS results (PDF) &rarr;</a>
-                </div>
+                {waterQualityShown.length > 0 && (
+                  <div className="rp-card-links">
+                    {waterQualityShown.map((doc) => <DocLink key={doc.href} {...doc} />)}
+                    {waterQualityMore && (
+                      <Link href={`/departments/water-gas#${headingId(WATER_QUALITY_SECTION)}`}>
+                        All water quality reports &rarr;
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -342,7 +378,7 @@ export default function Residents() {
                   <li><span className="rp-k">Hours</span><span className="rp-v">Confirm with library <span className="rp-placeholder">verify</span></span></li>
                 </ul>
                 <div className="rp-card-links">
-                  <a href="https://www.piedmontcity.org/departments/library/" target="_blank" rel="noopener noreferrer">Library page &rarr;</a>
+                  <Link href="/departments/public-library">Library page &rarr;</Link>
                 </div>
               </div>
 
