@@ -178,6 +178,8 @@ export default function RootLayout({ children }) {
           </SiteChrome>
           <BackToTop />
         </ClientEffects>
+        {/* Cloudflare Web Analytics (cookieless visitor counts, read by the Ladiga Studios console) */}
+        <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "98b8c47573c0454e9b402d6e1fc76622"}'></script>
       </body>
     </html>
   );
