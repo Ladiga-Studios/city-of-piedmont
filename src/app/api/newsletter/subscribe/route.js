@@ -12,6 +12,7 @@
 
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
+import { checkTurnstile, clientIp } from '@/lib/turnstile';
 
 export const runtime = 'nodejs';
 
@@ -28,6 +29,15 @@ export async function POST(request) {
   const email = String(body?.email || '').trim().toLowerCase();
   if (!email || !EMAIL_RE.test(email) || email.length > 254) {
     return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+  }
+
+  // Cloudflare Turnstile, before anything is written. Fails open if the
+  // verifier cannot be reached.
+  if (!(await checkTurnstile(body?.['cf-turnstile-response'], clientIp(request)))) {
+    return NextResponse.json(
+      { error: 'Please finish the quick security check above the button, then try again.' },
+      { status: 400 }
+    );
   }
 
   try {

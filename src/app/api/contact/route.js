@@ -6,6 +6,7 @@
 
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { checkTurnstile, clientIp } from '@/lib/turnstile';
 
 export const runtime = 'nodejs';
 
@@ -38,6 +39,14 @@ export async function POST(request) {
 
   if (!name || !message || !EMAIL_RE.test(email)) {
     return NextResponse.json({ ok: false, error: 'Please complete every field.' }, { status: 400 });
+  }
+
+  // Cloudflare Turnstile (fails open if the verifier cannot be reached).
+  if (!(await checkTurnstile(body?.['cf-turnstile-response'], clientIp(request)))) {
+    return NextResponse.json(
+      { ok: false, error: 'Please finish the quick security check above the button, then send again, or call 256-447-3560.' },
+      { status: 400 }
+    );
   }
 
   const to = process.env.CONTACT_TO || 'info@piedmontcity.org';

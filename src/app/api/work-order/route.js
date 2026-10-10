@@ -13,6 +13,7 @@
 
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { checkTurnstile, clientIp } from '@/lib/turnstile';
 
 export const runtime = 'nodejs';
 
@@ -139,6 +140,18 @@ export async function POST(request) {
   }
 
   fields.hasPhoto = attachments.length > 0;
+
+  // Cloudflare Turnstile, after validation and before the email goes out.
+  // Fails open if the verifier cannot be reached.
+  if (!(await checkTurnstile(form.get('cf-turnstile-response'), clientIp(request)))) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'Please finish the quick security check above the button, then submit again, or call the Administration Office at 256-447-3560.',
+      },
+      { status: 400 }
+    );
+  }
 
   const to = process.env.WORK_ORDER_TO || 'payments@piedmontcity.org';
   const from =

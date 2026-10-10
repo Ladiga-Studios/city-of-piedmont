@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Turnstile, resetTurnstile } from './Turnstile';
 
 /**
  * Newsletter subscribe form. Posts the email to /api/newsletter/subscribe.
@@ -23,13 +24,15 @@ export default function NewsletterSignup({ variant = 'panel', heading, blurb }) 
     const value = email.trim();
     if (!value) { setStatus('error'); setMessage('Please enter your email address.'); return; }
 
+    const form = e.currentTarget;
+    const turnstileToken = String(new FormData(form).get('cf-turnstile-response') || '');
     setStatus('loading');
     setMessage('');
     try {
       const res = await fetch('/api/newsletter/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: value }),
+        body: JSON.stringify({ email: value, 'cf-turnstile-response': turnstileToken }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -45,6 +48,9 @@ export default function NewsletterSignup({ variant = 'panel', heading, blurb }) 
     } catch {
       setStatus('error');
       setMessage('Couldn\u2019t reach the server. Please try again.');
+    } finally {
+      // Turnstile tokens are single use, so get a fresh one after every attempt.
+      resetTurnstile(form);
     }
   }
 
@@ -70,6 +76,7 @@ export default function NewsletterSignup({ variant = 'panel', heading, blurb }) 
         </p>
       ) : (
         <form className="nl-form" onSubmit={submit} noValidate>
+          <Turnstile theme="light" style={{ marginBottom: '.6rem' }} />
           <div className="nl-field">
             <input
               type="email"

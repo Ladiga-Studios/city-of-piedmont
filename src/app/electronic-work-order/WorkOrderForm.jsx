@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useToast } from '@/components/ClientEffects';
+import { Turnstile, resetTurnstile } from '@/components/Turnstile';
 
 // Departments a work order can be routed to. Edit this list as needed —
 // it only affects this form.
@@ -76,6 +77,10 @@ export default function WorkOrderForm() {
       const data = new FormData(f);
       const res = await fetch('/api/work-order', { method: 'POST', body: data });
       const out = await res.json().catch(() => ({}));
+      if (res.status === 400 && out.error) {
+        toast('Could not submit', out.error, 'error');
+        return;
+      }
       if (!res.ok || !out.ok) throw new Error(out.error || 'Send failed');
       toast('Work order submitted', 'It has been emailed to the Administration Office.');
       f.reset();
@@ -88,6 +93,8 @@ export default function WorkOrderForm() {
         'error'
       );
     } finally {
+      // Turnstile tokens are single use, so get a fresh one after every attempt.
+      resetTurnstile(f);
       setSending(false);
     }
   }
@@ -162,6 +169,8 @@ export default function WorkOrderForm() {
           {errs.requestedBy && <span className="err">{errs.requestedBy}</span>}
         </div>
       </div>
+
+      <Turnstile theme="light" style={{ marginTop: '1.4rem' }} />
 
       <button className="btn btn-primary wo-submit" type="submit" disabled={sending}>
         {sending ? 'Submitting…' : 'Submit Work Order'}

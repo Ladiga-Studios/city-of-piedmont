@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useToast } from './ClientEffects';
+import { Turnstile, resetTurnstile } from './Turnstile';
 
 export default function ContactForm() {
   const toast = useToast();
@@ -27,15 +28,22 @@ export default function ContactForm() {
           name: f.name.value.trim(),
           email: f.email.value.trim(),
           message: f.message.value.trim(),
+          'cf-turnstile-response': String(new FormData(f).get('cf-turnstile-response') || ''),
         }),
       });
       const out = await res.json().catch(() => ({}));
+      if (res.status === 400 && out.error) {
+        toast('Could not send', out.error, 'error');
+        return;
+      }
       if (!res.ok || !out.ok) throw new Error(out.error || 'send failed');
       toast('Message sent', "We'll get back to you soon.");
       f.reset();
     } catch {
       toast('Could not send', 'Your message did not go through. Please try again or call 256-447-3560.', 'error');
     } finally {
+      // Turnstile tokens are single use, so get a fresh one after every attempt.
+      resetTurnstile(f);
       setSending(false);
     }
   }
@@ -57,6 +65,7 @@ export default function ContactForm() {
         <textarea id="message" name="message" rows="5" />
         {errs.message && <span className="err">{errs.message}</span>}
       </div>
+      <Turnstile theme="light" style={{ marginBottom: '1rem' }} />
       <button className="btn btn-primary" type="submit" disabled={sending}>
         {sending ? 'Sending…' : 'Send Message'}
       </button>
