@@ -2,12 +2,14 @@ import '../../pages.css';
 import './park-detail.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terrapin Creek',
+export const metadata = pageMeta({
+  title: "Terrapin Creek",
   description:
-    'Terrapin Creek near Piedmont, Alabama: clear water for paddling, fishing, and relaxing in the Appalachian foothills. Public boat launch, local outfitters, and shuttle service.',
-};
+    "Terrapin Creek near Piedmont, Alabama: clear water for paddling and fishing in the Appalachian foothills, with a public boat launch and local outfitters.",
+  path: "/parks/terrapin-creek",
+});
 
 // Terrapin Creek public boat launch / fishing area, Co Rd 8
 const LAT = 33.9791012;

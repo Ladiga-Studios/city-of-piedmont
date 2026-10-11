@@ -95,6 +95,9 @@ export const DEPARTMENTS = [
     slug: 'power-light',
     name: 'Power & Light',
     short: 'Piedmont\u2019s municipal electric utility, one of the oldest continuing businesses in the city.',
+    // Search-result summary (70-160 characters); the intro below runs longer.
+    metaDescription:
+      'Piedmont Power & Light, the city\u2019s electric utility: residential and commercial service, new connections, street lighting and power outage response.',
     intro:
       'Piedmont Power is one of the oldest continuing businesses in Piedmont.',
     about: [
@@ -160,6 +163,9 @@ export const DEPARTMENTS = [
     slug: 'water-gas',
     name: 'Water & Gas',
     short: 'Water, natural gas, and sewer service, billing, and connections.',
+    // Search-result summary (70-160 characters); the intro below runs longer.
+    metaDescription:
+      'Piedmont Water Works, Gas and Sewer: water, natural gas and sewer service, new connections, billing and service requests, and the city filtration plant.',
     intro:
       'The City of Piedmont Water Works, Gas and Sewer Department provides water, natural gas, and sewer service throughout Piedmont, handling new connections, billing, and service requests.',
     about: [
@@ -211,6 +217,9 @@ export const DEPARTMENTS = [
     slug: 'public-safety',
     name: 'Public Safety',
     short: 'Piedmont Police and Fire, dedicated to the safety of our citizens.',
+    // Search-result summary (70-160 characters); the intro below runs longer.
+    metaDescription:
+      'Piedmont Police and Fire Departments: police patrol and emergency response, fire protection and rescue, investigations and traffic enforcement.',
     intro:
       'The Police and Fire Department in Piedmont are dedicated to the safety of our citizens. In times of emergency, the brave men and women of the Piedmont Police and Fire respond with skill, dedication, and confidence in their abilities to ensure the very best resolutions.',
     about: [
@@ -267,6 +276,9 @@ export const DEPARTMENTS = [
     slug: 'revenue',
     name: 'Revenue',
     short: 'Business licenses, sales tax, and city revenue collection.',
+    // Search-result summary (70-160 characters); the intro below runs longer.
+    metaDescription:
+      'The Piedmont Revenue Department handles business license applications and renewals, sales tax forms and filing, and police jurisdiction information.',
     intro:
       'The Piedmont Revenue Department offers the resources you need to stay prosperous under the law within the city.',
     about: [
@@ -312,6 +324,9 @@ export const DEPARTMENTS = [
     slug: 'municipal-court',
     name: 'Municipal Court',
     short: 'Traffic and misdemeanor cases, fines, and court dates for the City of Piedmont.',
+    // Search-result summary (70-160 characters); the intro below runs longer.
+    metaDescription:
+      'Piedmont Municipal Court handles traffic citations, misdemeanor cases, magistrate matters, fine payments and court dates for the City of Piedmont.',
     intro:
       'The Municipal Court of Piedmont handles matters of justice and its administration. Traffic and misdemeanor violations, matters for the town clerk, matters for the magistrate \u2013 if you need officials in Piedmont to hear your case, you will be appearing here in Municipal Court to see it carried out.',
     about: [

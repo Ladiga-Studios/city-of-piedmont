@@ -4,13 +4,18 @@ import Link from 'next/link';
 import { staticEntries, searchEntries, TYPE_ORDER } from '@/lib/search';
 import { createClient } from '@/lib/supabase-server';
 import { onlyLiveNews } from '@/lib/news-events';
+import { pageMeta } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Search',
-  description: 'Search the City of Piedmont website.',
-};
+export const metadata = pageMeta({
+  title: "Search",
+  description:
+    "Search the City of Piedmont, Alabama website for city departments, services, news, events, meeting minutes, public notices and local businesses.",
+  path: "/search",
+  // Search results pages have no content of their own: keep them out of the index.
+  robots: { index: false, follow: true },
+});
 
 const TYPE_LABEL = {
   Page: 'Pages', Department: 'Departments', Ordinance: 'Ordinances', Park: 'Parks & Recreation',

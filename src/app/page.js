@@ -10,6 +10,10 @@ import { newsDate, eventMonthAbbr, eventDayNum, eventTimeRange, onlyLiveNews } f
 
 export const revalidate = 60;
 
+// Title, description and share text come from the root layout; the homepage
+// only adds its own canonical (the layout sets none, see lib/seo.js).
+export const metadata = { alternates: { canonical: '/' } };
+
 // Trim a string to ~n characters on a word boundary and append an ellipsis.
 function truncate(s, n) {
   if (!s) return '';

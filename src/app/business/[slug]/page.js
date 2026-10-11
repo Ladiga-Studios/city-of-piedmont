@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 import { normalizeUrl, displayUrl } from '@/lib/business';
 import BizGallery from '@/components/BizGallery';
+import { pageMeta, fitTitle, fitDescription } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -27,17 +28,16 @@ async function getBusiness(slug) {
 export async function generateMetadata({ params }) {
   const b = await getBusiness(params.slug);
   if (!b) return { title: 'Business Not Found' };
-  const desc = b.tagline || b.description || `${b.name} in Piedmont, Alabama.`;
-  return {
-    title: `${b.name}, Piedmont, AL`,
-    description: desc.slice(0, 160),
-    openGraph: {
-      title: `${b.name}, Piedmont, AL`,
-      description: desc.slice(0, 160),
-      images: b.image_url ? [b.image_url] : undefined,
-      type: 'website',
-    },
-  };
+  const desc = fitDescription(
+    b.tagline || b.description || `${b.name} in Piedmont, Alabama.`,
+    'A local business listed in the City of Piedmont, Alabama business directory.'
+  );
+  return pageMeta({
+    title: fitTitle(b.name),
+    description: desc,
+    path: `/business/${params.slug}`,
+    ogImages: b.image_url ? [b.image_url] : undefined,
+  });
 }
 
 export default async function BusinessPage({ params }) {

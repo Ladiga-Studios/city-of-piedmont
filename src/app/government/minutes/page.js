@@ -3,12 +3,14 @@ import './minutes.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
 import MinutesExplorer from './MinutesExplorer';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Council Meeting Minutes',
+export const metadata = pageMeta({
+  title: "Council Meeting Minutes",
   description:
-    'Read AI-summarized highlights and download official City of Piedmont City Council meeting minutes: decisions, votes, and action items from every meeting.',
-};
+    "Read AI-summarized highlights and download official City of Piedmont City Council meeting minutes: decisions, votes, and action items from every meeting.",
+  path: "/government/minutes",
+});
 
 export const revalidate = 60;
 

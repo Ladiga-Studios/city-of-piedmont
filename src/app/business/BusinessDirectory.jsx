@@ -115,7 +115,7 @@ export default function BusinessDirectory({ businesses }) {
             </div>
             <div className="biz-card-body">
               <span className="biz-cat">{b.category}</span>
-              <h3>{b.name}</h3>
+              <h2>{b.name}</h2>
               {b.tagline && <p>{b.tagline}</p>}
             </div>
           </Link>

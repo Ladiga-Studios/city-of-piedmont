@@ -1,12 +1,14 @@
 import '../pages.css';
 import '../about.css';
 import Link from 'next/link';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'History of Piedmont',
+export const metadata = pageMeta({
+  title: "History of Piedmont",
   description:
-    'The history of Piedmont, Alabama, from Hollow Stump Cross Roads and Cross Plains through the railroad and the 1888 founding, the cotton mills and the 1890s boom, banking, education, and the modern era. Researched by the Piedmont Historical Society.',
-};
+    "The history of Piedmont, Alabama, from Hollow Stump Cross Roads and Cross Plains to the 1888 founding, the railroad, cotton mills, banking and schools.",
+  path: "/history",
+});
 
 // Small helper for a captioned gallery image
 function Photo({ src, alt, cap }) {
@@ -43,7 +45,7 @@ export default function History() {
           <div className="era reveal">
             <div className="era-head">
               <div className="yr">1840s to 1850</div>
-              <h3>Hollow Stump Cross Roads</h3>
+              <h2>Hollow Stump Cross Roads</h2>
             </div>
             <div className="history-prose">
               <p>In the 1840s, this was a meeting of Cherokee and Creek Indian trails that became two post roads: the Rome &amp; Wetumpka Road (today's Ladiga Street) and the Centre &amp; Choccoloco Road (today's Center Avenue). At their corner stood a hollow sycamore stump that served as the area's first "post office," where settlers and American Indians left and collected mail.</p>
@@ -59,7 +61,7 @@ export default function History() {
           <div className="era reveal">
             <div className="era-head">
               <div className="yr">1851 to 1888</div>
-              <h3>Cross Plains &amp; the Railroad</h3>
+              <h2>Cross Plains &amp; the Railroad</h2>
             </div>
             <div className="history-prose">
               <p>The community chose "Cross Plains" over the name Griffin's Creek in 1851, and the post office opened that September with Jacob Forney Dailey as first postmaster. Incorporated in 1871, Cross Plains grew fast: by 1879 it had 200 citizens, eight general stores, two churches, two schools, and the Selma, Rome &amp; Dalton Railroad. For a brief moment in 1870 a railroad settlement just west of town carried the name "Patona."</p>
@@ -76,7 +78,7 @@ export default function History() {
           <div className="era reveal">
             <div className="era-head">
               <div className="yr">1888</div>
-              <h3>Becoming Piedmont</h3>
+              <h2>Becoming Piedmont</h2>
             </div>
             <div className="history-prose">
               <p>In 1888, citizens moved to rename the town. The name "Piedmont" (Latin for "foot of the hills") was promoted by the editors of <em>The Saturday Post</em> and credited to William Iredell Hood, who thought the foothills recalled the Piedmont Plateau of North Carolina. It became official on July 30, 1888, and the Alabama General Assembly incorporated the City of Piedmont on December 12, 1888. At the time, the area was home to roughly 1,000 settlers and 3,000 Cherokee and Creek people.</p>
@@ -90,7 +92,7 @@ export default function History() {
           <div className="era reveal">
             <div className="era-head">
               <div className="yr">1890s to 1900s</div>
-              <h3>The Boom, the Mills &amp; the Banks</h3>
+              <h2>The Boom, the Mills &amp; the Banks</h2>
             </div>
             <div className="history-prose">
               <p>The 1890s boom brought churches, hotels, two mountain resorts, and electric street lamps as early as 1891. The plant operator blew a whistle at 10:45 pm so residents could light oil lamps before the power cut at 11:00. The boom crashed in the Panic of 1893, but industry returned. The Coosa Manufacturing Company (1892) became Standard Coosa Thatcher, a major employer until 1995. Banking grew too, from the Bank of Piedmont (1890) to the Farmers &amp; Merchants Bank, founded 1915 at 109 North Center Avenue and still family-led today.</p>
@@ -106,7 +108,7 @@ export default function History() {
           <div className="era reveal">
             <div className="era-head">
               <div className="yr">1900s to today</div>
-              <h3>Schools, Mid-Century &amp; the Modern Era</h3>
+              <h2>Schools, Mid-Century &amp; the Modern Era</h2>
             </div>
             <div className="history-prose">
               <p>Education grew from early academies into the Piedmont Public School (1900) and today's nationally recognized Piedmont City School System. Through the 20th century, downtown thrived with storefronts, the old City Hall, and a mix of industry: textiles, poultry, manufacturing, and healthcare. After the textile losses of the 1990s, Piedmont turned toward healthcare and embraced the Chief Ladiga Trail, Terrapin Creek, and the Appalachian foothills for recreation and tourism.</p>

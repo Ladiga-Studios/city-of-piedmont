@@ -2,12 +2,14 @@ import '../../pages.css';
 import '../chief-ladiga-trail/park-detail.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Pinhoti Trail',
+export const metadata = pageMeta({
+  title: "Pinhoti Trail",
   description:
-    'The Pinhoti Trail is a 335-mile hiking trail from Flagg Mountain, Alabama into Georgia, passing Piedmont. Trailheads, the Chief Ladiga junction, and Dugger Mountain Wilderness access.',
-};
+    "The Pinhoti Trail runs 335 miles from Flagg Mountain, Alabama into Georgia, passing Piedmont. Trailheads, the Chief Ladiga junction and Dugger Mountain.",
+  path: "/parks/pinhoti-trail",
+});
 
 // Pinhoti access points around Piedmont. Coordinates are the trailhead
 // parking areas (Alabama Recreation Trails / Pinhoti Trail Alliance data).

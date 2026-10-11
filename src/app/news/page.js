@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
 import { newsDate, onlyLiveNews } from '@/lib/news-events';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'News',
-  description: 'City of Piedmont news, announcements, and updates for residents.',
-  alternates: { canonical: 'https://www.piedmontcity.org/news' },
-};
+export const metadata = pageMeta({
+  title: "City News",
+  description:
+    "News and announcements from the City of Piedmont, Alabama: city services, public meetings, job openings, community events and updates for residents.",
+  path: "/news",
+});
 
 export const revalidate = 60;
 

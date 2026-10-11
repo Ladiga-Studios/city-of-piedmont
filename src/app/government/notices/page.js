@@ -3,13 +3,14 @@ import './notices.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
 import NoticesList from './NoticesList';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Public Notices & Bid Requests',
+export const metadata = pageMeta({
+  title: "Public Notices & Bid Requests",
   description:
-    'Current City of Piedmont public notices, ordinances, legal announcements, and open bid requests. Download the official PDFs.',
-  alternates: { canonical: 'https://www.piedmontcity.org/government/notices' },
-};
+    "Current City of Piedmont public notices, ordinances, legal announcements, and open bid requests. Download the official PDFs.",
+  path: "/government/notices",
+});
 
 export const revalidate = 60;
 

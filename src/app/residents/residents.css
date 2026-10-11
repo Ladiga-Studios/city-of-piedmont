@@ -18,7 +18,7 @@
 .rp-action-icon{width:44px;height:44px;border-radius:12px;background:var(--paper-2);
   display:grid;place-items:center;color:var(--sunset);flex:none}
 .rp-action-icon svg{width:22px;height:22px}
-.rp-action h3{font-size:1.1rem;margin-bottom:.15rem}
+.rp-action h2,.rp-action h3{font-size:1.1rem;margin-bottom:.15rem}
 .rp-action p{font-size:.85rem;color:var(--muted);line-height:1.4}
 .rp-action .rp-action-cta{display:inline-block;margin-top:.4rem;font-size:.82rem;
   font-weight:600;color:var(--sunset)}

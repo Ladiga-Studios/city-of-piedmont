@@ -2,12 +2,14 @@ import '../pages.css';
 import '../about.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'About Piedmont',
+export const metadata = pageMeta({
+  title: "About Piedmont",
   description:
-    'The history of Piedmont, Alabama, from Hollow Stump Cross Roads and Cross Plains to the city at the foot of the Appalachian Mountains. Founded 1888, named for the Piedmont Plateau, home of the Chief Ladiga Trail.',
-};
+    "About Piedmont, Alabama: the city today, its place in the Appalachian foothills, its schools, how city government works, and the story of its many names.",
+  path: "/about",
+});
 
 // The Piedmont Historical Society's Roberts Home / Southern Railroad Depot Museum.
 const MUSEUM_URL = 'https://piedmontalabamamuseum.com';

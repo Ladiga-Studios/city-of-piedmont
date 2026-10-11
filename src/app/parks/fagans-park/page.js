@@ -3,12 +3,14 @@ import '../civic-center/civic-center.css';
 import './fagans-park.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMeta({
   title: "Fagan's Park",
   description:
-    "Fagan's Park in Piedmont, Alabama: a family-friendly park on McFarland Avenue with a playground, pickleball and basketball courts, a covered picnic pavilion, and a walking track at the foot of the Appalachian foothills.",
-};
+    "Fagan's Park on McFarland Avenue in Piedmont, Alabama: a playground, pickleball and basketball courts, a covered picnic pavilion and a walking track.",
+  path: "/parks/fagans-park",
+});
 
 // McFarland Ave, Piedmont, AL 36272
 const LAT = 33.9253934;
@@ -77,15 +79,15 @@ export default function FagansPark() {
 
               <div className="cc-features">
                 <div className="cc-feature">
-                  <h3>Playground &amp; Courts</h3>
+                  <h2>Playground &amp; Courts</h2>
                   <p>A full playground for the kids, plus pickleball, tennis, and basketball courts for all ages.</p>
                 </div>
                 <div className="cc-feature">
-                  <h3>Picnic Pavilion</h3>
+                  <h2>Picnic Pavilion</h2>
                   <p>A covered pavilion with picnic tables, great for parties, cookouts, and group events.</p>
                 </div>
                 <div className="cc-feature">
-                  <h3>Walking Track</h3>
+                  <h2>Walking Track</h2>
                   <p>A walking track and wide-open green space for exercise, games, and gatherings.</p>
                 </div>
               </div>

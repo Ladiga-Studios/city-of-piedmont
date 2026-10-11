@@ -2,12 +2,14 @@ import '../../pages.css';
 import './park-detail.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Aquatic Center',
+export const metadata = pageMeta({
+  title: "Aquatic Center",
   description:
-    'The Piedmont Aquatic Center at 150 Sports Complex Drive: a seasonal outdoor pool with lap lanes, a water slide, a splash area, and plenty of deck seating. Register and buy passes through Piedmont Parks & Recreation.',
-};
+    "The Piedmont Aquatic Center at 150 Sports Complex Drive: a seasonal outdoor pool with lap lanes, a water slide and a splash area. Passes and registration.",
+  path: "/parks/aquatic-center",
+});
 
 // Piedmont Aquatic Center: 150 Sports Complex Drive
 const LAT = 33.9499;

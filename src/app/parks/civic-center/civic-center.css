@@ -34,7 +34,7 @@
 
 .cc-features{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s4) 0 var(--s5)}
 .cc-feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s3)}
-.cc-feature h3{font-size:1.15rem;margin-bottom:.4rem}
+.cc-feature h2,.cc-feature h3{font-size:1.15rem;margin-bottom:.4rem}
 .cc-feature p{font-size:.92rem;color:var(--muted);line-height:1.5}
 
 .cc-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:var(--s4)}

@@ -1,11 +1,14 @@
 import '../pages.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy Policy',
-  description: 'How the City of Piedmont, Alabama collects, uses, and protects information on this website.',
-};
+export const metadata = pageMeta({
+  title: "Privacy Policy",
+  description:
+    "How the City of Piedmont, Alabama collects, uses and protects information on this website, including newsletter sign-ups, form messages and your choices.",
+  path: "/privacy",
+});
 
 const UPDATED = 'June 30, 2026';
 

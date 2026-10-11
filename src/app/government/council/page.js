@@ -2,15 +2,17 @@ import '../../pages.css';
 import '../../council.css';
 import Link from 'next/link';
 import { getCouncilPeople } from '@/lib/people';
+import { pageMeta } from '@/lib/seo';
 
 // Revalidate so changes made in /admin/people show within a minute.
 export const revalidate = 60;
 
-export const metadata = {
-  title: 'Mayor & City Council',
+export const metadata = pageMeta({
+  title: "Mayor & City Council",
   description:
-    'Meet the Mayor and City Council of Piedmont, Alabama. Council meets the first and third Tuesday of each month at 6:00 PM in the Council Chambers at City Hall.',
-};
+    "Meet the Mayor and City Council of Piedmont, Alabama. Council meets the first and third Tuesday of each month at 6:00 PM in the Council Chambers at City Hall.",
+  path: "/government/council",
+});
 
 const MAYOR = { name: 'Kevin Farmer', role: 'Mayor', img: '/images/council/kevin-farmer.jpg' };
 

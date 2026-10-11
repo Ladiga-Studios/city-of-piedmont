@@ -70,7 +70,7 @@
 .era:last-child{margin-bottom:0}
 .era-head{margin-bottom:var(--s4)}
 .era-head .yr{font-family:var(--display);font-weight:700;color:var(--sunset);font-size:1rem;letter-spacing:.05em}
-.era-head h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:.2rem}
+.era-head h2,.era-head h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:.2rem}
 
 /* full-history page: photo gallery */
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--s3);margin-top:var(--s3)}

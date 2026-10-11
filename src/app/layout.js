@@ -29,7 +29,7 @@ export const metadata = {
     template: '%s · City of Piedmont, Alabama',
   },
   description:
-    'Official website of the City of Piedmont, Alabama, a small city in the Appalachian foothills of Calhoun County and home of the Chief Ladiga Trail. Pay your utility bill, find city services and departments, explore parks and trails, browse local businesses, and read city news and events.',
+    'Official site of the City of Piedmont, Alabama, home of the Chief Ladiga Trail. Pay utility bills, reach city departments, and find parks, news and events.',
   applicationName: 'City of Piedmont, Alabama',
   authors: [{ name: 'City of Piedmont, Alabama' }],
   generator: 'Next.js',
@@ -43,9 +43,8 @@ export const metadata = {
   ],
   category: 'government',
   referrer: 'origin-when-cross-origin',
-  alternates: {
-    canonical: '/',
-  },
+  // No canonical here: a canonical in the root layout is inherited by every page
+  // that doesn't set its own. Each page sets a self-referencing one (lib/seo.js).
   openGraph: {
     title: 'City of Piedmont, Alabama | Home of the Chief Ladiga Trail',
     description:

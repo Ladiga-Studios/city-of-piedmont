@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 import { newsDate, onlyLiveNews } from '@/lib/news-events';
+import { pageMeta, fitTitle, fitDescription } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -27,14 +28,16 @@ async function getArticle(slug) {
 export async function generateMetadata({ params }) {
   const article = await getArticle(params.slug);
   if (!article) return { title: 'Article Not Found' };
-  const meta = {
-    title: article.title,
-    description: article.body || undefined,
-    alternates: { canonical: `https://www.piedmontcity.org/news/${article.slug}` },
-  };
-  if (article.image_url) {
-    meta.openGraph = { images: [{ url: article.image_url, alt: article.image_alt || article.title }] };
-  }
+  const description = fitDescription(article.body, 'Read the full article on the official City of Piedmont, Alabama website.');
+  const images = article.image_url
+    ? [{ url: article.image_url, alt: article.image_alt || article.title }]
+    : undefined;
+  const meta = pageMeta({
+    title: fitTitle(article.title),
+    description,
+    path: `/news/${article.slug}`,
+    ogImages: images,
+  });
   return meta;
 }
 

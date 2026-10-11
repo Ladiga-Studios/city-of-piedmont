@@ -3,17 +3,18 @@ import './careers.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { createClient } from '@/lib/supabase-server';
+import { pageMeta } from '@/lib/seo';
 
 // Postings are managed at /admin/careers. Re-check every minute so a
 // new posting shows up quickly and an expired one drops off on time.
 export const revalidate = 60;
 
-export const metadata = {
-  title: 'Careers',
+export const metadata = pageMeta({
+  title: "Careers",
   description:
-    'Employment opportunities with the City of Piedmont, Alabama. View current open positions and learn how to apply.',
-  alternates: { canonical: 'https://www.piedmontcity.org/careers' },
-};
+    "Open jobs with the City of Piedmont, Alabama. See each position, what the work involves and how to apply. New city openings are posted here as they come up.",
+  path: "/careers",
+});
 
 // ------------------------------------------------------------------
 // EMPLOYMENT APPLICATION PDF — not currently available.

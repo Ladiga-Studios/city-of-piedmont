@@ -2,12 +2,14 @@ import '../pages.css';
 import './visitors.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Visitors',
+export const metadata = pageMeta({
+  title: "Visit Piedmont",
   description:
-    'Plan a visit to Piedmont, Alabama: the Chief Ladiga Trail, Terrapin Creek, Dugger Mountain, historic downtown, Veterans Memorial Park, and family recreation, all at the foot of the Appalachians.',
-};
+    "Plan a visit to Piedmont, Alabama: the Chief Ladiga Trail, Terrapin Creek, Dugger Mountain, the historic downtown and Veterans Memorial Park.",
+  path: "/visitors",
+});
 
 // Eubanks Welcome Center
 const WC_LAT = 33.9226414;

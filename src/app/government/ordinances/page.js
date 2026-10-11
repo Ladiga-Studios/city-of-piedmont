@@ -2,20 +2,14 @@ import '../../pages.css';
 import './ordinances.css';
 import Link from 'next/link';
 import { ORDINANCES, fmtOrdinanceDate } from '@/lib/ordinances';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'City Ordinances',
+export const metadata = pageMeta({
+  title: "City Ordinances",
   description:
-    'Recently adopted City of Piedmont ordinances: short-term rentals, THC products, and brown bagging. Plain-language summaries with the signed PDF of each.',
-  alternates: { canonical: 'https://www.piedmontcity.org/government/ordinances' },
-  openGraph: {
-    title: 'City Ordinances — City of Piedmont, Alabama',
-    description:
-      'Recently adopted City of Piedmont ordinances with plain-language summaries and the signed PDF of each.',
-    url: 'https://www.piedmontcity.org/government/ordinances',
-    type: 'website',
-  },
-};
+    "Recently adopted City of Piedmont ordinances: short-term rentals, THC products, and brown bagging. Plain-language summaries with the signed PDF of each.",
+  path: "/government/ordinances",
+});
 
 const BASE = 'https://www.piedmontcity.org';
 

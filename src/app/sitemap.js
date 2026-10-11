@@ -30,7 +30,7 @@ const STATIC = [
   { path: '/history', priority: 0.6, changeFrequency: 'yearly' },
   { path: '/careers', priority: 0.6, changeFrequency: 'weekly' },
   { path: '/contact', priority: 0.6, changeFrequency: 'yearly' },
-  { path: '/search', priority: 0.3, changeFrequency: 'yearly' },
+  // /search is noindex (results pages have no content of their own), so it is not listed.
   { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' },
   { path: '/terms', priority: 0.2, changeFrequency: 'yearly' },
 ];

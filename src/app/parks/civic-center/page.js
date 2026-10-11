@@ -2,12 +2,14 @@ import '../../pages.css';
 import './civic-center.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Clyde H. Pike Civic Center',
+export const metadata = pageMeta({
+  title: "Clyde H. Pike Civic Center",
   description:
-    'The Clyde H. Pike Civic Center in Piedmont, Alabama: fitness center, gymnasium, walking track, tanning, and rentals. Memberships, hours, and rates.',
-};
+    "The Clyde H. Pike Civic Center in Piedmont, Alabama: fitness center, gymnasium, walking track, tanning, and rentals. Memberships, hours, and rates.",
+  path: "/parks/civic-center",
+});
 
 // 500 Mill St, Piedmont, AL 36272
 const LAT = 33.9241877;

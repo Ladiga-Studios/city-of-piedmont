@@ -1,7 +1,13 @@
 import '../pages.css';
 import Link from 'next/link';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = { title: 'City Government', description: 'Mayor, City Council, meeting minutes, ordinances, and public notices for the City of Piedmont, Alabama.' };
+export const metadata = pageMeta({
+  title: "City Government",
+  description:
+    "How Piedmont's Mayor-Council government works: meet the Mayor and City Council, read meeting minutes, and review adopted ordinances and public notices.",
+  path: "/government",
+});
 
 const Arrow = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -24,22 +30,22 @@ export default function Government() {
       <div className="card-grid">
         <Link href="/government/council" className="info-card">
           <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2.4 1.4-4.4 3.5-5.2"/></svg></span>
-          <h3>Mayor &amp; City Council</h3><p>Meet your elected officials and find contact information.</p>
+          <h2>Mayor &amp; City Council</h2><p>Meet your elected officials and find contact information.</p>
           <CardArrow />
         </Link>
         <Link href="/government/minutes" className="info-card">
           <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 3v5h5M7 3h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2zM9 13h6M9 17h6"/></svg></span>
-          <h3>Council Meeting Minutes</h3><p>Read and download official records of council proceedings.</p>
+          <h2>Council Meeting Minutes</h2><p>Read and download official records of council proceedings.</p>
           <CardArrow />
         </Link>
         <Link href="/government/ordinances" className="info-card">
           <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 4v16M5 8l7-4 7 4M3 12l2-4 2 4a2 2 0 01-4 0zM17 12l2-4 2 4a2 2 0 01-4 0zM8 20h8"/></svg></span>
-          <h3>City Ordinances</h3><p>Recently adopted ordinances, summarized in plain language, with the signed PDFs.</p>
+          <h2>City Ordinances</h2><p>Recently adopted ordinances, summarized in plain language, with the signed PDFs.</p>
           <CardArrow />
         </Link>
         <Link href="/government/notices" className="info-card">
           <span className="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 5h18M3 12h18M3 19h12M19 16l2 2-2 2"/></svg></span>
-          <h3>Public Notices &amp; Bids</h3><p>Current public notices, bid requests, and legal announcements.</p>
+          <h2>Public Notices &amp; Bids</h2><p>Current public notices, bid requests, and legal announcements.</p>
           <CardArrow />
         </Link>
       </div>

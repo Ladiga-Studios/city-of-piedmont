@@ -32,7 +32,7 @@
 }
 .dept-card.has-photo:hover .dept-photo img{ transform:scale(1.05); }
 .dept-body{ padding:var(--s3); }
-.dept-body h3{ font-size:1.25rem; margin-bottom:.4rem; }
+.dept-body h2,.dept-body h3{ font-size:1.25rem; margin-bottom:.4rem; }
 .dept-body p{ font-size:.93rem; color:var(--muted); }
 
 @media (prefers-reduced-motion: reduce){

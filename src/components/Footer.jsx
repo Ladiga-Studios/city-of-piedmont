@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
 
           <div className="foot-col">
-            <h4>Government</h4>
+            <h2>Government</h2>
             <ul>
               <li><Link href="/government/council">Mayor &amp; Council</Link></li>
               <li><Link href="/government/minutes">Agendas &amp; Minutes</Link></li>
@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
 
           <div className="foot-col">
-            <h4>Residents</h4>
+            <h2>Residents</h2>
             <ul>
               <li><Link href="/residents">City Services</Link></li>
               <li><Link href="/residents#utilities">Utilities &amp; Trash</Link></li>
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
 
           <div className="foot-col">
-            <h4>Visitors</h4>
+            <h2>Visitors</h2>
             <ul>
               <li><Link href="/visitors">Things to Do</Link></li>
               <li><Link href="/business">Local Businesses</Link></li>
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div className="foot-col">
-            <h4>Quick Links</h4>
+            <h2>Quick Links</h2>
             <ul>
               <li><a href={SITE.payBillUrl} target="_blank" rel="noopener noreferrer">Pay My Bill</a></li>
               <li><Link href="/careers">Jobs &amp; Careers</Link></li>
@@ -72,7 +72,7 @@ export default function Footer() {
           </div>
 
           <div className="foot-col">
-            <h4>Hours</h4>
+            <h2>Hours</h2>
             <ul>
               <li>Monday – Friday</li>
               <li className="foot-dim">8:00 AM – 5:00 PM</li>

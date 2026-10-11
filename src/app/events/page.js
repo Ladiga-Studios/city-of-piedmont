@@ -6,12 +6,14 @@ import {
   eventMonthAbbr, eventDayNum, eventTimeRange, eventLongDate,
   eventCategoryLabel, parseEventDate,
 } from '@/lib/news-events';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Events Calendar',
-  description: 'Upcoming events, festivals, and city meetings in Piedmont, Alabama.',
-  alternates: { canonical: 'https://www.piedmontcity.org/events' },
-};
+export const metadata = pageMeta({
+  title: "Events Calendar",
+  description:
+    "Upcoming events in Piedmont, Alabama: festivals, community gatherings, city meetings and seasonal programs, with the date, time and place of each one.",
+  path: "/events",
+});
 
 export const revalidate = 60;
 

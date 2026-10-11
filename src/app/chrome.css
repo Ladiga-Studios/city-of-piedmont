@@ -62,7 +62,7 @@
 .foot-brand .name{font-family:var(--display);color:var(--paper);font-size:1.35rem}
 .foot-brand .tag{color:var(--gold);font-style:italic;font-family:var(--display)}
 .foot-brand p{font-size:.9rem;margin-top:.8rem;line-height:1.7}
-.site-footer h4{color:var(--paper);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+.site-footer h2,.site-footer h4{color:var(--paper);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
   margin-bottom:1rem;font-family:var(--body);font-weight:700}
 .site-footer ul{list-style:none;font-size:.92rem}
 .site-footer li{margin-bottom:.5rem}

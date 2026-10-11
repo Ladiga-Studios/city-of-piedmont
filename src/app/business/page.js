@@ -3,12 +3,14 @@ import './business.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
 import BusinessDirectory from './BusinessDirectory';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Local Business Directory',
+export const metadata = pageMeta({
+  title: "Local Business Directory",
   description:
-    'Locally owned businesses in Piedmont, Alabama: dining, retail, outdoors, services, lodging, and more. Support local on your visit through the Chief Ladiga Trail.',
-};
+    "Locally owned businesses in Piedmont, Alabama: dining, shopping, outdoors, services and lodging, many a short ride from the Chief Ladiga Trail.",
+  path: "/business",
+});
 
 export const revalidate = 60;
 

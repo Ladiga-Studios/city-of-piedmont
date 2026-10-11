@@ -2,12 +2,14 @@ import '../../pages.css';
 import './park-detail.css';
 import Link from 'next/link';
 import ParkMap from '@/components/ParkMap';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Chief Ladiga Trail',
+export const metadata = pageMeta({
+  title: "Chief Ladiga Trail",
   description:
-    "The Chief Ladiga Trail is a 33-mile paved rail-trail through Piedmont, Alabama. It's Alabama's first rails-to-trails project, connecting to Georgia's Silver Comet Trail.",
-};
+    "The Chief Ladiga Trail is a 33-mile paved rail-trail through Piedmont, Alabama, the state's first rails-to-trails project, linking to Georgia's Silver Comet.",
+  path: "/parks/chief-ladiga-trail",
+});
 
 // Eubanks Welcome Center: trailhead / parking for the Piedmont section
 const LAT = 33.9226414;

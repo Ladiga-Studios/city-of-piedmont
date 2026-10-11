@@ -1,11 +1,14 @@
 import '../pages.css';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terms & Conditions',
-  description: 'The terms and conditions for using the City of Piedmont, Alabama website.',
-};
+export const metadata = pageMeta({
+  title: "Terms & Conditions",
+  description:
+    "The terms for using the City of Piedmont, Alabama website: accuracy of information, outside links, online payments, the business directory and liability.",
+  path: "/terms",
+});
 
 const UPDATED = 'June 30, 2026';
 

@@ -2,8 +2,14 @@ import '../pages.css';
 import './departments.css';
 import Link from 'next/link';
 import { DEPARTMENTS } from '@/lib/departments';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = { title: 'Departments', description: 'City of Piedmont departments: Power & Light, Water & Gas, Public Safety, Public Works, Revenue, Municipal Court, Building Inspection, and the Public Library.' };
+export const metadata = pageMeta({
+  title: "City Departments",
+  description:
+    "City of Piedmont departments: Power & Light, Water & Gas, Public Safety, Public Works, Revenue, Municipal Court, Building Inspection, and the Public Library.",
+  path: "/departments",
+});
 
 export default function Departments() {
   return (<>
@@ -26,7 +32,7 @@ export default function Departments() {
             </div>
           )}
           <div className="dept-body">
-            <h3>{d.name}</h3>
+            <h2>{d.name}</h2>
             <p>{d.short}</p>
             <span className="dept-more">View department &rarr;</span>
           </div>

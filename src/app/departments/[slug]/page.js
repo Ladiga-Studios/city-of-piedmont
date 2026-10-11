@@ -7,6 +7,7 @@ import { DEPARTMENTS, getDepartment } from '@/lib/departments';
 import { getDepartmentStaff, getDepartmentDocuments, mergeDownloadGroups } from '@/lib/people';
 import ParkMap from '@/components/ParkMap';
 import { headingId, fileTypeLabel } from '@/lib/document-sections';
+import { pageMeta, fitDescription } from '@/lib/seo';
 
 // Revalidate so staff and document changes made in the admin console
 // show up on the public page within a minute.
@@ -19,10 +20,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const d = getDepartment(params.slug);
   if (!d) return {};
-  return {
-    title: `${d.name}, City of Piedmont`,
-    description: d.intro,
-  };
+  return pageMeta({
+    title: d.name,
+    description: d.metaDescription || fitDescription(d.intro),
+    path: `/departments/${d.slug}`,
+  });
 }
 
 function telHref(phone) {

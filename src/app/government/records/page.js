@@ -1,13 +1,14 @@
 import '../../pages.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'The Permanent Record',
+export const metadata = pageMeta({
+  title: "The Permanent Record",
   description:
-    'How the City of Piedmont preserves council minutes, public notices, and city news in a tamper-evident public archive, and how anyone can verify a record.',
-  alternates: { canonical: 'https://www.piedmontcity.org/government/records' },
-};
+    "How the City of Piedmont preserves council minutes, public notices, and city news in a tamper-evident public archive, and how anyone can verify a record.",
+  path: "/government/records",
+});
 
 export const revalidate = 300;
 

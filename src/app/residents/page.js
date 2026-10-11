@@ -5,12 +5,14 @@ import { getDocumentSection } from '@/lib/people';
 import {
   WATER_FORMS_SECTION, WATER_QUALITY_SECTION, headingId, fileTypeLabel,
 } from '@/lib/document-sections';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Residents',
+export const metadata = pageMeta({
+  title: "Resident Services",
   description:
-    'Everyday city services for Piedmont, Alabama residents: pay your utility bill, water/gas/sewer service, trash and brush pickup, building permits, police and fire, severe weather, schools, library, and voting.',
-};
+    "City services for Piedmont, Alabama residents: pay your utility bill, start water or gas service, trash and brush pickup, permits, public safety and voting.",
+  path: "/residents",
+});
 
 const PAY_BILL = 'https://piedmontcity.payacp.com/home';
 
@@ -80,7 +82,7 @@ export default async function Residents() {
                 </svg>
               </span>
               <span>
-                <h3>Pay My Bill</h3>
+                <h2>Pay My Bill</h2>
                 <p>Pay your water, gas, sewer, and electric bill online.</p>
                 <span className="rp-action-cta">Open payment portal &rarr;</span>
               </span>
@@ -95,7 +97,7 @@ export default async function Residents() {
                 </svg>
               </span>
               <span>
-                <h3>Report a Problem</h3>
+                <h2>Report a Problem</h2>
                 <p>Potholes, drainage, brush, streetlights, and code concerns.</p>
                 <span className="rp-action-cta">How to report &rarr;</span>
               </span>
@@ -110,7 +112,7 @@ export default async function Residents() {
                 </svg>
               </span>
               <span>
-                <h3>Permits &amp; Licensing</h3>
+                <h2>Permits &amp; Licensing</h2>
                 <p>Building permits, zoning, and contractor lists.</p>
                 <span className="rp-action-cta">Get a permit &rarr;</span>
               </span>
@@ -124,7 +126,7 @@ export default async function Residents() {
                 </svg>
               </span>
               <span>
-                <h3>Public Safety</h3>
+                <h2>Public Safety</h2>
                 <p>Police, fire, and severe-weather information.</p>
                 <span className="rp-action-cta">Safety info &rarr;</span>
               </span>
