@@ -1,0 +1,48 @@
+{
+ "generated_at": "2026-10-18T03:45:43.699Z",
+ "meetings": 69,
+ "items": 1070,
+ "latest_meeting": "2026-09-15",
+ "kinds": {
+  "call to order": 132,
+  "minutes": 14,
+  "bills": 67,
+  "ordinance": 24,
+  "business": 323,
+  "visitors": 57,
+  "reports": 226,
+  "adjournment": 67,
+  "contract": 8,
+  "purchase": 49,
+  "resolution": 71,
+  "appointment": 21,
+  "bid": 11
+ },
+ "years": {
+  "2024": 398,
+  "2025": 455,
+  "2026": 217
+ },
+ "fingerprint": "abbab4f6621084fe483440d0c943ca943e575fa211e9881089ae8347d8a2a172",
+ "model": "nomic-ai/nomic-embed-text-v1.5",
+ "westmarch": "0.0.20-dev",
+ "eval": {
+  "outcome": "success",
+  "pass": true,
+  "goals": {
+   "residents": {
+    "checks": 6,
+    "passing": 6,
+    "search": 0.6,
+    "coverage": null
+   },
+   "researchers": {
+    "checks": 4,
+    "passing": 4,
+    "search": 1,
+    "coverage": 1
+   }
+  },
+  "failures": []
+ }
+}
