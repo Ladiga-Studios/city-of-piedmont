@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { fmtMeetingDate as fmtDate, descriptorFromTitle } from '@/lib/minutes-format';
 import AnchorBadge from '@/components/AnchorBadge';
+import MeetingSearch from './MeetingSearch';
 
 function yearOf(d) { return (d || '').slice(0, 4) || 'Undated'; }
 
@@ -15,6 +16,8 @@ export default function MinutesExplorer({ minutes }) {
 
   const [selectedId, setSelectedId] = useState(minutes[0]?.id || null);
   const selected = minutes.find((m) => m.id === selectedId) || null;
+  const [searching, setSearching] = useState(false);
+  const [jumped, setJumped] = useState(0);
 
   // On mobile, selecting scrolls the detail panel into view.
   useEffect(() => {
@@ -23,12 +26,32 @@ export default function MinutesExplorer({ minutes }) {
     }
   }, [selectedId]);
 
+  // From a search result to that meeting's summary card.
+  const openMeeting = useCallback((date) => {
+    const m = minutes.find((x) => x.meeting_date === date);
+    if (m) setSelectedId(m.id);
+    setJumped((n) => n + 1);
+  }, [minutes]);
+  useEffect(() => {
+    if (!jumped) return;
+    requestAnimationFrame(() => {
+      const el = document.getElementById(window.matchMedia('(max-width: 880px)').matches ? 'minute-detail' : 'minutes-explorer');
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Bring the chosen meeting into view inside the list, without moving the page again.
+      const list = document.querySelector('.mx-list');
+      const item = list?.querySelector('.mx-item.active');
+      if (list && item) list.scrollTop += item.getBoundingClientRect().top - list.getBoundingClientRect().top - list.clientHeight / 3;
+    });
+  }, [jumped]);
+
   if (minutes.length === 0) {
     return <div className="empty-note">No meeting minutes have been posted yet. Check back soon.</div>;
   }
 
   return (
-    <div className="minutes-explorer">
+    <>
+    <MeetingSearch onOpenMeeting={openMeeting} onActiveChange={setSearching} />
+    <div className="minutes-explorer" id="minutes-explorer" hidden={searching}>
       {/* ---- left: list grouped by year ---- */}
       <div className="mx-list" role="list">
         {grouped.map(([year, items]) => (
@@ -58,6 +81,7 @@ export default function MinutesExplorer({ minutes }) {
         {selected && <DetailCard key={selected.id} m={selected} />}
       </div>
     </div>
+    </>
   );
 }
 

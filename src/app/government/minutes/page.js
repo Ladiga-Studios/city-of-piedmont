@@ -8,7 +8,7 @@ import { pageMeta } from '@/lib/seo';
 export const metadata = pageMeta({
   title: "Council Meeting Minutes",
   description:
-    "Read AI-summarized highlights and download official City of Piedmont City Council meeting minutes: decisions, votes, and action items from every meeting.",
+    "Search every City of Piedmont City Council meeting since 2024, read plain-language summaries of what the council decided, and open the official minutes at the exact page.",
   path: "/government/minutes",
 });
 
@@ -42,9 +42,10 @@ export default async function MinutesPage() {
           <p className="eyebrow">City Government</p>
           <h1>Council Meeting Minutes</h1>
           <p>
-            Pick a meeting to see a plain-language summary of what the council decided,
-            then download the official record. The City Council meets the 1st and 3rd
-            Tuesday of each month; minutes are posted after approval at the following meeting.
+            Search every meeting for a street, a purchase or a resolution, or pick a meeting
+            to see a plain-language summary of what the council decided. The City Council
+            meets the 1st and 3rd Tuesday of each month; minutes are posted after approval
+            at the following meeting.
           </p>
         </div>
       </section>
