@@ -1,0 +1,20 @@
+{
+  "name": "piedmont-minutes",
+  "version": "1.0.0",
+  "scripts": {
+    "ship": "westmarch-ship app.json",
+    "local": "westmarch-ship app.json --local .ship/local",
+    "eval": "westmarch-eval ../public/meeting-search",
+    "check": ".venv/bin/python -m sources.minutes --check",
+    "postinstall": "rm -f node_modules/@fangorn-network/westmarch/site/dist/assets/*.wasm",
+    "site": "westmarch-ship app.json --local ../public/meeting-search",
+    "site:crawl": "westmarch-ship app.json --local ../public/meeting-search --crawl"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fangorn-network/sdk": "2026.9.22-dev",
+    "@fangorn-network/westmarch": "0.0.20-dev",
+    "@huggingface/transformers": "^4.2.0"
+  }
+}

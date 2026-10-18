@@ -112,3 +112,149 @@
   .mx-list{max-height:46vh;overflow-y:auto;border:1px solid var(--line);
     border-radius:var(--radius);padding:.8rem}
 }
+
+.minutes-explorer[hidden]{display:none}
+
+/* ============================================================
+   MEETING SEARCH — every item of business, searchable by meaning
+   (Fangorn Westmarch view in public/meeting-search)
+   ============================================================ */
+
+.ms{margin-bottom:var(--s4)}
+.ms-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- the bar ---------- */
+.ms-bar{
+  position:relative;display:flex;align-items:center;gap:.6rem;
+  background:var(--card);border:1.5px solid var(--line-strong);border-radius:var(--radius);
+  padding:.45rem .45rem .45rem 3rem;box-shadow:var(--shadow-sm);
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease);
+}
+.ms-bar:focus-within{border-color:var(--sunset);box-shadow:0 0 0 4px rgba(157,37,64,.12),var(--shadow-md)}
+.ms-icon{position:absolute;left:1.05rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.ms-bar:focus-within .ms-icon{color:var(--sunset)}
+.ms-bar input{
+  flex:1;min-width:0;border:0;background:transparent;outline:none;
+  font:inherit;font-size:1.08rem;color:var(--ink);padding:.7rem 0;
+}
+.ms-bar input::placeholder{color:var(--muted)}
+.ms-bar input::-webkit-search-cancel-button{display:none}
+.ms-clear{
+  display:grid;place-items:center;width:36px;height:36px;border-radius:50%;
+  border:0;background:transparent;color:var(--muted);cursor:pointer;flex:none;
+}
+.ms-clear:hover{background:var(--paper-2);color:var(--ink)}
+.ms-go{flex:none;padding:.7rem 1.4rem}
+.ms-go:hover{transform:none}
+
+/* ---------- suggestions + meta ---------- */
+.ms-hint{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-top:.9rem}
+.ms-hint-label{
+  font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:.2rem;
+}
+.ms-meta{flex-basis:100%;font-size:.85rem;color:var(--muted);margin-top:.35rem}
+
+.ms-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font:inherit;font-size:.88rem;font-weight:600;color:var(--ink-2);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:.38rem .8rem;min-height:36px;cursor:pointer;
+  transition:border-color .15s var(--ease),background .15s var(--ease),color .15s var(--ease);
+}
+.ms-chip:hover{border-color:var(--sunset);color:var(--sunset)}
+.ms-chip.on{background:var(--sunset);border-color:var(--sunset);color:#fff}
+.ms-chip .ms-n{font-weight:700;font-size:.76rem;opacity:.7}
+.ms-return{border-color:rgba(157,37,64,.35);color:var(--sunset);flex-basis:auto;margin-right:.4rem}
+
+/* ---------- results header ---------- */
+.ms-results{margin-top:var(--s3)}
+.ms-head{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;
+  padding-bottom:.9rem;border-bottom:1px solid var(--line);margin-bottom:1rem;
+}
+.ms-count{font-size:1.02rem;color:var(--ink-2);margin-right:auto}
+.ms-count strong{color:var(--ink)}
+.ms-back{
+  font:inherit;font-size:.9rem;font-weight:600;color:var(--sunset);
+  background:none;border:0;cursor:pointer;padding:.4rem 0;min-height:36px;
+}
+.ms-back:hover{text-decoration:underline}
+
+.ms-mode{
+  display:inline-flex;align-items:center;gap:.45rem;font-size:.8rem;font-weight:600;color:var(--muted);
+  background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:.3rem .75rem;
+}
+.ms-mode.on{color:var(--success);background:rgba(63,107,70,.08);border-color:rgba(63,107,70,.25)}
+.ms-mode.on::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--success)}
+.ms-mode-btn{font-family:inherit;cursor:pointer}
+.ms-mode-btn:hover{color:var(--ink);border-color:var(--line-strong)}
+.ms-mode-btn u{text-underline-offset:2px;color:var(--sunset)}
+.ms-meter{display:inline-block;width:46px;height:5px;border-radius:5px;background:var(--stone-100);overflow:hidden}
+.ms-meter span{display:block;height:100%;background:var(--sunset);transition:width .3s var(--ease)}
+
+/* ---------- filters ---------- */
+.ms-filters{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem}
+.ms-filter{display:flex;flex-wrap:wrap;gap:.4rem}
+
+/* ---------- result cards ---------- */
+.ms-list{list-style:none;display:flex;flex-direction:column;gap:.8rem;padding:0;margin:0}
+.ms-item{
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--stone-200);
+  border-radius:var(--radius);padding:1.1rem 1.25rem 1rem;
+  animation:msIn .3s var(--ease) both;
+}
+@keyframes msIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ms-item{animation:none}}
+
+.ms-item-top{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;margin-bottom:.45rem}
+.ms-kind{
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:6px;padding:.22rem .5rem;background:var(--paper-2);color:var(--ink-2);
+}
+.ms-date{font-size:.86rem;color:var(--muted);font-weight:500}
+
+/* kind accents: law in crimson, money in gold, people in blue */
+.ms-item:has(.k-resolution),.ms-item:has(.k-ordinance){border-left-color:var(--sunset)}
+.k-resolution,.k-ordinance{background:rgba(157,37,64,.09);color:var(--sunset)}
+.ms-item:has(.k-purchase),.ms-item:has(.k-contract),.ms-item:has(.k-bid),.ms-item:has(.k-bills){border-left-color:var(--gold)}
+.k-purchase,.k-contract,.k-bid,.k-bills{background:rgba(190,154,70,.15);color:#7a5f1c}
+.ms-item:has(.k-appointment),.ms-item:has(.k-public-hearing){border-left-color:var(--seal-blue)}
+.k-appointment,.k-public-hearing{background:rgba(91,134,168,.13);color:#3c6383}
+
+.ms-title{
+  font-family:var(--body);font-size:1.06rem;font-weight:650;line-height:1.4;color:var(--ink);margin:0 0 .35rem;
+}
+.ms-snippet{font-size:.96rem;line-height:1.6;color:var(--ink-2);margin:0}
+.ms-item mark{background:rgba(202,162,74,.32);color:inherit;border-radius:3px;padding:0 .12em}
+
+.ms-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.1rem;margin-top:.8rem}
+.ms-pdf,.ms-open{
+  display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:.9rem;font-weight:600;
+  min-height:36px;padding:.2rem 0;
+}
+.ms-pdf{color:var(--sunset);text-decoration:none}
+.ms-pdf:hover{text-decoration:underline;text-underline-offset:3px}
+.ms-open{background:none;border:0;cursor:pointer;color:var(--ink-2)}
+.ms-open:hover{color:var(--ink)}
+.ms-open svg{transition:transform .2s var(--ease)}
+.ms-open:hover svg{transform:translateX(3px)}
+
+.ms-more{margin:1.2rem auto 0;display:flex}
+.ms-foot{font-size:.82rem;font-style:italic;color:var(--muted);margin-top:1.2rem;text-align:center}
+
+@media(max-width:880px){
+  .ms-bar{padding-left:2.7rem}
+  .ms-icon{left:.9rem}
+  .ms-go{padding:.65rem 1rem}
+  .ms-bar input{font-size:1rem}
+  .ms-filter{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:none}
+  .ms-filter::-webkit-scrollbar{display:none}
+  .ms-chip{flex:none}
+  .ms-item{padding:1rem 1rem .9rem}
+}
+@media(max-width:480px){
+  .ms-go{display:none}
+  .ms-hint .ms-chip:nth-of-type(n+5){display:none}
+}
+.ms-title-passage{font-weight:500;font-size:1.02rem;line-height:1.55}
+@media(max-width:880px){.ms-back{margin-left:auto}}
