@@ -1,0 +1,117 @@
+# Meeting search: rebuilds the searchable index of City Council minutes that the
+# /government/minutes page reads (public/meeting-search), with Fangorn's Westmarch.
+#
+#   1. Tony's minutes source (fangorn/sources/minutes.py) reads the public minutes page,
+#      downloads each official PDF and splits it into meetings and items of business,
+#      each with its PDF page and the PDF's sha256.
+#   2. westmarch-ship --local embeds them (nomic-embed-text-v1.5, q8) and bakes the static
+#      view: catalog, manifest, and sha256-checked shards. No server, no chain, no keys.
+#   3. westmarch-eval scores the view against fangorn/eval/golden.jsonl.
+#   4. If the records changed, the view is committed and Vercel redeploys.
+#
+# Runs every morning, on demand, and when anything under fangorn/ changes.
+name: Meeting search index
+
+on:
+  schedule:
+    - cron: "17 11 * * *"   # 6:17 AM Central (daylight time)
+  workflow_dispatch:
+  push:
+    branches: [main, meeting-search]
+    paths:
+      - "fangorn/**"
+      - ".github/workflows/meeting-search.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meeting-search-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: fangorn
+    env:
+      PYTHON: python
+      VIEW: ../public/meeting-search
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: fangorn/sources/requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: fangorn/package-lock.json
+
+      # PDFs (by URL), embedded vectors (by exact text) and the embedding model, so a
+      # daily run only downloads new minutes and only embeds what changed.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            fangorn/.ship/cache
+            fangorn/.ship/vectors.ndjson
+            ~/.cache/fangorn-mcp
+          key: meeting-search-${{ github.run_id }}
+          restore-keys: meeting-search-
+
+      - name: Install
+        run: |
+          pip install -r sources/requirements.txt
+          npm ci --no-audit --no-fund
+
+      - name: Self-check the minutes source
+        run: python -m sources.minutes --check 2>&1 | tee -a ../.ci-build.txt
+
+      - name: Crawl the minutes and build the view
+        run: |
+          rm -rf .ship/stage
+          npx westmarch-ship app.json --local "$VIEW" --crawl 2>&1 | tee -a ../.ci-build.txt
+
+      - name: Score the view
+        id: eval
+        continue-on-error: true
+        run: npx westmarch-eval "$VIEW" --report ../.ci-eval.json 2>&1 | tee -a ../.ci-build.txt
+
+      - name: Write build.json and decide whether to publish
+        id: decide
+        run: node ../scripts/meeting-search-build-info.mjs "$VIEW" ../.ci-eval.json "${{ steps.eval.outcome }}"
+
+      - name: Commit the new view
+        if: steps.decide.outputs.publish == 'true'
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --cached --ignore-unmatch fangorn/.ci/last-failure.txt || true
+          rm -f fangorn/.ci/last-failure.txt
+          git add -A public/meeting-search
+          git commit -m "Meeting search: rebuild index (${{ steps.decide.outputs.summary }})"
+          git pull --rebase -q origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      # Actions logs are not always at hand, so a failed run leaves its log in the repo.
+      - name: Record the failure
+        if: failure()
+        working-directory: .
+        run: |
+          git checkout -- public/meeting-search 2>/dev/null || true
+          mkdir -p fangorn/.ci
+          { date -u; echo; tail -n 300 .ci-build.txt 2>/dev/null; } > fangorn/.ci/last-failure.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fangorn/.ci/last-failure.txt
+          git commit -m "Meeting search: index build failed (log in fangorn/.ci/last-failure.txt) [skip ci]"
+          git pull --rebase -q origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
