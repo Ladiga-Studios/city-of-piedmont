@@ -1,0 +1,34 @@
+/* Christmas Parade Entry Form. Builds on work-order.css (.wo-form, .wo-grid). */
+
+.pe-req{color:var(--sunset);font-weight:700;margin-left:.15rem}
+.pe-legend-note{margin:0 0 1rem;font-size:.85rem;color:var(--ink-2)}
+
+.pe-flyer{margin:0 0 var(--s4)}
+.pe-flyer img{display:block;width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow-md)}
+
+.pe-cats{border:0;margin:0;padding:0;min-width:0}
+.pe-cats legend{font-weight:600;font-size:.92rem;color:var(--ink-2);padding:0;margin-bottom:.2rem}
+.pe-cats .wo-hint{margin:0 0 .6rem}
+.pe-cats ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+
+.pe-check{display:flex;align-items:center;gap:.7rem;padding:.65rem .9rem;min-height:44px;
+  border:1.5px solid var(--line-strong);border-radius:10px;background:var(--card);cursor:pointer}
+.pe-check:has(input:checked){border-color:var(--sunset);background:color-mix(in srgb, var(--sunset) 6%, var(--card))}
+.pe-check input{width:1.15rem;height:1.15rem;margin:0;accent-color:var(--sunset);flex:none}
+.pe-check:has(input:focus-visible){outline:2px solid var(--sunset);outline-offset:2px}
+
+.pe-other{margin:.5rem 0 0 2.2rem}
+.pe-other input{width:100%;padding:.75rem .9rem;border:1.5px solid var(--line-strong);border-radius:10px;
+  font:inherit;background:var(--card);color:var(--ink)}
+.pe-other input:focus{border-color:var(--sunset);outline:none}
+.pe-other input[aria-invalid="true"]{border-color:var(--error)}
+.pe-other .err{color:var(--error);font-size:.85rem;margin-top:.35rem;display:block}
+
+.pe-cats[aria-invalid="true"] .pe-check{border-color:var(--error)}
+.pe-cats .err{color:var(--error);font-size:.85rem;margin-top:.5rem;display:block}
+
+.pe-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media (max-width: 640px){
+  .pe-other{margin-left:0}
+}
