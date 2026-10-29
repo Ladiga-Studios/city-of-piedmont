@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { useToast } from '@/components/ClientEffects';
 import { Turnstile, resetTurnstile } from '@/components/Turnstile';
+import { shrinkImage } from '@/lib/shrink-image';
 
 // Departments a work order can be routed to. Edit this list as needed —
 // it only affects this form.
@@ -30,7 +31,9 @@ const REQUESTERS = [
   'POLICE DEPT',
 ];
 
-const MAX_PHOTO_MB = 8;
+// Photos are shrunk in the browser before upload (Vercel rejects request
+// bodies over 4.5 MB), so people can pick full-size phone photos.
+const MAX_PHOTO_MB = 25;
 
 export default function WorkOrderForm() {
   const toast = useToast();
@@ -75,7 +78,23 @@ export default function WorkOrderForm() {
     setSending(true);
     try {
       const data = new FormData(f);
+      const photo = data.get('photo');
+      if (photo && typeof photo === 'object' && photo.size > 0) {
+        const small = await shrinkImage(photo);
+        if (!small) {
+          setErrs((p) => ({
+            ...p,
+            photo: 'This photo could not be prepared for upload. Please choose a JPG or PNG, or take a screenshot of it and attach that instead.',
+          }));
+          return;
+        }
+        data.set('photo', small, small.name);
+      }
       const res = await fetch('/api/work-order', { method: 'POST', body: data });
+      if (res.status === 413) {
+        toast('Photo too large', 'The photo is too large to send. Please attach a smaller photo, or submit without one.', 'error');
+        return;
+      }
       const out = await res.json().catch(() => ({}));
       if (res.status === 400 && out.error) {
         toast('Could not submit', out.error, 'error');
@@ -155,7 +174,7 @@ export default function WorkOrderForm() {
             onChange={onPhotoChange}
           />
           <span className="wo-hint">
-            {photoName ? `Attached: ${photoName}` : `One image, up to ${MAX_PHOTO_MB} MB. It will be attached to the email.`}
+            {photoName ? `Attached: ${photoName}` : 'One image. Large phone photos are resized automatically and attached to the email.'}
           </span>
           {errs.photo && <span className="err">{errs.photo}</span>}
         </div>

@@ -17,7 +17,9 @@ import { checkTurnstile, clientIp } from '@/lib/turnstile';
 
 export const runtime = 'nodejs';
 
-const MAX_PHOTO_BYTES = 8 * 1024 * 1024; // keep in sync with the form
+// The browser shrinks photos to about 3.5 MB before upload; Vercel itself
+// rejects request bodies over 4.5 MB, so anything bigger never gets here.
+const MAX_PHOTO_BYTES = 4.5 * 1024 * 1024;
 const MAX_FIELD = 2000;
 
 // Server-side allow-lists — reject anything the form doesn't offer.
@@ -130,7 +132,7 @@ export async function POST(request) {
       return NextResponse.json({ ok: false, error: 'The attachment must be an image.' }, { status: 400 });
     }
     if (photo.size > MAX_PHOTO_BYTES) {
-      return NextResponse.json({ ok: false, error: 'Photo must be under 8 MB.' }, { status: 400 });
+      return NextResponse.json({ ok: false, error: 'Photo is too large. Please attach a smaller photo.' }, { status: 400 });
     }
     const buf = Buffer.from(await photo.arrayBuffer());
     attachments.push({
@@ -167,7 +169,9 @@ export async function POST(request) {
       attachments,
     });
     if (error) throw new Error(error.message || 'send failed');
-  } catch {
+  } catch (e) {
+    // Logged so a failed send shows up in Vercel's runtime logs.
+    console.error('work-order send failed:', e && e.message);
     return NextResponse.json(
       { ok: false, error: 'The email could not be sent. Please try again.' },
       { status: 502 }
