@@ -2,7 +2,7 @@
 // Receives the Christmas Parade Entry Form (hidden page /christmas-parade)
 // and emails it to City Hall.
 //
-// Fields: orgName*, orgAddress, cityStateZip, representative*, contact*,
+// Fields: orgName*, orgAddress, cityStateZip, representative*, phone*, email*,
 //         announcement*, category* (one or more), otherCategory (required
 //         when "Other" is marked), website (honeypot). * = required.
 //
@@ -18,6 +18,7 @@ import { checkTurnstile, clientIp } from '@/lib/turnstile';
 export const runtime = 'nodejs';
 
 const MAX_FIELD = 2000;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DEFAULT_TO = ['amy.rawson@piedmontcity.org', 'jay.wilson@piedmontcity.org'];
 
 // Keep in sync with CATEGORIES in src/app/christmas-parade/ParadeEntryForm.jsx.
@@ -49,7 +50,8 @@ function buildHtml(f) {
       ${row('Address of Organization/Group', f.orgAddress)}
       ${row('City, State and Zip', f.cityStateZip)}
       ${row('Authorized Representative', f.representative)}
-      ${row('Representative Phone Number or Email Address', f.contact)}
+      ${row('Representative Phone Number', f.phone)}
+      ${row('Representative Email Address', f.email)}
       ${row('How the entry should be announced downtown', f.announcement)}
       ${row('Category for Parade', f.categoryText)}
     </table>
@@ -65,7 +67,8 @@ function buildText(f) {
     `Address of Organization/Group: ${f.orgAddress || '-'}`,
     `City, State and Zip: ${f.cityStateZip || '-'}`,
     `Authorized Representative: ${f.representative}`,
-    `Representative Phone Number or Email Address: ${f.contact}`,
+    `Representative Phone Number: ${f.phone}`,
+    `Representative Email Address: ${f.email}`,
     `How the entry should be announced downtown:\n${f.announcement}`,
     `Category for Parade: ${f.categoryText}`,
     '',
@@ -97,13 +100,20 @@ export async function POST(request) {
     orgAddress: clean(form.get('orgAddress')),
     cityStateZip: clean(form.get('cityStateZip')),
     representative: clean(form.get('representative')),
-    contact: clean(form.get('contact')),
+    phone: clean(form.get('phone')).slice(0, 40),
+    email: clean(form.get('email')).slice(0, 254),
     announcement: clean(form.get('announcement')),
     otherCategory: clean(form.get('otherCategory')),
   };
 
-  if (!f.orgName || !f.representative || !f.contact || !f.announcement) {
+  if (!f.orgName || !f.representative || !f.phone || !f.email || !f.announcement) {
     return NextResponse.json({ ok: false, error: 'Please complete every required field.' }, { status: 400 });
+  }
+  if (f.phone.replace(/\D/g, '').length < 7) {
+    return NextResponse.json({ ok: false, error: 'Please enter a full phone number.' }, { status: 400 });
+  }
+  if (!EMAIL_RE.test(f.email)) {
+    return NextResponse.json({ ok: false, error: 'Please enter a valid email address.' }, { status: 400 });
   }
   if (categories.length === 0) {
     return NextResponse.json({ ok: false, error: 'Please mark at least one parade category.' }, { status: 400 });
@@ -130,14 +140,13 @@ export async function POST(request) {
     ? process.env.PARADE_ENTRY_TO.split(',').map((s) => s.trim()).filter(Boolean)
     : DEFAULT_TO;
   const from = process.env.PARADE_ENTRY_FROM || 'City of Piedmont <parade@piedmontcity.org>';
-  const replyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.contact) ? f.contact : undefined;
 
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from,
       to,
-      ...(replyTo ? { replyTo } : {}),
+      replyTo: f.email,
       subject: `Christmas Parade Entry: ${f.orgName}`.slice(0, 200),
       html: buildHtml(f),
       text: buildText(f),

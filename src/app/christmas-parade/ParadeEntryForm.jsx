@@ -14,6 +14,8 @@ const CATEGORIES = [
   'Other',
 ];
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function Req() {
   return <span className="pe-req" aria-hidden="true">*</span>;
 }
@@ -31,7 +33,12 @@ export default function ParadeEntryForm() {
     const next = {};
     if (!f.orgName.value.trim()) next.orgName = 'Enter the name of the organization or group.';
     if (!f.representative.value.trim()) next.representative = 'Enter the authorized representative.';
-    if (!f.contact.value.trim()) next.contact = 'Enter a phone number or email address.';
+    const phone = f.phone.value.trim();
+    const email = f.email.value.trim();
+    if (!phone) next.phone = 'Enter a phone number.';
+    else if (phone.replace(/\D/g, '').length < 7) next.phone = 'Enter a full phone number, like 256-447-3560.';
+    if (!email) next.email = 'Enter an email address.';
+    else if (!EMAIL_RE.test(email)) next.email = 'Enter a valid email address, like name@example.com.';
     if (!f.announcement.value.trim()) next.announcement = 'Tell us how your entry should be announced.';
     if (cats.length === 0) next.category = 'Mark at least one category.';
     else if (cats.includes('Other') && !f.otherCategory.value.trim()) next.other = 'Tell us what "Other" is.';
@@ -92,16 +99,22 @@ export default function ParadeEntryForm() {
           <input id="pe-cityStateZip" name="cityStateZip" type="text" placeholder="Piedmont, AL 36272" />
         </div>
 
-        <div className="field">
+        <div className="field wo-full">
           <label htmlFor="pe-representative">Authorized Representative <Req /></label>
           <input id="pe-representative" name="representative" type="text" autoComplete="name" required {...inv('representative')} />
           {err('representative')}
         </div>
 
         <div className="field">
-          <label htmlFor="pe-contact">Representative Phone Number or Email Address <Req /></label>
-          <input id="pe-contact" name="contact" type="text" autoComplete="tel" required {...inv('contact')} />
-          {err('contact')}
+          <label htmlFor="pe-phone">Representative Phone Number <Req /></label>
+          <input id="pe-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required {...inv('phone')} />
+          {err('phone')}
+        </div>
+
+        <div className="field">
+          <label htmlFor="pe-email">Representative Email Address <Req /></label>
+          <input id="pe-email" name="email" type="email" inputMode="email" autoComplete="email" required {...inv('email')} />
+          {err('email')}
         </div>
 
         <div className="field wo-full">
