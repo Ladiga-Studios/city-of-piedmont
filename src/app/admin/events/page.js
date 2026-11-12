@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase-client';
 import { useToast } from '@/components/ClientEffects';
 import Modal from '@/components/Modal';
+import ImageUploader from '@/components/ImageUploader';
 import {
   EVENT_CATEGORIES, eventLongDate, eventTimeRange, parseEventDate,
 } from '@/lib/news-events';
@@ -13,6 +14,7 @@ import {
 const BLANK = {
   title: '', event_date: '', end_date: '', location: '',
   description: '', category: 'community', url: '', all_day: false,
+  image_url: '', image_alt: '',
 };
 
 // Turn a stored timestamp into the value a <input type="datetime-local"> wants.
@@ -54,6 +56,8 @@ export default function EventsAdmin() {
       category: e.category || 'community',
       url: e.url || '',
       all_day: !!e.all_day,
+      image_url: e.image_url || '',
+      image_alt: e.image_alt || '',
     });
   }
   function cancel() { setEditing(null); setForm(BLANK); }
@@ -176,6 +180,23 @@ export default function EventsAdmin() {
                 <label htmlFor="e-url">More-info link <span className="opt">(optional)</span></label>
                 <input id="e-url" type="url" value={form.url} onChange={(e) => set('url', e.target.value)} placeholder="https://..." />
               </div>
+
+              <div className="field">
+                <label>Flyer <span className="opt">(optional)</span></label>
+                <ImageUploader
+                  value={form.image_url}
+                  onChange={(url) => set('image_url', url)}
+                  endpoint="/api/admin/upload-news-photo"
+                  label="Shown beside the event on the calendar. Click opens the full flyer."
+                />
+              </div>
+
+              {form.image_url && (
+                <div className="field">
+                  <label htmlFor="e-alt">Flyer description <span className="opt">(for screen readers)</span></label>
+                  <input id="e-alt" type="text" value={form.image_alt} onChange={(e) => set('image_alt', e.target.value)} placeholder="e.g. Flyer: Christmas Open House, Nov 14 and 15" />
+                </div>
+              )}
 
               <button className="btn btn-primary" type="submit" disabled={saving} style={{ width: '100%' }}>
                 {saving ? 'Saving\u2026' : (editing === 'new' ? 'Add Event' : 'Save Changes')}

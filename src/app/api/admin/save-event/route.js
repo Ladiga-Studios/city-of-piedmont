@@ -38,6 +38,8 @@ export async function POST(request) {
     category,
     url: (body.url || '').trim() || null,
     all_day: !!body.all_day,
+    image_url: (body.image_url || '').trim() || null,
+    image_alt: (body.image_alt || '').trim() || null,
     is_sample: false,
   };
 
