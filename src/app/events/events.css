@@ -46,7 +46,21 @@
 .ev-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-top:.35rem;
   font-size:.86rem;color:var(--muted)}
 .ev-dot{opacity:.6}
-.ev-desc{margin-top:.55rem;color:var(--ink-2);line-height:1.6;font-size:.96rem}
+.ev-desc{margin-top:.55rem;color:var(--ink-2);line-height:1.6;font-size:.96rem;white-space:pre-line}
+
+/* multi-day chip: "13" with "– 15" tucked underneath */
+.ev-date-range .ev-d{padding-bottom:.4rem}
+.ev-d-end{display:block;font-size:.78rem;font-weight:700;letter-spacing:.02em;margin-top:.15rem;opacity:.92}
+
+/* flyer thumbnail, right side of the card */
+.ev-flyer{
+  flex:0 0 auto;width:128px;align-self:flex-start;border-radius:10px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);background:var(--paper-2);
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease);
+}
+.ev-flyer img{display:block;width:100%;height:auto}
+.ev-flyer:hover,.ev-flyer:focus-visible{transform:translateY(-2px) rotate(-.6deg);box-shadow:var(--shadow-md)}
+@media(prefers-reduced-motion:reduce){.ev-flyer:hover,.ev-flyer:focus-visible{transform:none}}
 .ev-link{display:inline-block;margin-top:.55rem;color:var(--sunset);font-weight:600;font-size:.9rem}
 .ev-link:hover{text-decoration:underline}
 
@@ -55,4 +69,8 @@
   .ev-date{width:54px}
   .ev-d{font-size:1.3rem}
   .ev-head h3{font-size:1.08rem}
+  /* flyer drops below the text, full card width minus the date chip */
+  .ev-has-img{flex-wrap:wrap}
+  .ev-has-img .ev-main{flex-basis:calc(100% - 54px - var(--s3))}
+  .ev-flyer{width:auto;max-width:260px;margin-left:calc(54px + var(--s3))}
 }

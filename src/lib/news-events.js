@@ -52,8 +52,45 @@ export function eventLongDate(value) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+// True when the event ends on a later calendar day than it starts
+// (a weekend open house, a 3-day VBS). A single start/end time would be
+// wrong for those, since hours often differ by day; the description
+// carries the per-day hours instead.
+export function isMultiDay(start, end) {
+  const s = parseEventDate(start);
+  const e = parseEventDate(end);
+  if (!s || !e) return false;
+  return e.getFullYear() !== s.getFullYear() || e.getMonth() !== s.getMonth() || e.getDate() !== s.getDate();
+}
+
+// "Friday, November 13 – Sunday, November 15, 2026"
+// (falls back to eventLongDate for single-day events)
+export function eventDateSpan(start, end) {
+  if (!isMultiDay(start, end)) return eventLongDate(start);
+  const s = parseEventDate(start);
+  const e = parseEventDate(end);
+  const sameYear = s.getFullYear() === e.getFullYear();
+  const left = s.toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', ...(sameYear ? {} : { year: 'numeric' }),
+  });
+  const right = e.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  return `${left} – ${right}`;
+}
+
+// Short span for tight spots (homepage panel, admin list): "Nov 13 – 15" / "Nov 30 – Dec 2".
+export function eventShortSpan(start, end) {
+  const s = parseEventDate(start);
+  const e = parseEventDate(end);
+  if (!s || !e) return '';
+  const sm = MONTHS[s.getMonth()];
+  const em = MONTHS[e.getMonth()];
+  return sm === em ? `${sm} ${s.getDate()} – ${e.getDate()}` : `${sm} ${s.getDate()} – ${em} ${e.getDate()}`;
+}
+
 // A time range string for the detail/list views: "4:00 PM – 8:00 PM" or "4:00 PM".
+// Multi-day events return their day span ("Nov 13 – 15") instead of a time.
 export function eventTimeRange(start, end, allDay) {
+  if (end && isMultiDay(start, end)) return eventShortSpan(start, end);
   if (allDay) return 'All day';
   const s = eventTime(start, false);
   const e = end ? eventTime(end, false) : '';

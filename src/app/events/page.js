@@ -3,8 +3,8 @@ import './events.css';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-server';
 import {
-  eventMonthAbbr, eventDayNum, eventTimeRange, eventLongDate,
-  eventCategoryLabel, parseEventDate,
+  eventMonthAbbr, eventDayNum, eventTimeRange, eventDateSpan,
+  eventCategoryLabel, parseEventDate, isMultiDay,
 } from '@/lib/news-events';
 import { pageMeta } from '@/lib/seo';
 
@@ -87,11 +87,21 @@ export default async function EventsPage() {
                 <section key={g.key} className="ev-month" aria-label={g.key}>
                   <h2 className="ev-month-label">{g.key}</h2>
                   <ul className="ev-list">
-                    {g.items.map((e) => (
-                      <li key={e.id} className="ev-item">
-                        <div className="ev-date" aria-hidden="true">
+                    {g.items.map((e) => {
+                      const multi = isMultiDay(e.event_date, e.end_date);
+                      const sameMonth = multi && eventMonthAbbr(e.event_date) === eventMonthAbbr(e.end_date);
+                      return (
+                      <li key={e.id} className={`ev-item${e.image_url ? ' ev-has-img' : ''}`}>
+                        <div className={`ev-date${multi ? ' ev-date-range' : ''}`} aria-hidden="true">
                           <span className="ev-m">{eventMonthAbbr(e.event_date)}</span>
-                          <span className="ev-d">{eventDayNum(e.event_date)}</span>
+                          <span className="ev-d">
+                            {eventDayNum(e.event_date)}
+                            {multi && (
+                              <span className="ev-d-end">
+                                {sameMonth ? '' : `${eventMonthAbbr(e.end_date)} `}{'– '}{eventDayNum(e.end_date)}
+                              </span>
+                            )}
+                          </span>
                         </div>
                         <div className="ev-main">
                           <div className="ev-head">
@@ -101,9 +111,13 @@ export default async function EventsPage() {
                             </span>
                           </div>
                           <p className="ev-meta">
-                            <span>{eventLongDate(e.event_date)}</span>
-                            <span className="ev-dot" aria-hidden="true">·</span>
-                            <span>{eventTimeRange(e.event_date, e.end_date, e.all_day)}</span>
+                            <span>{eventDateSpan(e.event_date, e.end_date)}</span>
+                            {!multi && (
+                              <>
+                                <span className="ev-dot" aria-hidden="true">·</span>
+                                <span>{eventTimeRange(e.event_date, e.end_date, e.all_day)}</span>
+                              </>
+                            )}
                             {e.location && (
                               <>
                                 <span className="ev-dot" aria-hidden="true">·</span>
@@ -118,8 +132,15 @@ export default async function EventsPage() {
                             </a>
                           )}
                         </div>
+                        {e.image_url && (
+                          <a href={e.image_url} target="_blank" rel="noopener noreferrer" className="ev-flyer"
+                             aria-label={`Open the full flyer for ${e.title}`}>
+                            <img src={e.image_url} alt={e.image_alt || `Flyer for ${e.title}`} loading="lazy" decoding="async" />
+                          </a>
+                        )}
                       </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 </section>
               ))}
