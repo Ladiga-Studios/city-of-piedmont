@@ -54,11 +54,14 @@
 
 /* flyer thumbnail, right side of the card */
 .ev-flyer{
-  flex:0 0 auto;width:128px;align-self:flex-start;border-radius:10px;overflow:hidden;
+  flex:0 0 auto;width:clamp(170px,26%,230px);align-self:flex-start;border-radius:10px;overflow:hidden;
   border:1px solid var(--line);box-shadow:var(--shadow-sm);background:var(--paper-2);
   transition:transform .18s var(--ease),box-shadow .18s var(--ease);
 }
 .ev-flyer img{display:block;width:100%;height:auto}
+/* narrower text column next to a flyer: date and place on their own lines */
+.ev-has-img .ev-meta{flex-direction:column;align-items:flex-start;gap:.1rem}
+.ev-has-img .ev-dot{display:none}
 .ev-flyer:hover,.ev-flyer:focus-visible{transform:translateY(-2px) rotate(-.6deg);box-shadow:var(--shadow-md)}
 @media(prefers-reduced-motion:reduce){.ev-flyer:hover,.ev-flyer:focus-visible{transform:none}}
 .ev-link{display:inline-block;margin-top:.55rem;color:var(--sunset);font-weight:600;font-size:.9rem}
@@ -72,7 +75,7 @@
   /* flyer drops below the text, lined up with it */
   .ev-has-img{flex-wrap:wrap}
   .ev-has-img .ev-main{flex-basis:calc(100% - 54px - var(--s3))}
-  .ev-flyer{width:150px;margin-left:calc(54px + var(--s3))}
+  .ev-flyer{width:calc(100% - 54px - var(--s3));max-width:340px;margin-left:calc(54px + var(--s3))}
   /* date / time / place stack instead of wrapping around stray dots */
   .ev-meta{flex-direction:column;align-items:flex-start;gap:.1rem}
   .ev-dot{display:none}
